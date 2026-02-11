@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "generate-api": "openapi-generator-cli generate -i ./firefly-iii-api.yaml -g typescript-fetch -o ./app/generated/api --additional-properties=supportsES6=true,typescriptThreePlus=true"
   },
   "dependencies": {
     "next": "16.1.6",
