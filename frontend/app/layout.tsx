@@ -1,14 +1,16 @@
 import type {Metadata} from "next";
-import {Geist, Geist_Mono} from "next/font/google";
+import {Montserrat_Alternates, Hind_Madurai} from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-    variable: "--font-geist-sans",
+const montserratAlternates = Montserrat_Alternates({
+    variable: "--font-montserrat-alternates",
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
     subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
+const hindMadurai = Hind_Madurai({
+    variable: "--font-hind-madurai",
+    weight: ["300", "400", "500", "600", "700"],
     subsets: ["latin"],
 });
 
@@ -25,7 +27,7 @@ export default function RootLayout({
     return (
         <html lang="en">
         <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            className={`${montserratAlternates.variable} ${hindMadurai.variable} antialiased`}
         >
         {children}
         </body>
