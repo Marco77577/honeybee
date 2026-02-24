@@ -1,7 +1,7 @@
 import type {Metadata} from "next";
 import {Montserrat_Alternates, Hind_Madurai} from "next/font/google";
 import "./globals.css";
-import Header from "@/app/components/Header.jsx";
+import Header from "@/app/components/Header";
 
 const montserratAlternates = Montserrat_Alternates({
     variable: "--font-montserrat-alternates",
