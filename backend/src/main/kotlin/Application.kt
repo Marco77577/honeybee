@@ -1,14 +1,13 @@
-package com.accounting
-
-import com.accounting.config.configureHTTP
-import com.accounting.config.configureMonitoring
-import com.accounting.config.configureRouting
-import com.accounting.config.configureSecurity
-import com.accounting.config.configureSerialization
+import config.configureHTTP
+import config.configureMonitoring
+import config.configureSerialization
+import config.authentication.configureSecurity
+import config.configureRouting
 import io.ktor.server.application.*
+import io.ktor.server.netty.*
 
 fun main(args: Array<String>) {
-    io.ktor.server.netty.EngineMain.main(args)
+    EngineMain.main(args)
 }
 
 fun Application.module() {

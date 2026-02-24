@@ -1,4 +1,4 @@
-package com.accounting.config
+package config
 
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
