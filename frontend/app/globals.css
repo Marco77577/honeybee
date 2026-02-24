@@ -30,3 +30,7 @@ body {
 h1 {
     @apply font-montserrat text-3xl font-semibold leading-10 tracking-tight;
 }
+
+p {
+    @apply font-madurai text-lg;
+}
