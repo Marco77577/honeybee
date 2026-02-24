@@ -4,12 +4,14 @@
     --background: #eef3f7;
     --foreground: #171717;
     --honey: #eab308;
+    --accent: #111A4A;
 }
 
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --color-honey: var(--honey);
+    --color-accent: var(--accent);
     --font-montserrat: var(--font-montserrat-alternates);
     --font-madurai: var(--font-hind-madurai);
 }
