@@ -5,7 +5,7 @@ export default function Header() {
         <header className={`py-12`}>
             <div className={`mx-auto container flex items-center gap-4`}>
                 <Honeycomb strokeWidth={8} className={`h-8 text-honey`}/>
-                <h1 className={`text-3xl font-semibold leading-10 tracking-tight`}>honeybee</h1>
+                <h1 className={`text-3xl`}>honeybee</h1>
             </div>
         </header>
     )

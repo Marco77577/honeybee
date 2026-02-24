@@ -28,5 +28,5 @@ body {
 }
 
 h1 {
-    @apply font-montserrat;
+    @apply font-montserrat text-3xl font-semibold leading-10 tracking-tight;
 }
