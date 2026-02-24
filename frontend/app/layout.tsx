@@ -29,7 +29,9 @@ export default function RootLayout({
         <html lang="en">
         <body className={`${montserratAlternates.variable} ${hindMadurai.variable} antialiased`}>
         <Header/>
-        {children}
+        <div className={`mx-auto container`}>
+            {children}
+        </div>
         </body>
         </html>
     );
