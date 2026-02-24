@@ -3,11 +3,13 @@
 :root {
     --background: #eef3f7;
     --foreground: #171717;
+    --honey: #eab308;
 }
 
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
+    --color-honey: var(--honey);
     --font-montserrat: var(--font-montserrat-alternates);
     --font-madurai: var(--font-hind-madurai);
 }
