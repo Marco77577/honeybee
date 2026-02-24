@@ -2,6 +2,7 @@
 
 :root {
     --background: #eef3f7;
+    --on-background: #797a7c;
     --foreground: #171717;
     --honey: #eab308;
     --accent: #111A4A;
@@ -9,6 +10,7 @@
 
 @theme inline {
     --color-background: var(--background);
+    --color-on-background: var(--on-background);
     --color-foreground: var(--foreground);
     --color-honey: var(--honey);
     --color-accent: var(--accent);
