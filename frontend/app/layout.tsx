@@ -1,7 +1,8 @@
 import type {Metadata} from "next";
-import {Montserrat_Alternates, Hind_Madurai} from "next/font/google";
+import {Hind_Madurai, Montserrat_Alternates} from "next/font/google";
 import "./globals.css";
 import Header from "@/app/components/Header";
+import OidcProvider from "@/app/components/OidcProvider";
 
 const montserratAlternates = Montserrat_Alternates({
     variable: "--font-montserrat-alternates",
@@ -28,10 +29,12 @@ export default function RootLayout({
     return (
         <html lang="en">
         <body className={`${montserratAlternates.variable} ${hindMadurai.variable} antialiased`}>
-        <Header/>
-        <div className={`mx-auto container`}>
-            {children}
-        </div>
+        <OidcProvider>
+            <Header/>
+            <div className={`mx-auto container`}>
+                {children}
+            </div>
+        </OidcProvider>
         </body>
         </html>
     );
