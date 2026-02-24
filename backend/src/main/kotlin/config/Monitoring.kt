@@ -1,4 +1,4 @@
-package com.accounting
+package com.accounting.config
 
 import io.ktor.server.application.*
 import io.ktor.server.plugins.calllogging.*
