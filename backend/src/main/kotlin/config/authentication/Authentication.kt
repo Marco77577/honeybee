@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit
 
 const val OIDC_AUTH = "oidc"
 
-fun Application.configureSecurity() {
+fun Application.configureAuthentication() {
     val oidcRealm = System.getenv("OIDC_REALM") ?: error("OIDC_REALM environment variable is not set")
     val audience = System.getenv("OIDC_CLIENT_ID") ?: error("OIDC_CLIENT_ID environment variable is not set")
     val issuer = System.getenv("OIDC_ISSUER") ?: error("OIDC_ISSUER environment variable is not set")
@@ -61,7 +61,7 @@ fun Application.configureSecurity() {
                 }
             }
             challenge { _, _ ->
-                with(this@configureSecurity) {
+                with(this@configureAuthentication) {
                     analyzeError(jwkProvider, issuer)
                 }
                 call.respond(HttpStatusCode.Unauthorized, "Token invalid or expired")
