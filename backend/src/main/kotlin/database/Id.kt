@@ -1,5 +1,6 @@
 package database
 
+import database.account.Accounts
 import database.currency.Currencies
 import database.fiscalyear.FiscalYears
 import org.jetbrains.exposed.sql.Table
@@ -11,6 +12,7 @@ object Id {
 
     fun currency() = generate(Currencies)
     fun fiscalYear() = generate(FiscalYears)
+    fun account() = generate(Accounts)
 
     /**
      * Generates a prefixed UUID.

@@ -1,5 +1,6 @@
 package com.accounting.config
 
+import database.account.Accounts
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import database.currency.Currencies
@@ -31,7 +32,8 @@ fun Application.configureDatabase() {
     transaction {
         SchemaUtils.createMissingTablesAndColumns(
             Currencies,
-            FiscalYears
+            FiscalYears,
+            Accounts
         )
     }
 }
