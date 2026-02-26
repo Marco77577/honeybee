@@ -6,9 +6,11 @@ The server uses OIDC to authenticate users.
 
 You need to provide the following environment variables:
 
-- `OIDC_ISSUER`
-- `OIDC_CLIENT_ID`
-- `OIDC_REALM`
+| Variable Name    | Description                                                                 |
+|------------------|-----------------------------------------------------------------------------|
+| `OIDC_ISSUER`    | The URL to the Issuer, e.g. `https://authentik.host.com/realms/your-realm`. |
+| `OIDC_CLIENT_ID` | The client id (audience), e.g. `honeybee`.                                  |
+| `OIDC_REALM`     | The realm your client lives in, e.g. `users`.                               |
 
 ## Building & Running
 
