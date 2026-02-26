@@ -10,6 +10,8 @@ class CurrencyRepository {
         val id = Currencies.insert {
             it[id] = currency.id
             it[name] = currency.name
+            it[abbreviation] = currency.abbreviation
+            it[manualExchangeRate] = currency.manualExchangeRate
         } get Currencies.id
         currency.copy(id = id)
     }
@@ -39,6 +41,8 @@ class CurrencyRepository {
         id = this[Currencies.id],
         name = this[Currencies.name],
         abbreviation = this[Currencies.abbreviation],
-        manualExchangeRate = this[Currencies.manualExchangeRate]
+        manualExchangeRate = this[Currencies.manualExchangeRate],
+        updatedAt = this[Currencies.updatedAt],
+        createdAt = this[Currencies.createdAt],
     )
 }
