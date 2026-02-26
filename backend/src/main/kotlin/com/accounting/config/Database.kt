@@ -1,10 +1,10 @@
 package com.accounting.config
 
-import database.account.Accounts
+import com.accounting.database.account.Accounts
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import database.currency.Currencies
-import database.fiscalyear.FiscalYears
+import com.accounting.database.currency.Currencies
+import com.accounting.database.fiscalyear.FiscalYears
 import io.ktor.server.application.*
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils

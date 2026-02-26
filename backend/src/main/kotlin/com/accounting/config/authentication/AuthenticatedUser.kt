@@ -1,4 +1,4 @@
-package config.authentication
+package com.accounting.config.authentication
 
 /**
  * Represents an authenticated user.

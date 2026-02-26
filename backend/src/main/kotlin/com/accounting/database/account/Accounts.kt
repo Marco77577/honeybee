@@ -1,14 +1,16 @@
-package database.currency
+package com.accounting.database.account
 
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.javatime.CurrentDateTime
 import org.jetbrains.exposed.sql.javatime.datetime
 
-object Currencies : Table("currency") {
+object Accounts : Table("accounts") {
     val id = varchar("id", 255).uniqueIndex()
+    val number = integer("number")
     val name = varchar("name", 255)
-    val abbreviation = varchar("abbreviation", 3)
-    val manualExchangeRate = double("manual_exchange_rate").nullable()
+    val color = varchar("color", 6)
+    val description = text("description").nullable()
+    val category = enumerationByName<AccountCategory>("category", 50)
     val updatedAt = datetime("updated_at").defaultExpression(CurrentDateTime)
     val createdAt = datetime("created_at").defaultExpression(CurrentDateTime)
     override val primaryKey = PrimaryKey(id)

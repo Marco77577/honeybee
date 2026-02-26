@@ -1,8 +1,8 @@
-package database
+package com.accounting.database
 
-import database.account.Accounts
-import database.currency.Currencies
-import database.fiscalyear.FiscalYears
+import com.accounting.database.account.Accounts
+import com.accounting.database.currency.Currencies
+import com.accounting.database.fiscalyear.FiscalYears
 import org.jetbrains.exposed.sql.Table
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid

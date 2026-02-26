@@ -1,4 +1,4 @@
-package database.currency
+package com.accounting.database.currency
 
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq

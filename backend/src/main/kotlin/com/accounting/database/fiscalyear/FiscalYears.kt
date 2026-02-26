@@ -1,4 +1,4 @@
-package database.fiscalyear
+package com.accounting.database.fiscalyear
 
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.javatime.CurrentDateTime

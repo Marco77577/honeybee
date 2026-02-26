@@ -1,4 +1,4 @@
-package database.account
+package com.accounting.database.account
 
 enum class AccountCategory(
     val group: AccountCategoryGroup,

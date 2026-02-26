@@ -1,4 +1,4 @@
-package config.authentication
+package com.accounting.config.authentication
 
 import com.auth0.jwk.JwkProvider
 import com.auth0.jwk.JwkProviderBuilder

@@ -1,4 +1,4 @@
-package database.account
+package com.accounting.database.account
 
 enum class AccountCategoryGroup(val type: AccountType) {
     CASH_AND_SECURITIES(AccountType.ASSET),

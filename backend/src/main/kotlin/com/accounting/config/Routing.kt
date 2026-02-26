@@ -1,7 +1,7 @@
-package config
+package com.accounting.config
 
-import config.authentication.AuthenticatedUser
-import config.authentication.OIDC_AUTH
+import com.accounting.config.authentication.AuthenticatedUser
+import com.accounting.config.authentication.OIDC_AUTH
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*

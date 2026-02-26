@@ -1,7 +1,7 @@
-package database.account
+package com.accounting.database.account
 
+import com.accounting.database.Id
 import com.accounting.database.LocalDateTimeSerializer
-import database.Id
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
 

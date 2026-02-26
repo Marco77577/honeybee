@@ -1,8 +1,8 @@
-package database.fiscalyear
+package com.accounting.database.fiscalyear
 
+import com.accounting.database.Id
+import com.accounting.database.LocalDateSerializer
 import com.accounting.database.LocalDateTimeSerializer
-import database.Id
-import database.LocalDateSerializer
 import kotlinx.serialization.Serializable
 import java.time.LocalDate
 import java.time.LocalDateTime

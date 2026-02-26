@@ -1,7 +1,7 @@
-package database.currency
+package com.accounting.database.currency
 
+import com.accounting.database.Id
 import com.accounting.database.LocalDateTimeSerializer
-import database.Id
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
 
@@ -14,7 +14,7 @@ data class Currency(
 
     @Serializable(with = LocalDateTimeSerializer::class)
     val updatedAt: LocalDateTime,
-    
+
     @Serializable(with = LocalDateTimeSerializer::class)
     val createdAt: LocalDateTime,
 )
