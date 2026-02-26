@@ -3,6 +3,7 @@ package com.accounting.database.currency
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
+import java.math.BigDecimal
 
 class CurrencyRepository {
 
@@ -11,7 +12,7 @@ class CurrencyRepository {
             it[id] = currency.id
             it[name] = currency.name
             it[abbreviation] = currency.abbreviation
-            it[manualExchangeRate] = currency.manualExchangeRate
+            it[manualExchangeRate] = BigDecimal(currency.manualExchangeRate)
         } get Currencies.id
         currency.copy(id = id)
     }
@@ -41,7 +42,8 @@ class CurrencyRepository {
         id = this[Currencies.id],
         name = this[Currencies.name],
         abbreviation = this[Currencies.abbreviation],
-        manualExchangeRate = this[Currencies.manualExchangeRate],
+        manualExchangeRate = this[Currencies.manualExchangeRate].toString(),
+        organization = this[Currencies.organization],
         updatedAt = this[Currencies.updatedAt],
         createdAt = this[Currencies.createdAt],
     )

@@ -10,7 +10,7 @@ data class Currency(
     val id: String = Id.currency(),
     val name: String,
     val abbreviation: String,
-    val manualExchangeRate: Double? = null,
+    val manualExchangeRate: String? = null,
     val organization: String,
 
     @Serializable(with = LocalDateTimeSerializer::class)
