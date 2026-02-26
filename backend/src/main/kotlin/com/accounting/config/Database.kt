@@ -1,11 +1,13 @@
 package com.accounting.config
 
 import com.accounting.database.account.Accounts
-import com.zaxxer.hikari.HikariConfig
-import com.zaxxer.hikari.HikariDataSource
 import com.accounting.database.currency.Currencies
 import com.accounting.database.fiscalyear.FiscalYears
+import com.accounting.database.organisation.Organisations
 import com.accounting.database.transaction.Transactions
+import com.accounting.database.user.Users
+import com.zaxxer.hikari.HikariConfig
+import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.application.*
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
@@ -35,7 +37,9 @@ fun Application.configureDatabase() {
             Currencies,
             FiscalYears,
             Accounts,
-            Transactions
+            Transactions,
+            Users,
+            Organisations,
         )
     }
 }
