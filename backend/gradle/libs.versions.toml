@@ -7,6 +7,7 @@ swagger = "5.6.0"
 exposed = "0.44.1"
 postgres = "42.7.1"
 hikari = "5.1.0"
+koin = "4.1.1"
 
 [libraries]
 ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
@@ -39,6 +40,10 @@ exposed-java-time = { module = "org.jetbrains.exposed:exposed-java-time", versio
 postgres = { module = "org.postgresql:postgresql", version.ref = "postgres" }
 hikari = { module = "com.zaxxer:HikariCP", version.ref = "hikari" }
 
+koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin" }
+koin-ktor = { module = "io.insert-koin:koin-ktor" }
+koin-logger = { module = "io.insert-koin:koin-logger-slf4j" }
+
 ktor-server-test-host = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 
@@ -48,6 +53,7 @@ parsing = ["ktor-server-content-negotiation", "ktor-serialization-kotlinx-json"]
 http-client = ["ktor-client-cio", "ktor-client-content-negotation"]
 database = ["exposed-core", "exposed-dao", "exposed-jdbc", "exposed-java-time", "postgres", "hikari"]
 documentation = ["ktor-openapi", "ktor-swagger-ui"]
+koin = ["koin-ktor", "koin-logger"]
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

@@ -4,6 +4,7 @@ import com.accounting.api.configureApi
 import com.accounting.config.*
 import com.accounting.config.authentication.OidcDiscovery
 import com.accounting.config.authentication.configureAuthentication
+import com.accounting.config.di.configureKoin
 import io.ktor.server.application.*
 import io.ktor.server.netty.*
 
@@ -14,6 +15,7 @@ fun main(args: Array<String>) {
 fun Application.module() {
     val oidcDiscovery = OidcDiscovery()
 
+    configureKoin()
     configureDatabase()
     configureMonitoring()
     configureHTTP()
