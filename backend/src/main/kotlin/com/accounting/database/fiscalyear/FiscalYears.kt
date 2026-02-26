@@ -1,5 +1,6 @@
 package com.accounting.database.fiscalyear
 
+import com.accounting.database.organisation.Organisations
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.javatime.CurrentDateTime
 import org.jetbrains.exposed.sql.javatime.date
@@ -10,6 +11,7 @@ object FiscalYears : Table("fiscal_year") {
     val start = date("start")
     val end = date("end")
     val isActive = bool("is_active")
+    val organisation = varchar("organisation_id", 255).references(Organisations.id)
     val createdAt = datetime("created_at").defaultExpression(CurrentDateTime)
     val updatedAt = datetime("updated_at").defaultExpression(CurrentDateTime)
     override val primaryKey = PrimaryKey(id)

@@ -10,13 +10,15 @@ import java.time.LocalDateTime
 @Serializable
 data class FiscalYear(
     val id: String = Id.fiscalYear(),
-    val isActive: Boolean,
 
     @Serializable(with = LocalDateSerializer::class)
     val start: LocalDate,
 
     @Serializable(with = LocalDateSerializer::class)
     val end: LocalDate,
+
+    val isActive: Boolean,
+    val organisation: String,
 
     @Serializable(with = LocalDateTimeSerializer::class)
     val updatedAt: LocalDateTime,

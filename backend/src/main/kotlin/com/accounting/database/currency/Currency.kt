@@ -11,6 +11,7 @@ data class Currency(
     val name: String,
     val abbreviation: String,
     val manualExchangeRate: Double? = null,
+    val organisation: String,
 
     @Serializable(with = LocalDateTimeSerializer::class)
     val updatedAt: LocalDateTime,

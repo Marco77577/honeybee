@@ -1,6 +1,7 @@
 package com.accounting.database.transaction
 
 import com.accounting.database.account.Accounts
+import com.accounting.database.organisation.Organisations
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.javatime.CurrentDateTime
 import org.jetbrains.exposed.sql.javatime.date
@@ -13,6 +14,7 @@ object Transactions : Table("transactions") {
     val amount = decimal("amount", 19, 2)
     val debitAccount = varchar("debit_account_id", 255).references(Accounts.id)
     val creditAccount = varchar("credit_account_id", 255).references(Accounts.id)
+    val organisation = varchar("organisation_id", 255).references(Organisations.id)
     val updatedAt = datetime("updated_at").defaultExpression(CurrentDateTime)
     val createdAt = datetime("created_at").defaultExpression(CurrentDateTime)
     override val primaryKey = PrimaryKey(id)
