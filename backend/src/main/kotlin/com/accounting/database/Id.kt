@@ -3,6 +3,7 @@ package com.accounting.database
 import com.accounting.database.account.Accounts
 import com.accounting.database.currency.Currencies
 import com.accounting.database.fiscalyear.FiscalYears
+import com.accounting.database.transaction.Transactions
 import org.jetbrains.exposed.sql.Table
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
@@ -13,6 +14,7 @@ object Id {
     fun currency() = generate(Currencies)
     fun fiscalYear() = generate(FiscalYears)
     fun account() = generate(Accounts)
+    fun transaction() = generate(Transactions)
 
     /**
      * Generates a prefixed UUID.

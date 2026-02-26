@@ -5,6 +5,7 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import com.accounting.database.currency.Currencies
 import com.accounting.database.fiscalyear.FiscalYears
+import com.accounting.database.transaction.Transactions
 import io.ktor.server.application.*
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
@@ -33,7 +34,8 @@ fun Application.configureDatabase() {
         SchemaUtils.createMissingTablesAndColumns(
             Currencies,
             FiscalYears,
-            Accounts
+            Accounts,
+            Transactions
         )
     }
 }
