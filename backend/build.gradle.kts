@@ -32,6 +32,9 @@ dependencies {
     implementation(libs.ktor.client.cio)
     implementation(libs.ktor.client.content.negotation)
     implementation(libs.logback.classic)
+
+    implementation(libs.bundles.database)
+    
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
 }
