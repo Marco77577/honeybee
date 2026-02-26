@@ -18,7 +18,7 @@ data class FiscalYear(
     val end: LocalDate,
 
     val isActive: Boolean,
-    val organisation: String,
+    val organization: String,
 
     @Serializable(with = LocalDateTimeSerializer::class)
     val updatedAt: LocalDateTime,

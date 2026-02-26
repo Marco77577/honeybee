@@ -13,7 +13,7 @@ data class Account(
     val color: String,
     val description: String? = null,
     val category: AccountCategory,
-    val organisation: String,
+    val organization: String,
 
     @Serializable(with = LocalDateTimeSerializer::class)
     val updatedAt: LocalDateTime,

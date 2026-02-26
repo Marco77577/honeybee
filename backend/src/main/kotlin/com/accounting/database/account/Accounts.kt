@@ -1,6 +1,6 @@
 package com.accounting.database.account
 
-import com.accounting.database.organisation.Organisations
+import com.accounting.database.organization.Organizations
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.javatime.CurrentDateTime
 import org.jetbrains.exposed.sql.javatime.datetime
@@ -12,7 +12,7 @@ object Accounts : Table("accounts") {
     val color = varchar("color", 6)
     val description = text("description").nullable()
     val category = enumerationByName<AccountCategory>("category", 50)
-    val organisation = varchar("organisation_id", 255).references(Organisations.id)
+    val organization = varchar("organization_id", 255).references(Organizations.id)
     val updatedAt = datetime("updated_at").defaultExpression(CurrentDateTime)
     val createdAt = datetime("created_at").defaultExpression(CurrentDateTime)
     override val primaryKey = PrimaryKey(id)

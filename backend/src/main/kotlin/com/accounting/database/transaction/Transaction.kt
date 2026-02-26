@@ -18,7 +18,7 @@ data class Transaction(
     val amount: Double,
     val debitAccount: String,
     val creditAccount: String,
-    val organisation: String,
+    val organization: String,
 
     @Serializable(with = LocalDateTimeSerializer::class)
     val updatedAt: LocalDateTime,

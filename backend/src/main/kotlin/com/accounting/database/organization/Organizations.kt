@@ -1,4 +1,4 @@
-package com.accounting.database.organisation
+package com.accounting.database.organization
 
 import com.accounting.database.account.Accounts
 import com.accounting.database.currency.Currencies
@@ -6,7 +6,7 @@ import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.javatime.CurrentDateTime
 import org.jetbrains.exposed.sql.javatime.datetime
 
-object Organisations : Table("organisations") {
+object Organizations : Table("organisations") {
     val id = varchar("id", 255).uniqueIndex()
     val displayName = varchar("display_name", 255)
     val officialName = varchar("official_name", 255)

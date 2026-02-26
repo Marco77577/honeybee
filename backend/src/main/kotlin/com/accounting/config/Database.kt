@@ -3,7 +3,7 @@ package com.accounting.config
 import com.accounting.database.account.Accounts
 import com.accounting.database.currency.Currencies
 import com.accounting.database.fiscalyear.FiscalYears
-import com.accounting.database.organisation.Organisations
+import com.accounting.database.organization.Organizations
 import com.accounting.database.transaction.Transactions
 import com.accounting.database.user.Users
 import com.zaxxer.hikari.HikariConfig
@@ -39,7 +39,7 @@ fun Application.configureDatabase() {
             Accounts,
             Transactions,
             Users,
-            Organisations,
+            Organizations,
         )
     }
 }

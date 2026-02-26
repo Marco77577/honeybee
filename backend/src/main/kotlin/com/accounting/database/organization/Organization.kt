@@ -1,4 +1,4 @@
-package com.accounting.database.organisation
+package com.accounting.database.organization
 
 import com.accounting.database.Id
 import com.accounting.database.LocalDateTimeSerializer
@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
 
 @Serializable
-data class Organisation(
+data class Organization(
     val id: String = Id.organisation(),
     val displayName: String,
     val officialName: String,

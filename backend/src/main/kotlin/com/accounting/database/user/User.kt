@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 @Serializable
 data class User(
     val id: String,
-    val organisation: String,
+    val organization: String,
     val role: UserRole,
 
     @Serializable(with = LocalDateTimeSerializer::class)
