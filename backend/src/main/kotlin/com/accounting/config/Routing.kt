@@ -1,7 +1,7 @@
 package com.accounting.config
 
-import com.accounting.config.authentication.AuthenticatedUser
 import com.accounting.config.authentication.OIDC_AUTH
+import com.accounting.config.authentication.requireUser
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -26,16 +26,9 @@ fun Application.configureRouting() {
 
         authenticate(OIDC_AUTH) {
             get("/api/protected") {
-                val principal = requirePrincipal()
+                val principal = requireUser()
                 call.respondText(principal.email)
             }
         }
     }
 }
-
-/**
- * Asserts that the current call has an authenticated principal.
- * @return the authenticated principal.
- */
-fun RoutingContext.requirePrincipal(): AuthenticatedUser =
-    call.principal<AuthenticatedUser>() ?: error("No principal found — is this route inside an authenticate block?")

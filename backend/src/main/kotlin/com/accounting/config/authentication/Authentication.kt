@@ -12,6 +12,7 @@ import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
 import io.ktor.server.response.*
+import io.ktor.server.routing.*
 import java.security.interfaces.RSAPublicKey
 import java.util.concurrent.TimeUnit
 
@@ -90,3 +91,10 @@ private fun JWTChallengeContext.analyzeError(jwkProvider: JwkProvider, issuer: S
         }
     }
 }
+
+/**
+ * Asserts that the current call has an authenticated principal.
+ * @return the authenticated principal.
+ */
+fun RoutingContext.requireUser(): AuthenticatedUser =
+    call.principal<AuthenticatedUser>() ?: error("No principal found — is this route inside an authenticate block?")
