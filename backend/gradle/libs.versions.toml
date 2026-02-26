@@ -3,6 +3,7 @@ kotlin = "2.3.0"
 ktor = "3.4.0"
 logback = "1.4.14"
 
+swagger = "5.6.0"
 exposed = "0.44.1"
 postgres = "42.7.1"
 hikari = "5.1.0"
@@ -28,6 +29,9 @@ ktor-server-config-yaml = { module = "io.ktor:ktor-server-config-yaml", version.
 ktor-client-content-negotation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 
+ktor-openapi = { module = "io.github.smiley4:ktor-openapi", version.ref = "swagger" }
+ktor-swagger-ui = { module = "io.github.smiley4:ktor-swagger-ui", version.ref = "swagger" }
+
 exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }
 exposed-dao = { module = "org.jetbrains.exposed:exposed-dao", version.ref = "exposed" }
 exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }
@@ -43,6 +47,7 @@ authentication = ["ktor-server-auth", "ktor-server-auth-jwt"]
 parsing = ["ktor-server-content-negotiation", "ktor-serialization-kotlinx-json"]
 http-client = ["ktor-client-cio", "ktor-client-content-negotation"]
 database = ["exposed-core", "exposed-dao", "exposed-jdbc", "exposed-java-time", "postgres", "hikari"]
+documentation = ["ktor-openapi", "ktor-swagger-ui"]
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

@@ -15,6 +15,7 @@ fun Application.module() {
     configureHTTP()
     configureAuthentication()
     configureSerialization()
+    configureDocumentation()
     configureRouting()
     configureApi()
     configureDatabase()

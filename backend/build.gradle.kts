@@ -31,6 +31,9 @@ dependencies {
     implementation(libs.bundles.authentication)
     implementation(libs.bundles.http.client)
     implementation(libs.bundles.database)
+    implementation(libs.bundles.documentation)
+    implementation("io.ktor:ktor-server-openapi:3.4.0")
+    implementation("io.ktor:ktor-server-routing-openapi:3.4.0")
 
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
