@@ -1,3 +1,5 @@
+package com.accounting
+
 import config.configureHTTP
 import config.configureMonitoring
 import config.configureSerialization
