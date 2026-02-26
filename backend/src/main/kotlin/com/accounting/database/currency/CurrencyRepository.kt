@@ -5,6 +5,9 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.math.BigDecimal
 
+/**
+ * Repository class for accessing and manipulating [Currency]s.
+ */
 class CurrencyRepository {
 
     fun create(currency: Currency): Currency = transaction {
