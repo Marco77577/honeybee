@@ -1,4 +1,4 @@
-package com.accounting.database.fiscalyear
+package database.fiscalyear
 
 import com.accounting.database.LocalDateTimeSerializer
 import database.Id
