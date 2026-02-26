@@ -7,33 +7,22 @@ import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.exceptions.InvalidClaimException
 import com.auth0.jwt.exceptions.JWTVerificationException
 import com.auth0.jwt.exceptions.TokenExpiredException
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.engine.cio.*
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.client.request.*
 import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
 import io.ktor.server.response.*
-import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.jsonPrimitive
-import java.net.URI
-import java.net.URL
 import java.security.interfaces.RSAPublicKey
 import java.util.concurrent.TimeUnit
 
 const val OIDC_AUTH = "oidc"
 
-fun Application.configureAuthentication() {
+fun Application.configureAuthentication(oidcDiscovery: OidcDiscovery) {
     val oidcRealm = System.getenv("OIDC_REALM") ?: error("OIDC_REALM environment variable is not set")
     val audience = System.getenv("OIDC_CLIENT_ID") ?: error("OIDC_CLIENT_ID environment variable is not set")
     val issuer = System.getenv("OIDC_ISSUER") ?: error("OIDC_ISSUER environment variable is not set")
 
-    val jwksUrl = runBlocking { discoverJwksUrl(issuer) }
+    val jwksUrl = oidcDiscovery.discover(OidcDiscovery.Data.JWKS_URI)
     val jwkProvider = JwkProviderBuilder(jwksUrl)
         .cached(10, 24, TimeUnit.HOURS)
         .rateLimited(10, 1, TimeUnit.MINUTES)
@@ -68,31 +57,6 @@ fun Application.configureAuthentication() {
             }
         }
     }
-}
-
-/**
- * Discovers the JWKS URL from the OIDC discovery document.
- * @param issuer the OIDC issuer URL.
- * @return The JWKS URL.
- */
-private suspend fun discoverJwksUrl(issuer: String): URL = try {
-    val client = HttpClient(CIO) {
-        install(ContentNegotiation) {
-            json()
-        }
-    }
-
-    val config = client
-        .get("$issuer/.well-known/openid-configuration")
-        .body<JsonObject>()
-    client.close()
-
-    val jwksUri = config["jwks_uri"]?.jsonPrimitive?.content
-        ?: error("jwks_uri not found in OIDC discovery document")
-
-    return URI(jwksUri).toURL()
-} catch (e: Exception) {
-    error("Failed to discover JWKS URL from OIDC discovery document: ${e.message}")
 }
 
 /**

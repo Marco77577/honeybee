@@ -2,6 +2,7 @@ package com.accounting
 
 import com.accounting.api.configureApi
 import com.accounting.config.*
+import com.accounting.config.authentication.OidcDiscovery
 import com.accounting.config.authentication.configureAuthentication
 import io.ktor.server.application.*
 import io.ktor.server.netty.*
@@ -11,12 +12,14 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
+    val oidcDiscovery = OidcDiscovery()
+
+    configureDatabase()
     configureMonitoring()
     configureHTTP()
-    configureAuthentication()
     configureSerialization()
-    configureDocumentation()
+    configureAuthentication(oidcDiscovery)
+    configureDocumentation(oidcDiscovery)
     configureRouting()
     configureApi()
-    configureDatabase()
 }
