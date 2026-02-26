@@ -1,5 +1,6 @@
 package com.accounting
 
+import com.accounting.config.configureDatabase
 import config.configureHTTP
 import config.configureMonitoring
 import config.configureSerialization
@@ -18,4 +19,5 @@ fun Application.module() {
     configureAuthentication()
     configureSerialization()
     configureRouting()
+    configureDatabase()
 }

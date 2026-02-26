@@ -12,6 +12,20 @@ You need to provide the following environment variables:
 | `OIDC_CLIENT_ID` | The client id (audience), e.g. `honeybee`.                                  |
 | `OIDC_REALM`     | The realm your client lives in, e.g. `users`.                               |
 
+## Database
+
+The server requires a PostgreSQL database to store data.
+
+You need to provide the following environment variables:
+
+| Variable Name | Description                                         |
+|---------------|-----------------------------------------------------|
+| `DB_HOST`     | The host of the database, e.g. `postgres.host.com`. |
+| `DB_PORT`     | The port of the database (default: `5432`).         |
+| `DB_NAME`     | The name of the database, e.g. `honeybee`.          |
+| `DB_USERNAME` | The username to the database.                       |
+| `DB_PASSWORD` | The password to the database.                       |
+
 ## Building & Running
 
 To build or run the project, use one of the following tasks:
