@@ -1,27 +1,56 @@
 @import "tailwindcss";
 
 :root {
-    --background: #eef3f7;
-    --on-background: #797a7c;
+    --background: #fafafa;
     --foreground: #171717;
+
+    --button-background: #171717;
+    --button-background-hover: #383838;
+    --button-foreground: #f5f5f5;
+    --button-border: #c1c1c1;
+
+    --button-secondary-background: #ffffff;
+    --button-secondary-background-hover: #f2f2f2;
+    --button-secondary-foreground: #171717;
+    --button-secondary-border: #ebebeb;
+
     --honey: #eab308;
-    --accent: #111A4A;
 }
 
 @theme inline {
     --color-background: var(--background);
-    --color-on-background: var(--on-background);
     --color-foreground: var(--foreground);
+
+    --color-button-background: var(--button-background);
+    --color-button-background-hover: var(--button-background-hover);
+    --color-button-foreground: var(--button-foreground);
+    --color-button-border: var(--button-border);
+
+    --color-button-secondary-background: var(--button-secondary-background);
+    --color-button-secondary-background-hover: var(--button-secondary-background-hover);
+    --color-button-secondary-foreground: var(--button-secondary-foreground);
+    --color-button-secondary-border: var(--button-secondary-border);
+
     --color-honey: var(--honey);
-    --color-accent: var(--accent);
+
     --font-montserrat: var(--font-montserrat-alternates);
     --font-madurai: var(--font-hind-madurai);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --background: #0a0a0a;
+        --background: #000000;
         --foreground: #ededed;
+
+        --button-background: #ededed;
+        --button-background-hover: #cccccc;
+        --button-foreground: #0a0a0a;
+        --button-border: #3b3b3b;
+
+        --button-secondary-background: #0a0a0a;
+        --button-secondary-background-hover: #1f1f1f;
+        --button-secondary-foreground: #ededed;
+        --button-secondary-border: #2e2e2e;
     }
 }
 
@@ -37,4 +66,8 @@ h1 {
 
 p {
     @apply font-madurai text-lg;
+}
+
+button {
+    @apply font-montserrat cursor-pointer transition-all;
 }
