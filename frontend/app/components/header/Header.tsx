@@ -3,6 +3,8 @@
 import Honeycomb from "@/app/components/Honeycomb";
 import {Cross} from 'hamburger-react'
 import {useState} from "react";
+import LogInButton from "@/app/components/header/LogInButton";
+import SignInButton from "@/app/components/header/SignInButton";
 
 export default function Header() {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -17,20 +19,14 @@ export default function Header() {
 
                 {/* Desktop Menu */}
                 <div className={`hidden md:flex items-center gap-3`}>
-                    <button
-                        className={`rounded-md px-3 py-2 border border-button-secondary-border bg-button-secondary-background hover:bg-button-secondary-background-hover text-button-secondary-foreground text-sm`}>Log
-                        In
-                    </button>
-                    <button
-                        className={`rounded-md px-3 py-2 border border-button-border bg-button-background hover:bg-button-background-hover text-button-foreground text-sm`}>Sign
-                        Up
-                    </button>
+                    <LogInButton/>
+                    <SignInButton/>
                 </div>
 
                 {/* Mobile Menu */}
                 <div className={`block md:hidden`}>
                     <div
-                        className={`relative rounded-full w-10 h-10 border border-hamburger-button-border bg-hamburger-button-background hover:bg-hamburger-button-background-hover text-hamburger-button-foreground`}>
+                        className={`relative rounded-full w-10 h-10 z-10 border border-hamburger-button-border bg-hamburger-button-background hover:bg-hamburger-button-background-hover text-hamburger-button-foreground`}>
                         <div className={`absolute inset-0 -left-1 -top-1.25`}>
                             <Cross
                                 size={18}
@@ -40,9 +36,14 @@ export default function Header() {
                                 toggle={setMobileMenuOpen}/>
                         </div>
                     </div>
-                    {/*{isMobileMenuOpen && <div className="mobile-menu">Menu items</div>}*/}
                 </div>
             </div>
+            {isMobileMenuOpen && <div className={`fixed md:hidden inset-0 bg-background px-6 pt-20`}>
+                <div className={`flex flex-col gap-3`}>
+                    <SignInButton/>
+                    <LogInButton/>
+                </div>
+            </div>}
         </header>
     )
 }
