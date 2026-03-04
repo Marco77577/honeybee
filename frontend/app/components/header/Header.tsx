@@ -2,12 +2,18 @@
 
 import Honeycomb from "@/app/components/Honeycomb";
 import {Cross} from 'hamburger-react'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import LogInButton from "@/app/components/header/LogInButton";
 import SignInButton from "@/app/components/header/SignInButton";
+import {useAuth} from "react-oidc-context";
 
 export default function Header() {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    const auth = useAuth();
+    useEffect(() => {
+        auth.signinSilent().then()
+    }, []);
 
     return (
         <header className={`px-6`}>
@@ -19,8 +25,8 @@ export default function Header() {
 
                 {/* Desktop Menu */}
                 <div className={`hidden md:flex items-center gap-3`}>
-                    <LogInButton/>
-                    <SignInButton/>
+                    {!auth.isAuthenticated && <LogInButton/>}
+                    {!auth.isAuthenticated && <SignInButton/>}
                 </div>
 
                 {/* Mobile Menu */}
@@ -40,8 +46,8 @@ export default function Header() {
             </div>
             {isMobileMenuOpen && <div className={`fixed md:hidden inset-0 bg-background px-6 pt-20`}>
                 <div className={`flex flex-col gap-3`}>
-                    <SignInButton/>
-                    <LogInButton/>
+                    {!auth.isAuthenticated && <LogInButton/>}
+                    {!auth.isAuthenticated && <SignInButton/>}
                 </div>
             </div>}
         </header>
