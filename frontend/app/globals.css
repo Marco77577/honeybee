@@ -14,6 +14,11 @@
     --button-secondary-foreground: #171717;
     --button-secondary-border: #ebebeb;
 
+    --hamburger-button-background: #fafafa;
+    --hamburger-button-background-hover: #ededed;
+    --hamburger-button-foreground: #171717;
+    --hamburger-button-border: #ebebeb;
+
     --honey: #eab308;
 }
 
@@ -30,6 +35,11 @@
     --color-button-secondary-background-hover: var(--button-secondary-background-hover);
     --color-button-secondary-foreground: var(--button-secondary-foreground);
     --color-button-secondary-border: var(--button-secondary-border);
+
+    --color-hamburger-button-background: var(--hamburger-button-background);
+    --color-hamburger-button-background-hover: var(--hamburger-button-background-hover);
+    --color-hamburger-button-foreground: var(--hamburger-button-foreground);
+    --color-hamburger-button-border: var(--hamburger-button-border);
 
     --color-honey: var(--honey);
 
@@ -51,6 +61,11 @@
         --button-secondary-background-hover: #1f1f1f;
         --button-secondary-foreground: #ededed;
         --button-secondary-border: #2e2e2e;
+
+        --hamburger-button-background: #000000;
+        --hamburger-button-background-hover: #0f0f0f;
+        --hamburger-button-foreground: #ededed;
+        --hamburger-button-border: #1b1b1b;
     }
 }
 
