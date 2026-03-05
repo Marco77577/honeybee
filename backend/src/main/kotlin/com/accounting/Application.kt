@@ -22,6 +22,6 @@ fun Application.module() {
     configureSerialization()
     configureAuthentication(oidcDiscovery)
     configureDocumentation(oidcDiscovery)
-    configureRouting()
+    configureStatusPages()
     configureApi()
 }

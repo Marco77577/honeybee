@@ -2,10 +2,12 @@ package com.accounting.api
 
 import com.accounting.api.user.organization.organization
 import com.accounting.util.isProduction
+import io.github.smiley4.ktoropenapi.get
 import io.github.smiley4.ktoropenapi.openApi
 import io.github.smiley4.ktoropenapi.route
 import io.github.smiley4.ktorswaggerui.swaggerUI
 import io.ktor.server.application.*
+import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 private const val OPEN_API_PATH = "/openapi/api.json"
@@ -28,6 +30,13 @@ fun Application.configureApi() {
             tags = listOf("v1")
         }) {
             organization()
+        }
+
+        get("/health", {
+            tags = listOf("health")
+            description = "Health check"
+        }) {
+            call.respondText("OK")
         }
     }
 }
