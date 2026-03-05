@@ -6,6 +6,7 @@ import OidcProvider from "@/app/components/OidcProvider";
 import {ApiProvider} from "@/app/context/api/ApiProvider";
 import React from "react";
 import {Theme} from "@radix-ui/themes";
+import {QueryProvider} from "@/app/context/api/queries/QueryProvider";
 
 const montserratAlternates = Montserrat_Alternates({
     variable: "--font-montserrat-alternates",
@@ -35,10 +36,12 @@ export default function RootLayout({
         <Theme>
             <OidcProvider>
                 <ApiProvider>
-                    <Header/>
-                    <div className={`mx-auto container`}>
-                        {children}
-                    </div>
+                    <QueryProvider>
+                        <Header/>
+                        <div className={`mx-auto container`}>
+                            {children}
+                        </div>
+                    </QueryProvider>
                 </ApiProvider>
             </OidcProvider>
         </Theme>

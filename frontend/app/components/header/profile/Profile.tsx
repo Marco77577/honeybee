@@ -1,13 +1,12 @@
 import {useAuth} from "react-oidc-context";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {Building2, LogOut, Pencil} from "lucide-react";
 import PopoverListElement from "@/app/components/header/profile/PopoverListElement";
 import PopoverDivider from "@/app/components/header/profile/PopoverDivider";
 import ProfileTrigger from "@/app/components/header/profile/ProfileTrigger";
 import {Popover} from "@/app/components/header/profile/Popover";
-import {ComAccountingApiUserOrganizationModelPublicOrganization} from "@/app/generated/api";
-import {useOrganizationApi} from "@/app/context/api/ApiProvider";
 import {Box, Skeleton} from "@radix-ui/themes";
+import {useOrganizationsQuery} from "@/app/context/api/queries/organizations";
 
 interface ProfileProps {
     alwaysOpen?: boolean;
@@ -15,39 +14,13 @@ interface ProfileProps {
 
 export default function Profile({alwaysOpen = false}: ProfileProps) {
     const auth = useAuth();
-    const organizationApi = useOrganizationApi();
-    const [organizations, setOrganizations] = useState<ComAccountingApiUserOrganizationModelPublicOrganization[]>([]);
-    const [loading, setLoading] = useState(false);
+    const {data: organizations, isLoading} = useOrganizationsQuery()
 
-    useEffect(
-        () => {
-            const controller = new AbortController();
-
-            async function fetchOrganizations() {
-                try {
-                    setLoading(true);
-                    const organizations = await organizationApi.apiV1OrganizationGet({
-                        signal: controller.signal
-                    });
-                    setOrganizations(organizations)
-                    console.log(organizations)
-                } catch (e) {
-                    if (e instanceof Error && e.cause.name !== "AbortError") console.error(e);
-                } finally {
-                    setLoading(false);
-                }
-            }
-
-            fetchOrganizations().then();
-            return () => controller.abort();
-        },
-        []
-    );
     return (
         <Popover trigger={<ProfileTrigger/>} alwaysOpen={alwaysOpen}>
-            {loading && (
+            {isLoading && (
                 <div className={`contents`}>
-                    <Skeleton loading={loading}>
+                    <Skeleton>
                         <Box>
                             <PopoverListElement
                                 title="ACME Inc."
@@ -58,7 +31,7 @@ export default function Profile({alwaysOpen = false}: ProfileProps) {
                     <PopoverDivider/>
                 </div>
             )}
-            {!loading && organizations.length > 0 && (
+            {!isLoading && organizations && organizations.length > 0 && (
                 <div className={`contents`}>
                     {
                         organizations.map(
