@@ -1,0 +1,87 @@
+{
+  "openapi" : "3.1.0",
+  "info" : {
+    "title" : "Honeybee API",
+    "description" : "The API of the Honeybee backend.",
+    "version" : "1.0.0"
+  },
+  "externalDocs" : {
+    "url" : "/"
+  },
+  "servers" : [ ],
+  "tags" : [ ],
+  "paths" : {
+    "/health" : {
+      "get" : {
+        "tags" : [ "health" ],
+        "description" : "Health check",
+        "parameters" : [ ],
+        "responses" : { },
+        "deprecated" : false
+      }
+    },
+    "/api/v1/organization" : {
+      "get" : {
+        "tags" : [ "organization", "v1" ],
+        "description" : "Get organizations of a user",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "organizations",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/com.accounting.api.user.organization.model.PublicOrganization"
+                  },
+                  "title" : "List<PublicOrganization>"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "com.accounting.api.user.organization.model.PublicOrganization" : {
+        "type" : "object",
+        "properties" : {
+          "displayName" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "id" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        },
+        "required" : [ "displayName", "id" ],
+        "title" : "PublicOrganization"
+      }
+    },
+    "examples" : { },
+    "securitySchemes" : {
+      "oidc" : {
+        "type" : "oauth2",
+        "flows" : {
+          "implicit" : {
+            "scopes" : {
+              "openid" : "OpenID Connect",
+              "profile" : "User profile",
+              "email" : "User email"
+            }
+          }
+        }
+      }
+    }
+  },
+  "webhooks" : { }
+}

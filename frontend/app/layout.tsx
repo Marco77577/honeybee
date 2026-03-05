@@ -3,6 +3,8 @@ import {Hind_Madurai, Montserrat_Alternates} from "next/font/google";
 import "./globals.css";
 import Header from "@/app/components/header/Header";
 import OidcProvider from "@/app/components/OidcProvider";
+import {ApiProvider} from "@/app/context/api/ApiProvider";
+import React from "react";
 
 const montserratAlternates = Montserrat_Alternates({
     variable: "--font-montserrat-alternates",
@@ -30,10 +32,12 @@ export default function RootLayout({
         <html lang="en">
         <body className={`${montserratAlternates.variable} ${hindMadurai.variable} antialiased`}>
         <OidcProvider>
-            <Header/>
-            <div className={`mx-auto container`}>
-                {children}
-            </div>
+            <ApiProvider>
+                <Header/>
+                <div className={`mx-auto container`}>
+                    {children}
+                </div>
+            </ApiProvider>
         </OidcProvider>
         </body>
         </html>
