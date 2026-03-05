@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import LogInButton from "@/app/components/header/LogInButton";
 import SignInButton from "@/app/components/header/SignInButton";
 import {useAuth} from "react-oidc-context";
+import Profile from "@/app/components/header/profile/Profile";
 
 export default function Header() {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -27,6 +28,7 @@ export default function Header() {
                 <div className={`hidden md:flex items-center gap-3`}>
                     {!auth.isAuthenticated && <LogInButton/>}
                     {!auth.isAuthenticated && <SignInButton/>}
+                    {auth.isAuthenticated && <Profile/>}
                 </div>
 
                 {/* Mobile Menu */}
@@ -48,6 +50,11 @@ export default function Header() {
                 <div className={`flex flex-col gap-3`}>
                     {!auth.isAuthenticated && <LogInButton/>}
                     {!auth.isAuthenticated && <SignInButton/>}
+                    {auth.isAuthenticated &&
+                        <div className={`w-full flex justify-end`}>
+                            <Profile alwaysOpen={true}/>
+                        </div>
+                    }
                 </div>
             </div>}
         </header>

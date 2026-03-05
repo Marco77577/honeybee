@@ -19,7 +19,15 @@
     --hamburger-button-foreground: #171717;
     --hamburger-button-border: #ebebeb;
 
+    --popover-background: #ffffff;
+    --popover-border: #dfdfdf;
+    --popover-foreground: #8b8b8b;
+    --popover-foreground-title: #161616;
+    --popover-element-hover: #f2f2f2;
+
     --honey: #eab308;
+
+    --error: #e5484d;
 }
 
 @theme inline {
@@ -41,7 +49,15 @@
     --color-hamburger-button-foreground: var(--hamburger-button-foreground);
     --color-hamburger-button-border: var(--hamburger-button-border);
 
+    --color-popover-background: var(--popover-background);
+    --color-popover-border: var(--popover-border);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover-foreground-title: var(--popover-foreground-title);
+    --color-popover-element-hover: var(--popover-element-hover);
+
     --color-honey: var(--honey);
+
+    --color-error: var(--error);
 
     --font-montserrat: var(--font-montserrat-alternates);
     --font-madurai: var(--font-hind-madurai);
@@ -66,7 +82,17 @@
         --hamburger-button-background-hover: #0f0f0f;
         --hamburger-button-foreground: #ededed;
         --hamburger-button-border: #1b1b1b;
+
+        --popover-background: #0a0a0a;
+        --popover-border: #2a2a2a;
+        --popover-foreground: #828282;
+        --popover-foreground-title: #ededed;
+        --popover-element-hover: #1d1d1d;
     }
+}
+
+* {
+    @apply font-madurai transition-all;
 }
 
 body {
