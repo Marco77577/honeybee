@@ -11,6 +11,15 @@ interface PopoverListElementProps {
     color?: string,
 }
 
+const colorMap: Record<string, Record<string, string>> = {
+    text: {
+        error: `text-error`,
+    },
+    hover: {
+        error: `hover:bg-error`,
+    }
+}
+
 export default function PopoverListElement({
                                                title,
                                                icon: Icon,
@@ -19,12 +28,13 @@ export default function PopoverListElement({
                                                color,
                                                ...props
                                            }: PopoverListElementProps & React.HTMLAttributes<HTMLDivElement>) {
+
     return (
         <div
-            className={clsx(`p-2`, color ? `text-${color} hover:text-white` : `text-popover-foreground`, className)}
+            className={clsx(`p-2`, color ? `${colorMap.text[color]} hover:text-white` : `text-popover-foreground`, className)}
             {...props}>
             <div
-                className={clsx(`flex items-center gap-3 py-2.5 px-2 rounded-md cursor-pointer`, color ? `hover:bg-${color}` : `hover:bg-popover-element-hover`)}>
+                className={clsx(`flex items-center gap-3 py-2.5 px-2 rounded-md cursor-pointer`, color ? colorMap.hover[color] : `hover:bg-popover-element-hover`)}>
                 <div>
                     <Icon/>
                 </div>
