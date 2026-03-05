@@ -5,12 +5,9 @@ import PopoverListElement from "@/app/components/header/profile/PopoverListEleme
 import PopoverDivider from "@/app/components/header/profile/PopoverDivider";
 import ProfileTrigger from "@/app/components/header/profile/ProfileTrigger";
 import {Popover} from "@/app/components/header/profile/Popover";
-import {
-    ComAccountingApiUserOrganizationModelPublicOrganization,
-    Configuration, FetchError,
-    OrganizationApi
-} from "@/app/generated/api";
+import {ComAccountingApiUserOrganizationModelPublicOrganization} from "@/app/generated/api";
 import {useOrganizationApi} from "@/app/context/api/ApiProvider";
+import {Box, Skeleton} from "@radix-ui/themes";
 
 interface ProfileProps {
     alwaysOpen?: boolean;
@@ -21,7 +18,6 @@ export default function Profile({alwaysOpen = false}: ProfileProps) {
     const organizationApi = useOrganizationApi();
     const [organizations, setOrganizations] = useState<ComAccountingApiUserOrganizationModelPublicOrganization[]>([]);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
 
     useEffect(
         () => {
@@ -34,17 +30,14 @@ export default function Profile({alwaysOpen = false}: ProfileProps) {
                         signal: controller.signal
                     });
                     setOrganizations(organizations)
-                    setError(null);
                     console.log(organizations)
                 } catch (e) {
-                    if (e instanceof Error && e.cause.name !== "AbortError") {
-                        setError(e.message);
-                        console.error(e);
-                    }
+                    if (e instanceof Error && e.cause.name !== "AbortError") console.error(e);
                 } finally {
                     setLoading(false);
                 }
             }
+
             fetchOrganizations().then();
             return () => controller.abort();
         },
@@ -52,15 +45,37 @@ export default function Profile({alwaysOpen = false}: ProfileProps) {
     );
     return (
         <Popover trigger={<ProfileTrigger/>} alwaysOpen={alwaysOpen}>
-            <PopoverListElement
-                title="ACME Inc."
-                subtitle="GmbH"
-                icon={Building2}/>
-            <PopoverListElement
-                title="SpaceX"
-                subtitle="GmbH"
-                icon={Building2}/>
-            <PopoverDivider/>
+            {loading && (
+                <div className={`contents`}>
+                    <Skeleton loading={loading}>
+                        <Box>
+                            <PopoverListElement
+                                title="ACME Inc."
+                                subtitle="GmbH"
+                                icon={Building2}/>
+                        </Box>
+                    </Skeleton>
+                    <PopoverDivider/>
+                </div>
+            )}
+            {!loading && organizations.length > 0 && (
+                <div className={`contents`}>
+                    {
+                        organizations.map(
+                            organization => {
+                                return (
+                                    <PopoverListElement
+                                        key={organization.id}
+                                        title={organization.displayName}
+                                        subtitle="GmbH"
+                                        icon={Building2}/>
+                                )
+                            }
+                        )
+                    }
+                    <PopoverDivider/>
+                </div>
+            )}
             <PopoverListElement
                 title="Manage Organizations"
                 subtitle="Create and delete organizations."
