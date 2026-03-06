@@ -1,6 +1,6 @@
 package com.accounting.api
 
-import com.accounting.api.user.organization.organization
+import com.accounting.api.organization.organization
 import com.accounting.util.isProduction
 import io.github.smiley4.ktoropenapi.get
 import io.github.smiley4.ktoropenapi.openApi

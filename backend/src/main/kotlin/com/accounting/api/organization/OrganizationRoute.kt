@@ -1,6 +1,6 @@
-package com.accounting.api.user.organization
+package com.accounting.api.organization
 
-import com.accounting.api.user.organization.model.PublicOrganization
+import com.accounting.api.organization.model.PublicOrganization
 import com.accounting.config.authentication.OIDC_AUTH
 import com.accounting.config.authentication.requireUser
 import com.accounting.database.organization.OrganizationRepository

@@ -1,4 +1,4 @@
-package com.accounting.api.user.organization.model
+package com.accounting.api.organization.model
 
 import com.accounting.database.organization.Organization
 
