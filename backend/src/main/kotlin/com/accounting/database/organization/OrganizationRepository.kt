@@ -39,6 +39,7 @@ class OrganizationRepository {
         id = this[Organizations.id],
         displayName = this[Organizations.displayName],
         officialName = this[Organizations.officialName],
+        legalForm = this[Organizations.legalForm],
         defaultPaymentAccount = this[Organizations.defaultPaymentAccount],
         defaultRevenueAccount = this[Organizations.defaultRevenueAccount],
         mainCurrency = this[Organizations.mainCurrency],

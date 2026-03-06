@@ -10,6 +10,7 @@ data class Organization(
     val id: String = Id.organisation(),
     val displayName: String,
     val officialName: String,
+    val legalForm: LegalForm,
     val defaultPaymentAccount: String,
     val defaultRevenueAccount: String,
     val mainCurrency: String,

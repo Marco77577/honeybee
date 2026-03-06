@@ -10,6 +10,7 @@ object Organizations : Table("organisations") {
     val id = varchar("id", 255).uniqueIndex()
     val displayName = varchar("display_name", 255)
     val officialName = varchar("official_name", 255)
+    val legalForm = enumerationByName<LegalForm>("legal_form", 50)
     val defaultPaymentAccount = varchar("default_payment_account_id", 255).references(Accounts.id)
     val defaultRevenueAccount = varchar("default_revenue_account_id", 255).references(Accounts.id)
     val mainCurrency = varchar("main_currency_id", 255).references(Currencies.id)
