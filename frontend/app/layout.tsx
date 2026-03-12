@@ -38,7 +38,7 @@ export default function RootLayout({
                 <ApiProvider>
                     <QueryProvider>
                         <Header/>
-                        <div className={`mx-auto container pt-16`}>
+                        <div className={`mx-auto container py-16`}>
                             {children}
                         </div>
                     </QueryProvider>
