@@ -20,6 +20,7 @@ fun Application.configureHTTP() {
         allowMethod(HttpMethod.Post)
 
         allowHeader(HttpHeaders.Authorization)
+        allowHeader(HttpHeaders.ContentType)
 
         if (!isProduction()) anyHost()
     }
