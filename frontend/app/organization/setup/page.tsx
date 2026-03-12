@@ -23,6 +23,7 @@ import {
 } from "@/app/organization/setup/legal-form.util";
 import {formatFiscalYear} from "@/app/organization/setup/fiscal-year.util";
 import SelectField from "@/app/components/form/SelectField";
+import {useCreateOrganizationMutation} from "@/app/context/api/queries/organizations";
 
 export default function SetupOrganization() {
     const currentYear = new Date().getFullYear();
@@ -59,6 +60,8 @@ export default function SetupOrganization() {
         setFirstFiscalYear(numbersOnly);
         setPreviousYear(numbersOnly);
     };
+
+    const createOrganization = useCreateOrganizationMutation()
 
     return (
         <div className={`flex flex-col gap-12`}>
@@ -143,6 +146,14 @@ export default function SetupOrganization() {
             </AutoHeight>
             <AutoHeight open={isFirstFiscalYearSet && isLegalFormSet && isOrganizationNameSet}>
                 <PrimaryButton title="Finish Setup" onClick={() => {
+                    if (!organizationName || !legalForm || !firstFiscalYear) return;
+                    createOrganization.mutate(
+                        {
+                            displayName: organizationName,
+                            legalForm: legalForm,
+                            fiscalYear: firstFiscalYear
+                        }
+                    );
                 }}/>
             </AutoHeight>
         </div>
