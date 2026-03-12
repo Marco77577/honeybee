@@ -19,14 +19,14 @@ export function AutoHeight({
         <div
             {...props}
             className={clsx(
-                `overflow-hidden p-2 -m-2 transition-all duration-500`,
+                `overflow-hidden px-2 -mx-2 transition-all duration-500`,
                 open && `pointer-events-auto opacity-100`,
                 !open && `pointer-events-none opacity-0`,
                 className
             )}
             style={{height: open ? `${height}px` : "0px"}}>
             <div ref={ref} className={clsx(
-                `p-2 -m-2 transition-all duration-500`,
+                `*:px-2 *:-mx-2 *:py-2 transition-all duration-500`,
                 open && `pointer-events-auto opacity-100 mt-0`,
                 !open && `pointer-events-none opacity-0 -mt-3`,
             )}>
