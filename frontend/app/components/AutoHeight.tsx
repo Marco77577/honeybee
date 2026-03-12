@@ -39,11 +39,13 @@ export function AutoHeight({
             style={{height: height}}
             onTransitionEnd={() => setHeight(open ? `auto` : `0px`)}>
             <div ref={ref} className={clsx(
-                `*:px-2 *:-mx-2 *:py-2 transition-all duration-500`,
+                `transition-all duration-500`,
                 open && `pointer-events-auto opacity-100 mt-0`,
-                !open && `pointer-events-none opacity-0 -mt-3`,
+                !open && `pointer-events-none opacity-0 -mt-9`,
             )}>
+                <div className={`px-2 -mx-2 py-2`}>
                 {children}
+                </div>
             </div>
         </div>
     );
