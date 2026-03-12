@@ -19,13 +19,10 @@ export default function Profile({alwaysOpen = false}: ProfileProps) {
     return (
         <Popover trigger={<ProfileTrigger/>} alwaysOpen={alwaysOpen}>
             {isLoading && (
-                <div className={`contents`}>
-                    <Skeleton>
+                <div>
+                    <Skeleton className={`mx-2 rounded-lg`}>
                         <Box>
-                            <PopoverListElement
-                                title="ACME Inc."
-                                subtitle="GmbH"
-                                icon={Building2}/>
+                            <div className={`m-2 h-14`}/>
                         </Box>
                     </Skeleton>
                     <PopoverDivider/>
