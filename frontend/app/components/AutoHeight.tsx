@@ -1,4 +1,4 @@
-import React, {ReactNode} from "react";
+import React, {ReactNode, useLayoutEffect, useState} from "react";
 import clsx from "clsx";
 import {useMeasure} from "react-use";
 
@@ -13,7 +13,19 @@ export function AutoHeight({
                                className,
                                ...props
                            }: AutoHeightProps & React.HTMLAttributes<HTMLDivElement>) {
-    const [ref, {height}] = useMeasure();
+    const [ref, {height: measuredHeight}] = useMeasure();
+    const [height, setHeight] = useState(`0px`);
+
+    useLayoutEffect(() => {
+        if (open) {
+            setHeight(`${measuredHeight}px`);
+        } else {
+            setHeight(`${measuredHeight}px`);
+            requestAnimationFrame(() => {
+                setHeight(`0px`);
+            });
+        }
+    }, [open]);
 
     return (
         <div
@@ -24,7 +36,8 @@ export function AutoHeight({
                 !open && `pointer-events-none opacity-0`,
                 className
             )}
-            style={{height: open ? `${height}px` : "0px"}}>
+            style={{height: height}}
+            onTransitionEnd={() => setHeight(open ? `auto` : `0px`)}>
             <div ref={ref} className={clsx(
                 `*:px-2 *:-mx-2 *:py-2 transition-all duration-500`,
                 open && `pointer-events-auto opacity-100 mt-0`,
