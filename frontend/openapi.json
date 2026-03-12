@@ -34,9 +34,42 @@
                 "schema" : {
                   "type" : "array",
                   "items" : {
-                    "$ref" : "#/components/schemas/com.accounting.api.user.organization.model.PublicOrganization"
+                    "$ref" : "#/components/schemas/com.accounting.api.organization.model.PublicOrganization"
                   },
                   "title" : "List<PublicOrganization>"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      },
+      "post" : {
+        "tags" : [ "organization", "v1" ],
+        "description" : "Create a new organization",
+        "parameters" : [ ],
+        "requestBody" : {
+          "description" : "new organization",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/com.accounting.api.organization.model.NewOrganization"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "organization",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.api.organization.model.PublicOrganization"
                 }
               }
             }
@@ -51,7 +84,7 @@
   },
   "components" : {
     "schemas" : {
-      "com.accounting.api.user.organization.model.PublicOrganization" : {
+      "com.accounting.api.organization.model.PublicOrganization" : {
         "type" : "object",
         "properties" : {
           "displayName" : {
@@ -65,6 +98,30 @@
         },
         "required" : [ "displayName", "id" ],
         "title" : "PublicOrganization"
+      },
+      "com.accounting.database.organization.LegalForm" : {
+        "type" : "string",
+        "enum" : [ "SELF_EMPLOYED", "LIMITED_COMPANY", "LIMITED_LIABILITY_COMPANY", "PARTNERSHIP", "ASSOCIATION" ],
+        "title" : "LegalForm"
+      },
+      "com.accounting.api.organization.model.NewOrganization" : {
+        "type" : "object",
+        "properties" : {
+          "displayName" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "fiscalYear" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "legalForm" : {
+            "$ref" : "#/components/schemas/com.accounting.database.organization.LegalForm"
+          }
+        },
+        "required" : [ "displayName", "fiscalYear", "legalForm" ],
+        "title" : "NewOrganization"
       }
     },
     "examples" : { },
@@ -73,6 +130,7 @@
         "type" : "oauth2",
         "flows" : {
           "implicit" : {
+            "authorizationUrl" : "",
             "scopes" : {
               "openid" : "OpenID Connect",
               "profile" : "User profile",
