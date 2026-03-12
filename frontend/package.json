@@ -19,7 +19,8 @@
     "oidc-client-ts": "^3.4.1",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "react-oidc-context": "^3.3.0"
+    "react-oidc-context": "^3.3.0",
+    "react-use": "^17.6.0"
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.28.3",

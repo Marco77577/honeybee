@@ -1,5 +1,6 @@
-import React, {ReactNode, useLayoutEffect, useRef, useState} from "react";
+import React, {ReactNode} from "react";
 import clsx from "clsx";
+import {useMeasure} from "react-use";
 
 interface AutoHeightProps {
     children: ReactNode;
@@ -12,21 +13,7 @@ export function AutoHeight({
                                className,
                                ...props
                            }: AutoHeightProps & React.HTMLAttributes<HTMLDivElement>) {
-    const ref = useRef<HTMLDivElement>(null);
-    const [height, setHeight] = useState(0);
-
-    useLayoutEffect(() => {
-        const element = ref.current;
-        if (!element) return;
-
-        const updateHeight = () => setHeight(element.scrollHeight);
-
-        updateHeight();
-        const observer = new ResizeObserver(() => updateHeight());
-        observer.observe(element);
-
-        return () => observer.disconnect();
-    }, [children]);
+    const [ref, {height}] = useMeasure();
 
     return (
         <div
