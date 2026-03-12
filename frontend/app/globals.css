@@ -26,6 +26,13 @@
     --popover-foreground-title: #161616;
     --popover-element-hover: #f2f2f2;
 
+    --input-text-background: #ffffff;
+    --input-text-border: #cbcbcb;
+    --input-text-border-focused: #989898;
+    --input-text-border-outline: #dbdbdb;
+    --input-text-placeholder: #8f8f8f;
+    --input-text-foreground: #000000;
+
     --honey: #eab308;
     --lawn: #00a63e;
 
@@ -56,6 +63,13 @@
     --color-popover-foreground: var(--popover-foreground);
     --color-popover-foreground-title: var(--popover-foreground-title);
     --color-popover-element-hover: var(--popover-element-hover);
+
+    --color-input-text-background: var(--input-text-background);
+    --color-input-text-border: var(--input-text-border);
+    --color-input-text-border-focused: var(--input-text-border-focused);
+    --color-input-text-border-outline: var(--input-text-border-outline);
+    --color-input-text-placeholder: var(--input-text-placeholder);
+    --color-input-text-foreground: var(--input-text-foreground);
 
     --color-honey: var(--honey);
     --color-lawn: var(--lawn);
@@ -91,6 +105,13 @@
         --popover-foreground: #828282;
         --popover-foreground-title: #ededed;
         --popover-element-hover: #1d1d1d;
+
+        --input-text-background: #0a0a0a;
+        --input-text-border: #515151;
+        --input-text-border-focused: #aeaeae;
+        --input-text-border-outline: #515151;
+        --input-text-placeholder: #8f8f8f;
+        --input-text-foreground: #ffffff;
     }
 }
 
