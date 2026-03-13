@@ -1,6 +1,6 @@
 package com.accounting.database.organization
 
-import com.accounting.api.organization.model.NewOrganization
+import com.accounting.api.organization.model.CreateOrganization
 import com.accounting.config.authentication.AuthenticatedUser
 import com.accounting.database.Id
 import com.accounting.database.account.AccountCategory
@@ -47,14 +47,14 @@ class OrganizationRepository {
     }
 
     fun createOrganization(
-        newOrganization: NewOrganization,
+        createOrganization: CreateOrganization,
         user: AuthenticatedUser,
     ) = transaction {
         val id = Organizations.insert {
             it[id] = Id.organisation()
-            it[displayName] = newOrganization.displayName
-            it[officialName] = newOrganization.displayName
-            it[legalForm] = newOrganization.legalForm
+            it[displayName] = createOrganization.displayName
+            it[officialName] = createOrganization.displayName
+            it[legalForm] = createOrganization.legalForm
         } get Organizations.id
 
         Users.insert {

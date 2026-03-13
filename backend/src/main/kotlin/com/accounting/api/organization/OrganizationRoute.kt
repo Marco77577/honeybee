@@ -1,6 +1,6 @@
 package com.accounting.api.organization
 
-import com.accounting.api.organization.model.NewOrganization
+import com.accounting.api.organization.model.CreateOrganization
 import com.accounting.api.organization.model.PublicOrganization
 import com.accounting.config.authentication.OIDC_AUTH
 import com.accounting.config.authentication.requireUser
@@ -47,7 +47,7 @@ fun Route.organization() {
                     description = "Create a new organization"
                     tags = listOf("organization")
                     request {
-                        body<NewOrganization> {
+                        body<CreateOrganization> {
                             description = "new organization"
                         }
                     }
@@ -60,10 +60,10 @@ fun Route.organization() {
                 }
             ) {
                 val user = requireUser()
-                val newOrganization = call.receive<NewOrganization>()
+                val createOrganization = call.receive<CreateOrganization>()
 
                 val organization = organizationRepository.createOrganization(
-                    newOrganization = newOrganization,
+                    createOrganization = createOrganization,
                     user = user,
                 )
                 call.respond(
