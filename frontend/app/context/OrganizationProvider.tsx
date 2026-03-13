@@ -4,6 +4,7 @@ import React, {createContext, useContext, useEffect, useState} from "react";
 import {useQueryClient} from "@tanstack/react-query";
 import {currencyKeys} from "@/app/context/api/queries/currencies";
 import {Organization} from "@/app/context/api/queries/organizations";
+import {frankfurterKeys} from "@/app/context/api/queries/frankfurter";
 
 interface OrganizationProvider {
     organization: Organization | undefined
@@ -30,9 +31,8 @@ export function OrganizationProvider({children}: { children: React.ReactNode }) 
 
     useEffect(
         () => {
-            queryClient.invalidateQueries({
-                queryKey: currencyKeys.all,
-            }).then();
+            queryClient.invalidateQueries({queryKey: currencyKeys.all}).then();
+            queryClient.invalidateQueries({queryKey: frankfurterKeys.latest}).then();
         },
         [organization, queryClient]
     )
