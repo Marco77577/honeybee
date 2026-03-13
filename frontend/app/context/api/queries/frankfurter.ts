@@ -8,6 +8,7 @@ export class FrankfurterExchangeRates {
         public readonly base: string,
         public readonly date: string,
         public readonly rates: Map<string, number>,
+        public readonly names: Map<string, string>,
     ) {
     }
 
@@ -27,16 +28,23 @@ export const frankfurter = {
             queryFn: async ({signal}: {
                 signal: AbortSignal
             }) => {
-                const response = await fetch(`https://api.frankfurter.dev/v1/latest?base=${baseCurrency}`, {
+                const latest = await fetch(`https://api.frankfurter.dev/v1/latest?base=${baseCurrency}`, {
                     headers: {'Content-Type': 'application/json'},
                     signal: signal,
                 });
-                const json = await response.json();
+                const jsonLatest = await latest.json();
+
+                const currencies = await fetch(`https://api.frankfurter.dev/v1/currencies`, {
+                    headers: {'Content-Type': 'application/json'},
+                    signal: signal,
+                });
+                const jsonCurrencies = await currencies.json();
 
                 return new FrankfurterExchangeRates(
-                    json.base,
-                    json.date,
-                    new Map(Object.entries(json.rates))
+                    jsonLatest.base,
+                    jsonLatest.date,
+                    new Map(Object.entries(jsonLatest.rates)),
+                    new Map(Object.entries(jsonCurrencies)),
                 );
             },
             enabled: baseCurrency !== undefined,
