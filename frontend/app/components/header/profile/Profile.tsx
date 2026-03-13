@@ -1,5 +1,5 @@
 import {useAuth} from "react-oidc-context";
-import React from "react";
+import React, {useEffect} from "react";
 import {Building2, LogOut, Pencil} from "lucide-react";
 import PopoverListElement from "@/app/components/header/profile/PopoverListElement";
 import PopoverDivider from "@/app/components/header/profile/PopoverDivider";
@@ -7,6 +7,7 @@ import ProfileTrigger from "@/app/components/header/profile/ProfileTrigger";
 import {Popover} from "@/app/components/header/profile/Popover";
 import {Box, Skeleton} from "@radix-ui/themes";
 import {useOrganizationsQuery} from "@/app/context/api/queries/organizations";
+import {useSetOrganizationId} from "@/app/context/OrganizationProvider";
 
 interface ProfileProps {
     alwaysOpen?: boolean;
@@ -14,7 +15,13 @@ interface ProfileProps {
 
 export default function Profile({alwaysOpen = false}: ProfileProps) {
     const auth = useAuth();
-    const {data: organizations, isLoading} = useOrganizationsQuery()
+    const {data: organizations, isLoading} = useOrganizationsQuery();
+    const setOrganizationId = useSetOrganizationId();
+
+    useEffect(
+        () => setOrganizationId(organizations?.[0]?.id),
+        [organizations, setOrganizationId]
+    );
 
     return (
         <Popover trigger={<ProfileTrigger/>} alwaysOpen={alwaysOpen}>
