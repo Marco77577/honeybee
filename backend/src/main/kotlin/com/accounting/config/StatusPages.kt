@@ -7,11 +7,15 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 class NotAuthenticatedException : Exception("user is not authenticated")
+class NotAllowedToViewOrganization : Exception("user may not view organization")
 
 fun Application.configureStatusPages() {
     install(StatusPages) {
+        exception<NotAllowedToViewOrganization> { call, cause ->
+            call.respond(HttpStatusCode.Forbidden, cause.message ?: "Forbidden")
+        }
         exception<NotAuthenticatedException> { call, cause ->
-            call.respond(HttpStatusCode.Unauthorized, cause.message ?: "Not authenticated")
+            call.respond(HttpStatusCode.Unauthorized, cause.message ?: "Unauthorized")
         }
         exception<Throwable> { call, cause ->
             call.respondText(text = "500: $cause", status = HttpStatusCode.InternalServerError)
