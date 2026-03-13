@@ -9,9 +9,13 @@ import io.ktor.server.routing.*
 class NotAuthenticatedException : Exception("user is not authenticated")
 class NotAllowedToViewOrganization : Exception("user may not view organization")
 class NotAllowedToWriteOrganization : Exception("user may not write organization")
+class ValidationException(message: String) : Exception(message)
 
 fun Application.configureStatusPages() {
     install(StatusPages) {
+        exception<ValidationException> { call, cause ->
+            call.respond(HttpStatusCode.BadRequest, cause.message ?: "Bad Request")
+        }
         exception<NotAllowedToWriteOrganization> { call, cause ->
             call.respond(HttpStatusCode.Forbidden, cause.message ?: "Forbidden")
         }
