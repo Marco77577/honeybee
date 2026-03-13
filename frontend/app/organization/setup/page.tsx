@@ -72,7 +72,7 @@ export default function SetupOrganization() {
                     <Heading1 title="Let&#39;s Create a New Organization"
                               icon={<Building2 size={40} strokeWidth={1}/>}/>
                     <InputField
-                        icon={<Building2 strokeWidth={1}/>}
+                        leading={<Building2 strokeWidth={1}/>}
                         value={organizationName}
                         onValueChange={handleOrganizationNameChange}
                         placeholder="Enter the name of your organization to get started ..."/>
