@@ -1,5 +1,5 @@
 import type {Metadata} from "next";
-import {Hind_Madurai, Montserrat_Alternates} from "next/font/google";
+import {Courier_Prime, Hind_Madurai, Montserrat_Alternates} from "next/font/google";
 import "./globals.css";
 import Header from "@/app/components/header/Header";
 import OidcProvider from "@/app/components/OidcProvider";
@@ -21,6 +21,12 @@ const hindMadurai = Hind_Madurai({
     subsets: ["latin"],
 });
 
+const courierPrime = Courier_Prime({
+    variable: "--font-mono",
+    weight: ["400", "700"],
+    subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
     title: "Honeybee",
     description: "Double-Entry Accounting Made Easy",
@@ -33,7 +39,8 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-        <body className={`${montserratAlternates.variable} ${hindMadurai.variable} antialiased`}>
+        <body
+            className={`${montserratAlternates.variable} ${hindMadurai.variable} ${courierPrime.variable} antialiased`}>
         <Theme hasBackground={false}>
             <OidcProvider>
                 <ApiProvider>

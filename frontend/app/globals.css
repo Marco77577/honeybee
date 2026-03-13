@@ -78,6 +78,7 @@
 
     --font-montserrat: var(--font-montserrat-alternates);
     --font-madurai: var(--font-hind-madurai);
+    --font-mono: var(--font-mono);
 }
 
 @media (prefers-color-scheme: dark) {
