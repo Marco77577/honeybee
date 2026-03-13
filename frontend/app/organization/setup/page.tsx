@@ -64,7 +64,7 @@ export default function SetupOrganization() {
     const createOrganization = useCreateOrganizationMutation()
 
     return (
-        <div className={`flex flex-col gap-12`}>
+        <div className={`w-full max-w-lg mx-auto flex flex-col gap-12`}>
             <div className={`flex flex-col gap-6`}>
                 <div className={`flex flex-col gap-3`}>
                     <Building2 size={40} strokeWidth={1}/>
