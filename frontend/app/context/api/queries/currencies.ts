@@ -3,11 +3,14 @@
 import {
     ApiV1CurrencyOrganizationIdPatchRequest,
     ApiV1CurrencyOrganizationIdPostRequest,
+    ComAccountingApiCurrencyModelPublicCurrency,
     CurrencyApi
 } from "@/app/generated/api";
 import {mutationOptions, queryOptions, useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {useCurrencyApi} from "@/app/context/api/ApiProvider";
 import {useOrganization} from "@/app/context/OrganizationProvider";
+
+export type Currency = ComAccountingApiCurrencyModelPublicCurrency;
 
 export const currencyKeys = {
     all: ["currencies"] as const,
