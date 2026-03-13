@@ -1,5 +1,6 @@
 package com.accounting.api
 
+import com.accounting.api.currency.currency
 import com.accounting.api.organization.organization
 import com.accounting.util.isProduction
 import io.github.smiley4.ktoropenapi.get
@@ -30,6 +31,7 @@ fun Application.configureApi() {
             tags = listOf("v1")
         }) {
             organization()
+            currency()
         }
 
         get("/health", {

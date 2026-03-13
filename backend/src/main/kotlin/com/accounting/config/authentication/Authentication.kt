@@ -1,6 +1,8 @@
 package com.accounting.config.authentication
 
+import com.accounting.config.NotAllowedToViewOrganization
 import com.accounting.config.NotAuthenticatedException
+import com.accounting.database.user.UserRepository
 import com.auth0.jwk.JwkProvider
 import com.auth0.jwk.JwkProviderBuilder
 import com.auth0.jwt.JWT
@@ -14,6 +16,7 @@ import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.koin.ktor.ext.inject
 import java.security.interfaces.RSAPublicKey
 import java.util.concurrent.TimeUnit
 

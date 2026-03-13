@@ -1,6 +1,8 @@
 package com.accounting.config.di
 
+import com.accounting.database.currency.CurrencyRepository
 import com.accounting.database.organization.OrganizationRepository
+import com.accounting.database.user.UserRepository
 import io.ktor.server.application.*
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -13,6 +15,8 @@ fun Application.configureKoin() {
         modules(
             module {
                 singleOf(::OrganizationRepository)
+                singleOf(::CurrencyRepository)
+                singleOf(::UserRepository)
             }
         )
     }
