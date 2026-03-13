@@ -116,3 +116,16 @@ infix fun RoutingContext.assertMayRead(organizationId: String): AuthenticatedUse
     if (!userRepository.mayRead(user.id, organizationId)) throw NotAllowedToViewOrganization()
     return user
 }
+
+/**
+ * Asserts that the current user is allowed to write to the given organization.
+ * @param organizationId The id of the organization to check.
+ * @throws NotAllowedToViewOrganization if the user is not allowed to write to the organization.
+ */
+context(route: Route)
+infix fun RoutingContext.assertMayWrite(organizationId: String): AuthenticatedUser {
+    val userRepository by route.inject<UserRepository>()
+    val user = requireUser()
+    if (!userRepository.mayWrite(user.id, organizationId)) throw NotAllowedToViewOrganization()
+    return user
+}
