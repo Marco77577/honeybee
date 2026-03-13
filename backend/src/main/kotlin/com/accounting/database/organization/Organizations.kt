@@ -6,7 +6,7 @@ import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.javatime.CurrentDateTime
 import org.jetbrains.exposed.sql.javatime.datetime
 
-object Organizations : Table("organisations") {
+object Organizations : Table("organizations") {
     val id = varchar("id", 255).uniqueIndex()
     val displayName = varchar("display_name", 255)
     val officialName = varchar("official_name", 255)
