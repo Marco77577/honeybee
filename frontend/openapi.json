@@ -56,20 +56,147 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/com.accounting.api.organization.model.NewOrganization"
+                "$ref" : "#/components/schemas/com.accounting.api.organization.model.CreateOrganization"
               }
             }
           },
           "required" : false
         },
         "responses" : {
-          "200" : {
+          "201" : {
             "description" : "organization",
             "headers" : { },
             "content" : {
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/com.accounting.api.organization.model.PublicOrganization"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      }
+    },
+    "/api/v1/currency/{organizationId}" : {
+      "get" : {
+        "tags" : [ "currency", "v1" ],
+        "description" : "Get currencies of an organization",
+        "parameters" : [ {
+          "name" : "organizationId",
+          "in" : "path",
+          "description" : "The id of the organization owning the currencies",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "currencies of an organization",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/com.accounting.api.currency.model.PublicCurrency"
+                  },
+                  "title" : "List<PublicCurrency>"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      },
+      "post" : {
+        "tags" : [ "currency", "v1" ],
+        "description" : "Create a new currency",
+        "parameters" : [ {
+          "name" : "organizationId",
+          "in" : "path",
+          "description" : "The id of the organization owning the currencies",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "new currency",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/com.accounting.api.currency.model.CreateCurrency"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "currency",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.api.currency.model.PublicCurrency"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      },
+      "patch" : {
+        "tags" : [ "currency", "v1" ],
+        "description" : "Update a currency",
+        "parameters" : [ {
+          "name" : "organizationId",
+          "in" : "path",
+          "description" : "The id of the organization owning the currencies",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "updated currency",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/com.accounting.api.currency.model.UpdateCurrency"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "currency",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.api.currency.model.PublicCurrency"
                 }
               }
             }
@@ -104,7 +231,7 @@
         "enum" : [ "SELF_EMPLOYED", "LIMITED_COMPANY", "LIMITED_LIABILITY_COMPANY", "PARTNERSHIP", "ASSOCIATION" ],
         "title" : "LegalForm"
       },
-      "com.accounting.api.organization.model.NewOrganization" : {
+      "com.accounting.api.organization.model.CreateOrganization" : {
         "type" : "object",
         "properties" : {
           "displayName" : {
@@ -121,7 +248,72 @@
           }
         },
         "required" : [ "displayName", "fiscalYear", "legalForm" ],
-        "title" : "NewOrganization"
+        "title" : "CreateOrganization"
+      },
+      "com.accounting.api.currency.model.PublicCurrency" : {
+        "type" : "object",
+        "properties" : {
+          "abbreviation" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "id" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "manualExchangeRate" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "name" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        },
+        "required" : [ "abbreviation", "id", "name" ],
+        "title" : "PublicCurrency"
+      },
+      "com.accounting.api.currency.model.CreateCurrency" : {
+        "type" : "object",
+        "properties" : {
+          "abbreviation" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "manualExchangeRate" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "name" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        },
+        "required" : [ "abbreviation", "name" ],
+        "title" : "CreateCurrency"
+      },
+      "com.accounting.api.currency.model.UpdateCurrency" : {
+        "type" : "object",
+        "properties" : {
+          "abbreviation" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "id" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "manualExchangeRate" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "name" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        },
+        "required" : [ "abbreviation", "id", "name" ],
+        "title" : "UpdateCurrency"
       }
     },
     "examples" : { },
