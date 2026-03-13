@@ -8,7 +8,7 @@ data class PublicCurrency(
     val id: String,
     val name: String,
     val abbreviation: String,
-    val manualExchangeRate: String?,
+    val manualExchangeRate: Double?,
 ) {
 
     companion object {

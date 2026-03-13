@@ -26,7 +26,7 @@ class CurrencyRepository {
             it[id] = Id.currency()
             it[name] = createCurrency.name
             it[abbreviation] = createCurrency.abbreviation
-            it[manualExchangeRate] = BigDecimal(createCurrency.manualExchangeRate)
+            it[manualExchangeRate] = BigDecimal(createCurrency.manualExchangeRate.toString())
             it[organization] = organizationId
         } get Currencies.id
 
@@ -45,7 +45,7 @@ class CurrencyRepository {
         ) {
             it[name] = updateCurrency.name
             it[abbreviation] = updateCurrency.abbreviation
-            it[manualExchangeRate] = BigDecimal(updateCurrency.manualExchangeRate)
+            it[manualExchangeRate] = BigDecimal(updateCurrency.manualExchangeRate.toString())
         }
 
         Currencies
@@ -62,7 +62,7 @@ class CurrencyRepository {
         id = this[Currencies.id],
         name = this[Currencies.name],
         abbreviation = this[Currencies.abbreviation],
-        manualExchangeRate = this[Currencies.manualExchangeRate].toString(),
+        manualExchangeRate = this[Currencies.manualExchangeRate]?.toDouble(),
         organization = this[Currencies.organization],
         updatedAt = this[Currencies.updatedAt],
         createdAt = this[Currencies.createdAt],

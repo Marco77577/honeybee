@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class CreateCurrency(
     val name: String,
     val abbreviation: String,
-    val manualExchangeRate: String?,
+    val manualExchangeRate: Double?,
 )
