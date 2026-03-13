@@ -36,16 +36,16 @@ export default function RootLayout({
         <body className={`${montserratAlternates.variable} ${hindMadurai.variable} antialiased`}>
         <Theme hasBackground={false}>
             <OidcProvider>
-                <OrganizationProvider>
-                    <ApiProvider>
-                        <QueryProvider>
+                <ApiProvider>
+                    <QueryProvider>
+                        <OrganizationProvider>
                             <Header/>
                             <div className={`mx-auto container py-16 px-4 md:px-0`}>
                                 {children}
                             </div>
-                        </QueryProvider>
-                    </ApiProvider>
-                </OrganizationProvider>
+                        </OrganizationProvider>
+                    </QueryProvider>
+                </ApiProvider>
             </OidcProvider>
         </Theme>
         </body>
