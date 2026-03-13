@@ -24,6 +24,8 @@ import {
 import {formatFiscalYear} from "@/app/organization/setup/fiscal-year.util";
 import SelectField from "@/app/components/form/SelectField";
 import {useCreateOrganizationMutation} from "@/app/context/api/queries/organizations";
+import Heading1 from "@/app/components/title/Heading1";
+import Heading2 from "@/app/components/title/Heading2";
 
 export default function SetupOrganization() {
     const currentYear = new Date().getFullYear();
@@ -66,10 +68,8 @@ export default function SetupOrganization() {
     return (
         <div className={`w-full max-w-lg mx-auto flex flex-col gap-12`}>
             <div className={`flex flex-col gap-6`}>
-                <div className={`flex flex-col gap-3`}>
-                    <Building2 size={40} strokeWidth={1}/>
-                    <h1>Let&#39;s Create a New Organization</h1>
-                </div>
+                <Heading1 title="Let&#39;s Create a New Organization"
+                          icon={<Building2 size={40} strokeWidth={1}/>}/>
                 <InputField
                     icon={<Building2 strokeWidth={1}/>}
                     value={organizationName}
@@ -78,10 +78,8 @@ export default function SetupOrganization() {
             </div>
             <AutoHeight open={isOrganizationNameSet}>
                 <div className={`flex flex-col gap-6`}>
-                    <div className={`flex flex-col gap-3`}>
-                        <Scale size={40} strokeWidth={1}/>
-                        <h2 className={`text-2xl!`}>What Is {organizationName} Legally?</h2>
-                    </div>
+                    <Heading2 title={`What Is ${organizationName} Legally?`}
+                              icon={<Scale size={40} strokeWidth={1}/>}/>
                     <div className={`flex flex-col gap-3`}>
                         {
                             legalForms.map(key => {
@@ -104,10 +102,8 @@ export default function SetupOrganization() {
             </AutoHeight>
             <AutoHeight open={isLegalFormSet && isOrganizationNameSet}>
                 <div className={`flex flex-col gap-6`}>
-                    <div className={`flex flex-col gap-3`}>
-                        <Calendar size={40} strokeWidth={1}/>
-                        <h2 className={`text-2xl!`}>What Year Will Be Your First Fiscal Period?</h2>
-                    </div>
+                    <Heading2 title={`What Year Will Be Your First Fiscal Period?`}
+                              icon={<Calendar size={40} strokeWidth={1}/>}/>
                     <div className={`flex flex-col gap-3`}>
                         <RadioField
                             value={currentYear}
