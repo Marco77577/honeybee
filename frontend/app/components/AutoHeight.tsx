@@ -17,15 +17,15 @@ export function AutoHeight({
     const [height, setHeight] = useState(`0px`);
 
     useLayoutEffect(() => {
-        if (open) {
+        if (open && height !== `auto`) {
             setHeight(`${measuredHeight}px`);
-        } else {
+        } else if (!open) {
             setHeight(`${measuredHeight}px`);
             requestAnimationFrame(() => {
                 setHeight(`0px`);
             });
         }
-    }, [open]);
+    }, [open, measuredHeight]);
 
     return (
         <div
@@ -44,7 +44,7 @@ export function AutoHeight({
                 !open && `pointer-events-none opacity-0 -mt-9`,
             )}>
                 <div className={`px-2 -mx-2 py-2`}>
-                {children}
+                    {children}
                 </div>
             </div>
         </div>
