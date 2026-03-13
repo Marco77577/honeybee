@@ -1,8 +1,11 @@
 package com.accounting.database.currency
 
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.select
+import com.accounting.api.currency.model.CreateCurrency
+import com.accounting.api.currency.model.UpdateCurrency
+import com.accounting.database.Id
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
+import java.math.BigDecimal
 
 /**
  * Repository class for accessing and manipulating [Currency]s.
@@ -13,6 +16,42 @@ class CurrencyRepository {
         Currencies
             .select { Currencies.organization eq organizationId }
             .map { it.toCurrency() }
+    }
+
+    fun createCurrency(
+        createCurrency: CreateCurrency,
+        organizationId: String,
+    ) = transaction {
+        val id = Currencies.insert {
+            it[id] = Id.currency()
+            it[name] = createCurrency.name
+            it[abbreviation] = createCurrency.abbreviation
+            it[manualExchangeRate] = BigDecimal(createCurrency.manualExchangeRate)
+            it[organization] = organizationId
+        } get Currencies.id
+
+        Currencies
+            .select { Currencies.id eq id }
+            .single()
+            .toCurrency()
+    }
+
+    fun updateCurrency(
+        updateCurrency: UpdateCurrency,
+        organizationId: String,
+    ) = transaction {
+        Currencies.update(
+            { (Currencies.id eq updateCurrency.id) and (Currencies.organization eq organizationId) }
+        ) {
+            it[name] = updateCurrency.name
+            it[abbreviation] = updateCurrency.abbreviation
+            it[manualExchangeRate] = BigDecimal(updateCurrency.manualExchangeRate)
+        }
+
+        Currencies
+            .select { Currencies.id eq updateCurrency.id }
+            .single()
+            .toCurrency()
     }
 
     /**
