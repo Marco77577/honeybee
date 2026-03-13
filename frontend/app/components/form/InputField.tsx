@@ -7,6 +7,7 @@ interface InputFieldProps {
     value: string | undefined,
     placeholder?: string,
     onValueChange: (value: string) => void,
+    disabled: boolean
 }
 
 export default function InputField({
@@ -16,13 +17,18 @@ export default function InputField({
                                        placeholder,
                                        onValueChange,
                                        className,
+                                       disabled,
                                        ...props
                                    }: InputFieldProps & React.HTMLAttributes<HTMLDivElement>) {
     const id = useId();
     return (
         <div
             {...props}
-            className={clsx(`flex items-center gap-3 rounded-lg p-3 bg-input-text-background border border-input-text-border focus-within:border-input-text-border-focused outline-3 outline-transparent focus-within:outline-input-text-border-outline text-base`, className)}>
+            className={clsx(
+                `flex items-center gap-3 rounded-lg p-3 bg-input-text-background border border-input-text-border focus-within:border-input-text-border-focused outline-3 outline-transparent focus-within:outline-input-text-border-outline text-base`,
+                disabled && `bg-popover-element-hover`,
+                className
+            )}>
             {leading && <label className={`text-input-text-placeholder`} htmlFor={id}>
                 {leading}
             </label>}
@@ -35,6 +41,7 @@ export default function InputField({
                     !leading && trailing && `text-end`,
                 )}
                 type="text"
+                disabled={disabled}
                 placeholder={placeholder}/>
             {trailing && <label className={`text-input-text-placeholder`} htmlFor={id}>
                 {trailing}
@@ -42,3 +49,5 @@ export default function InputField({
         </div>
     )
 }
+
+InputField.defaultProps = {disabled: false};
