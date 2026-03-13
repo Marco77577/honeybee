@@ -39,8 +39,7 @@ fun Route.currency() {
                     }
                 }
             ) {
-                val organizationId = call.parameters.getOrFail("organizationId")
-                assertMayRead(organizationId)
+                val organizationId = assertMayReadOrganization()
 
                 call.respond(
                     currencyRepository

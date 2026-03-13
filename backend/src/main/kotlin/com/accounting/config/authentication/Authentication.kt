@@ -16,6 +16,7 @@ import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.server.util.*
 import org.koin.ktor.ext.inject
 import java.security.interfaces.RSAPublicKey
 import java.util.concurrent.TimeUnit
@@ -106,26 +107,26 @@ fun RoutingContext.requireUser(): AuthenticatedUser =
 
 /**
  * Asserts that the current user is allowed to read the given organization.
- * @param organizationId The id of the organization to check.
  * @throws NotAllowedToViewOrganization if the user is not allowed to read the organization.
  */
 context(route: Route)
-infix fun RoutingContext.assertMayRead(organizationId: String): AuthenticatedUser {
+fun RoutingContext.assertMayReadOrganization(): String {
+    val organizationId = call.parameters.getOrFail("organizationId")
     val userRepository by route.inject<UserRepository>()
     val user = requireUser()
     if (!userRepository.mayRead(user.id, organizationId)) throw NotAllowedToViewOrganization()
-    return user
+    return organizationId
 }
 
 /**
  * Asserts that the current user is allowed to write to the given organization.
- * @param organizationId The id of the organization to check.
  * @throws NotAllowedToViewOrganization if the user is not allowed to write to the organization.
  */
 context(route: Route)
-infix fun RoutingContext.assertMayWrite(organizationId: String): AuthenticatedUser {
+fun RoutingContext.assertMayWriteOrganization(): String {
+    val organizationId = call.parameters.getOrFail("organizationId")
     val userRepository by route.inject<UserRepository>()
     val user = requireUser()
     if (!userRepository.mayWrite(user.id, organizationId)) throw NotAllowedToViewOrganization()
-    return user
+    return organizationId
 }
