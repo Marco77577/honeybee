@@ -100,3 +100,16 @@ private fun JWTChallengeContext.analyzeError(jwkProvider: JwkProvider, issuer: S
  */
 fun RoutingContext.requireUser(): AuthenticatedUser =
     call.principal<AuthenticatedUser>() ?: throw NotAuthenticatedException()
+
+/**
+ * Asserts that the current user is allowed to read the given organization.
+ * @param organizationId The id of the organization to check.
+ * @throws NotAllowedToViewOrganization if the user is not allowed to read the organization.
+ */
+context(route: Route)
+infix fun RoutingContext.assertMayRead(organizationId: String): AuthenticatedUser {
+    val userRepository by route.inject<UserRepository>()
+    val user = requireUser()
+    if (!userRepository.mayRead(user.id, organizationId)) throw NotAllowedToViewOrganization()
+    return user
+}
