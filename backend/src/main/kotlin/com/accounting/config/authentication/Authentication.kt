@@ -96,6 +96,7 @@ private fun JWTChallengeContext.analyzeError(jwkProvider: JwkProvider, issuer: S
 /**
  * Asserts that the current call has an authenticated principal.
  * @return the authenticated principal.
+ * @throws NotAuthenticatedException if the call is not authenticated.
  */
 fun RoutingContext.requireUser(): AuthenticatedUser =
     call.principal<AuthenticatedUser>() ?: throw NotAuthenticatedException()
