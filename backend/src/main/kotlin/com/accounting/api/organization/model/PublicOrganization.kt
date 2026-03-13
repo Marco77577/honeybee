@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 data class PublicOrganization(
     val id: String,
     val displayName: String,
+    val mainCurrencyId: String?,
 ) {
 
     companion object {
@@ -16,7 +17,8 @@ data class PublicOrganization(
          */
         fun from(organization: Organization) = PublicOrganization(
             id = organization.id,
-            displayName = organization.displayName
+            displayName = organization.displayName,
+            mainCurrencyId = organization.mainCurrency
         )
     }
 }
