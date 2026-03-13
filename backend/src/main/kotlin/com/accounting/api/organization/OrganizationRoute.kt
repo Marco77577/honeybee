@@ -52,7 +52,7 @@ fun Route.organization() {
                         }
                     }
                     response {
-                        code(HttpStatusCode.OK) {
+                        code(HttpStatusCode.Created) {
                             description = "organization"
                             body<PublicOrganization>()
                         }
@@ -67,6 +67,7 @@ fun Route.organization() {
                     user = user,
                 )
                 call.respond(
+                    HttpStatusCode.Created,
                     PublicOrganization.from(organization)
                 )
             }
