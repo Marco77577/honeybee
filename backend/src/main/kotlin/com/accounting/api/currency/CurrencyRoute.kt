@@ -3,7 +3,6 @@ package com.accounting.api.currency
 import com.accounting.api.currency.model.CreateCurrency
 import com.accounting.api.currency.model.PublicCurrency
 import com.accounting.api.currency.model.UpdateCurrency
-import com.accounting.config.ValidationException
 import com.accounting.config.authentication.OIDC_AUTH
 import com.accounting.config.authentication.assertMayReadOrganization
 import com.accounting.config.authentication.assertMayWriteOrganization
@@ -81,12 +80,6 @@ fun Route.currency() {
                 val organizationId = assertMayWriteOrganization()
                 val createCurrency = call.receive<CreateCurrency>()
 
-                if (createCurrency.abbreviation.isEmpty()) throw ValidationException("abbreviation must not be empty")
-                if (createCurrency.name.isEmpty()) throw ValidationException("name must not be empty")
-                createCurrency.manualExchangeRate?.let {
-                    if (it <= 0) throw ValidationException("manual exchange rate must be positive")
-                }
-
                 val currency = currencyRepository.createCurrency(
                     createCurrency = createCurrency,
                     organizationId = organizationId,
@@ -124,12 +117,6 @@ fun Route.currency() {
             ) {
                 val organizationId = assertMayWriteOrganization()
                 val updateCurrency = call.receive<UpdateCurrency>()
-
-                if (updateCurrency.abbreviation.isEmpty()) throw ValidationException("abbreviation must not be empty")
-                if (updateCurrency.name.isEmpty()) throw ValidationException("name must not be empty")
-                updateCurrency.manualExchangeRate?.let {
-                    if (it <= 0) throw ValidationException("manual exchange rate must be positive")
-                }
 
                 val currency = currencyRepository.updateCurrency(
                     updateCurrency = updateCurrency,

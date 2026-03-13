@@ -23,5 +23,6 @@ fun Application.module() {
     configureAuthentication(oidcDiscovery)
     configureDocumentation(oidcDiscovery)
     configureStatusPages()
+    configureRequestValidation()
     configureApi()
 }

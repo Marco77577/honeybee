@@ -23,6 +23,7 @@ dependencies {
     implementation(libs.ktor.server.host.common)
     implementation(libs.ktor.server.status.pages)
     implementation(libs.ktor.server.default.headers)
+    implementation(libs.ktor.server.request.validation)
     implementation(libs.ktor.server.netty)
     implementation(libs.ktor.server.config.yaml)
     implementation(libs.logback.classic)
