@@ -10,6 +10,10 @@ export class FrankfurterExchangeRates {
         public readonly rates: Map<string, number>,
     ) {
     }
+
+    isCurrencyAvailable(abbreviation?: string): boolean {
+        return abbreviation !== undefined && this.rates.has(abbreviation);
+    }
 }
 
 export const frankfurterKeys = {
