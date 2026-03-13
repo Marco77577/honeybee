@@ -45,7 +45,8 @@ export default function Profile({alwaysOpen = false}: ProfileProps) {
                                         key={organization.id}
                                         title={organization.displayName}
                                         subtitle="GmbH"
-                                        icon={Building2}/>
+                                        icon={Building2}
+                                        onClick={() => setOrganizationId(organization.id)}/>
                                 )
                             }
                         )
