@@ -11,9 +11,9 @@ data class Organization(
     val displayName: String,
     val officialName: String,
     val legalForm: LegalForm,
-    val defaultPaymentAccount: String,
-    val defaultRevenueAccount: String,
-    val mainCurrency: String,
+    val defaultPaymentAccount: String?,
+    val defaultRevenueAccount: String?,
+    val mainCurrency: String?,
 
     @Serializable(with = LocalDateTimeSerializer::class)
     val updatedAt: LocalDateTime,
