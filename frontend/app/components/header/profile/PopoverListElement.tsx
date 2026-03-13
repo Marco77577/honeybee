@@ -34,7 +34,7 @@ export default function PopoverListElement({
             className={clsx(`p-2`, color ? `${colorMap.text[color]} hover:text-white` : `text-popover-foreground`, className)}
             {...props}>
             <div
-                className={clsx(`flex items-center gap-3 py-2.5 px-2 rounded-md cursor-pointer`, color ? colorMap.hover[color] : `hover:bg-popover-element-hover`)}>
+                className={clsx(`flex items-center gap-4 py-2.5 px-2 rounded-md cursor-pointer`, color ? colorMap.hover[color] : `hover:bg-popover-element-hover`)}>
                 <div>
                     <Icon/>
                 </div>
