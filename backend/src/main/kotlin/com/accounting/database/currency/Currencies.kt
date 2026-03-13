@@ -14,4 +14,8 @@ object Currencies : Table("currency") {
     val updatedAt = datetime("updated_at").defaultExpression(CurrentDateTime)
     val createdAt = datetime("created_at").defaultExpression(CurrentDateTime)
     override val primaryKey = PrimaryKey(id)
+
+    init {
+        uniqueIndex(abbreviation, organization)
+    }
 }
