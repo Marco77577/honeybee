@@ -7,6 +7,7 @@ import {ApiProvider} from "@/app/context/api/ApiProvider";
 import React from "react";
 import {Theme} from "@radix-ui/themes";
 import {QueryProvider} from "@/app/context/api/queries/QueryProvider";
+import {OrganizationProvider} from "@/app/context/OrganizationProvider";
 
 const montserratAlternates = Montserrat_Alternates({
     variable: "--font-montserrat-alternates",
@@ -35,14 +36,16 @@ export default function RootLayout({
         <body className={`${montserratAlternates.variable} ${hindMadurai.variable} antialiased`}>
         <Theme hasBackground={false}>
             <OidcProvider>
-                <ApiProvider>
-                    <QueryProvider>
-                        <Header/>
-                        <div className={`mx-auto container py-16 px-4 md:px-0`}>
-                            {children}
-                        </div>
-                    </QueryProvider>
-                </ApiProvider>
+                <OrganizationProvider>
+                    <ApiProvider>
+                        <QueryProvider>
+                            <Header/>
+                            <div className={`mx-auto container py-16 px-4 md:px-0`}>
+                                {children}
+                            </div>
+                        </QueryProvider>
+                    </ApiProvider>
+                </OrganizationProvider>
             </OidcProvider>
         </Theme>
         </body>
