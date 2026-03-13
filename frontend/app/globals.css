@@ -137,3 +137,7 @@ p {
 button {
     @apply font-montserrat cursor-pointer transition-all;
 }
+
+a {
+    @apply font-bold hover:underline;
+}
