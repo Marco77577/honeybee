@@ -16,6 +16,24 @@ class UserRepository {
             .any()
     }
 
+    fun mayWrite(userId: String, organizationId: String): Boolean = transaction {
+        Users
+            .select { (Users.user eq userId) and (Users.organization eq organizationId) }
+            .any { it[Users.role] in listOf(UserRole.OWNER, UserRole.ADMIN, UserRole.EDITOR) }
+    }
+
+    fun isAdmin(userId: String, organizationId: String): Boolean = transaction {
+        Users
+            .select { (Users.user eq userId) and (Users.organization eq organizationId) }
+            .any { it[Users.role] in listOf(UserRole.OWNER, UserRole.ADMIN) }
+    }
+
+    fun isOwner(userId: String, organizationId: String): Boolean = transaction {
+        Users
+            .select { (Users.user eq userId) and (Users.organization eq organizationId) }
+            .any { it[Users.role] == UserRole.OWNER }
+    }
+
     /**
      * Converts a [ResultRow] to a [User] object.
      * @return The converted [User] object.
