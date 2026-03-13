@@ -1,5 +1,6 @@
 package com.accounting.config.authentication
 
+import com.accounting.config.NotAuthenticatedException
 import com.auth0.jwk.JwkProvider
 import com.auth0.jwk.JwkProviderBuilder
 import com.auth0.jwt.JWT
@@ -97,4 +98,4 @@ private fun JWTChallengeContext.analyzeError(jwkProvider: JwkProvider, issuer: S
  * @return the authenticated principal.
  */
 fun RoutingContext.requireUser(): AuthenticatedUser =
-    call.principal<AuthenticatedUser>() ?: error("No principal found — is this route inside an authenticate block?")
+    call.principal<AuthenticatedUser>() ?: throw NotAuthenticatedException()
