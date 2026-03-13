@@ -59,8 +59,13 @@ fun Route.organization() {
                     }
                 }
             ) {
+                val user = requireUser()
                 val newOrganization = call.receive<NewOrganization>()
-                val organization = organizationRepository.createOrganization(newOrganization)
+                
+                val organization = organizationRepository.createOrganization(
+                    newOrganization = newOrganization,
+                    user = user,
+                )
                 call.respond(
                     PublicOrganization.from(organization)
                 )
