@@ -33,8 +33,8 @@ fun Route.currency() {
                     }
                     response {
                         code(HttpStatusCode.OK) {
-                            description = "organizations"
-                            body<List<PublicOrganization>>()
+                            description = "currencies of an organization"
+                            body<List<PublicCurrency>>()
                         }
                     }
                 }
