@@ -32,7 +32,7 @@ class OrganizationRepository {
      * @param userId The ID of the [User] whose [Organization]s are to be retrieved.
      * @return A list of [Organization]s.
      */
-    fun findByUser(userId: String) = transaction {
+    fun findAllByUser(userId: String) = transaction {
         Users
             .join(
                 otherTable = Organizations,

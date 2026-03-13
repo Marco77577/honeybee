@@ -37,7 +37,7 @@ fun Route.organization() {
                 val user = requireUser()
                 call.respond(
                     organizationRepository
-                        .findByUser(user.id)
+                        .findAllByUser(user.id)
                         .map { PublicOrganization.from(it) }
                 )
             }
@@ -61,7 +61,7 @@ fun Route.organization() {
             ) {
                 val user = requireUser()
                 val newOrganization = call.receive<NewOrganization>()
-                
+
                 val organization = organizationRepository.createOrganization(
                     newOrganization = newOrganization,
                     user = user,
