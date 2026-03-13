@@ -2,7 +2,7 @@ import React, {ReactElement} from "react";
 import clsx from "clsx";
 import {Check} from "lucide-react";
 
-interface InputFieldProps<T extends (string | number | readonly string[] | undefined)> {
+interface InputFieldProps<T extends (string | number | readonly string[] | undefined | null)> {
     icon: ReactElement,
     title: string,
     subtitle: string,
@@ -11,21 +11,21 @@ interface InputFieldProps<T extends (string | number | readonly string[] | undef
     onValueChange: (value: T) => void,
 }
 
-export default function RadioField<T extends (string | number | readonly string[] | undefined)>({
-                                       icon,
-                                       title,
-                                       subtitle,
-                                       value,
-                                       checked,
-                                       onValueChange,
-                                       ...props
-                                   }: InputFieldProps<T> & React.HTMLAttributes<HTMLLabelElement>) {
+export default function RadioField<T extends (string | number | readonly string[] | undefined | null)>({
+                                                                                                           icon,
+                                                                                                           title,
+                                                                                                           subtitle,
+                                                                                                           value,
+                                                                                                           checked,
+                                                                                                           onValueChange,
+                                                                                                           ...props
+                                                                                                       }: InputFieldProps<T> & React.HTMLAttributes<HTMLLabelElement>) {
     return (
         <label {...props}>
             <input
                 className={`hidden`}
                 type="radio"
-                value={value}
+                value={value ?? undefined}
                 checked={checked}
                 onChange={() => onValueChange(value)}
             />
