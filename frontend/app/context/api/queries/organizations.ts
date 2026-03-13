@@ -1,6 +1,12 @@
-import {ComAccountingApiOrganizationModelCreateOrganization, OrganizationApi} from "@/app/generated/api";
+import {
+    ComAccountingApiOrganizationModelCreateOrganization,
+    ComAccountingApiOrganizationModelPublicOrganization,
+    OrganizationApi
+} from "@/app/generated/api";
 import {useOrganizationApi} from "@/app/context/api/ApiProvider";
 import {mutationOptions, queryOptions, useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
+
+export type Organization = ComAccountingApiOrganizationModelPublicOrganization;
 
 export const organizationKeys = {
     all: ["organizations"] as const,

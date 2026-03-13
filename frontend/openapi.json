@@ -221,6 +221,10 @@
           "id" : {
             "type" : "string",
             "title" : "String"
+          },
+          "mainCurrencyId" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
           }
         },
         "required" : [ "displayName", "id" ],

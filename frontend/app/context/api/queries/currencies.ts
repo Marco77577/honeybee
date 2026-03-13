@@ -7,7 +7,7 @@ import {
 } from "@/app/generated/api";
 import {mutationOptions, queryOptions, useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {useCurrencyApi} from "@/app/context/api/ApiProvider";
-import {useOrganizationId} from "@/app/context/OrganizationProvider";
+import {useOrganization} from "@/app/context/OrganizationProvider";
 
 export const currencyKeys = {
     all: ["currencies"] as const,
@@ -39,8 +39,8 @@ export const currency = {
 
 export function useCurrenciesQuery() {
     const api = useCurrencyApi();
-    const organizationId = useOrganizationId()
-    return useQuery(currency.queries.all(api, organizationId));
+    const organization = useOrganization()
+    return useQuery(currency.queries.all(api, organization?.id));
 }
 
 export function useCreateCurrencyMutation() {

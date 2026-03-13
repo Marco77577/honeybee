@@ -3,29 +3,30 @@
 import React, {createContext, useContext, useEffect, useState} from "react";
 import {useQueryClient} from "@tanstack/react-query";
 import {currencyKeys} from "@/app/context/api/queries/currencies";
+import {Organization} from "@/app/context/api/queries/organizations";
 
 interface OrganizationProvider {
-    organizationId: string | undefined
-    setOrganizationId: (id: string | undefined) => void
+    organization: Organization | undefined
+    setOrganization: (organization: Organization | undefined) => void
 }
 
 export const OrganizationContext = createContext<OrganizationProvider | null>(null)
 
-export function useOrganizationId() {
+export function useOrganization() {
     const context = useContext(OrganizationContext);
     if (!context) throw new Error("organization provider not initialized");
-    return context.organizationId
+    return context.organization
 }
 
 export function useSetOrganizationId() {
     const context = useContext(OrganizationContext);
     if (!context) throw new Error("organization provider not initialized");
-    return context.setOrganizationId
+    return context.setOrganization
 }
 
 export function OrganizationProvider({children}: { children: React.ReactNode }) {
     const queryClient = useQueryClient();
-    const [organizationId, setOrganizationId] = useState<string | undefined>(undefined);
+    const [organization, setOrganization] = useState<Organization | undefined>(undefined);
 
     useEffect(
         () => {
@@ -33,11 +34,11 @@ export function OrganizationProvider({children}: { children: React.ReactNode }) 
                 queryKey: currencyKeys.all,
             }).then();
         },
-        [organizationId, queryClient]
+        [organization, queryClient]
     )
 
     return (
-        <OrganizationContext.Provider value={{organizationId, setOrganizationId}}>
+        <OrganizationContext.Provider value={{organization: organization, setOrganization: setOrganization}}>
             {children}
         </OrganizationContext.Provider>
     )

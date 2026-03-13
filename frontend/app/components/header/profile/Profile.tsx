@@ -19,7 +19,7 @@ export default function Profile({alwaysOpen = false}: ProfileProps) {
     const setOrganizationId = useSetOrganizationId();
 
     useEffect(
-        () => setOrganizationId(organizations?.[0]?.id),
+        () => setOrganizationId(organizations?.[0]),
         [organizations, setOrganizationId]
     );
 
@@ -46,7 +46,7 @@ export default function Profile({alwaysOpen = false}: ProfileProps) {
                                         title={organization.displayName}
                                         subtitle="GmbH"
                                         icon={Building2}
-                                        onClick={() => setOrganizationId(organization.id)}/>
+                                        onClick={() => setOrganizationId(organization)}/>
                                 )
                             }
                         )
