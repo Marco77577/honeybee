@@ -1,4 +1,4 @@
-import {ComAccountingApiOrganizationModelNewOrganization, OrganizationApi} from "@/app/generated/api";
+import {ComAccountingApiOrganizationModelCreateOrganization, OrganizationApi} from "@/app/generated/api";
 import {useOrganizationApi} from "@/app/context/api/ApiProvider";
 import {mutationOptions, queryOptions, useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 
@@ -15,9 +15,8 @@ export const organization = {
     },
     mutations: {
         create: (api: OrganizationApi) => mutationOptions({
-            mutationKey: ["create-organization"],
-            mutationFn: (organization: ComAccountingApiOrganizationModelNewOrganization) => api.apiV1OrganizationPost(
-                {comAccountingApiOrganizationModelNewOrganization: organization}
+            mutationFn: (organization: ComAccountingApiOrganizationModelCreateOrganization) => api.apiV1OrganizationPost(
+                {comAccountingApiOrganizationModelCreateOrganization: organization}
             ),
         }),
     },
