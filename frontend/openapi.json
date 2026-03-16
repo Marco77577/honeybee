@@ -156,6 +156,17 @@
                 }
               }
             }
+          },
+          "400" : {
+            "description" : "invalid request",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.config.Error"
+                }
+              }
+            }
           }
         },
         "deprecated" : false,
@@ -197,6 +208,17 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/com.accounting.api.currency.model.PublicCurrency"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid request",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.config.Error"
                 }
               }
             }
@@ -266,8 +288,9 @@
             "title" : "String"
           },
           "manualExchangeRate" : {
-            "type" : [ "null", "string" ],
-            "title" : "String"
+            "type" : [ "null", "number" ],
+            "format" : "double",
+            "title" : "Double"
           },
           "name" : {
             "type" : "string",
@@ -285,8 +308,9 @@
             "title" : "String"
           },
           "manualExchangeRate" : {
-            "type" : [ "null", "string" ],
-            "title" : "String"
+            "type" : [ "null", "number" ],
+            "format" : "double",
+            "title" : "Double"
           },
           "name" : {
             "type" : "string",
@@ -295,6 +319,27 @@
         },
         "required" : [ "abbreviation", "name" ],
         "title" : "CreateCurrency"
+      },
+      "com.accounting.config.Error" : {
+        "type" : "object",
+        "properties" : {
+          "errorCode" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "message" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "statusCode" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          }
+        },
+        "required" : [ "errorCode", "message", "statusCode" ],
+        "title" : "Error"
       },
       "com.accounting.api.currency.model.UpdateCurrency" : {
         "type" : "object",
@@ -308,8 +353,9 @@
             "title" : "String"
           },
           "manualExchangeRate" : {
-            "type" : [ "null", "string" ],
-            "title" : "String"
+            "type" : [ "null", "number" ],
+            "format" : "double",
+            "title" : "Double"
           },
           "name" : {
             "type" : "string",
