@@ -9,7 +9,7 @@ object Currencies : Table("currency") {
     val id = varchar("id", 255).uniqueIndex()
     val name = varchar("name", 255)
     val abbreviation = varchar("abbreviation", 3)
-    val manualExchangeRate = decimal("manual_exchange_rate", 19, 4).nullable()
+    val manualExchangeRate = decimal("manual_exchange_rate", 19, 16).nullable()
     val organization = varchar("organization_id", 255).references(Organizations.id)
     val updatedAt = datetime("updated_at").defaultExpression(CurrentDateTime)
     val createdAt = datetime("created_at").defaultExpression(CurrentDateTime)
