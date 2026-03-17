@@ -3,6 +3,7 @@ package com.accounting.api.currency
 import com.accounting.api.currency.model.CreateCurrency
 import com.accounting.api.currency.model.PublicCurrency
 import com.accounting.api.currency.model.UpdateCurrency
+import com.accounting.config.Error
 import com.accounting.config.authentication.OIDC_AUTH
 import com.accounting.config.authentication.assertMayReadOrganization
 import com.accounting.config.authentication.assertMayWriteOrganization
@@ -73,6 +74,7 @@ fun Route.currency() {
                         }
                         code(HttpStatusCode.BadRequest) {
                             description = "invalid request"
+                            body<Error>()
                         }
                     }
                 }
@@ -111,6 +113,7 @@ fun Route.currency() {
                         }
                         code(HttpStatusCode.BadRequest) {
                             description = "invalid request"
+                            body<Error>()
                         }
                     }
                 }

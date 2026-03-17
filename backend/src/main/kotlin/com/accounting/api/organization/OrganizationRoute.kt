@@ -2,6 +2,7 @@ package com.accounting.api.organization
 
 import com.accounting.api.organization.model.CreateOrganization
 import com.accounting.api.organization.model.PublicOrganization
+import com.accounting.config.Error
 import com.accounting.config.authentication.OIDC_AUTH
 import com.accounting.config.authentication.requireUser
 import com.accounting.database.organization.OrganizationRepository
@@ -55,6 +56,10 @@ fun Route.organization() {
                         code(HttpStatusCode.Created) {
                             description = "organization"
                             body<PublicOrganization>()
+                        }
+                        code(HttpStatusCode.BadRequest) {
+                            description = "invalid request"
+                            body<Error>()
                         }
                     }
                 }
