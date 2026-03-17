@@ -24,8 +24,8 @@ class CurrencyRepository {
     ) = transaction {
         val id = Currencies.insert {
             it[id] = Id.currency()
-            it[name] = createCurrency.name
-            it[abbreviation] = createCurrency.abbreviation
+            it[name] = createCurrency.name.trim()
+            it[abbreviation] = createCurrency.abbreviation.trim()
             it[manualExchangeRate] = BigDecimal(createCurrency.manualExchangeRate.toString())
             it[organization] = organizationId
         } get Currencies.id
@@ -43,8 +43,8 @@ class CurrencyRepository {
         Currencies.update(
             { (Currencies.id eq updateCurrency.id) and (Currencies.organization eq organizationId) }
         ) {
-            it[name] = updateCurrency.name
-            it[abbreviation] = updateCurrency.abbreviation
+            it[name] = updateCurrency.name.trim()
+            it[abbreviation] = updateCurrency.abbreviation.trim()
             it[manualExchangeRate] = updateCurrency.manualExchangeRate?.let {
                 BigDecimal(updateCurrency.manualExchangeRate.toString())
             }
