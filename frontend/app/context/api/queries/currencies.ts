@@ -1,6 +1,7 @@
 "use client"
 
 import {
+    ApiV1CurrencyOrganizationIdCurrencyIdDeleteRequest,
     ApiV1CurrencyOrganizationIdPatchRequest,
     ApiV1CurrencyOrganizationIdPostRequest,
     ComAccountingApiCurrencyModelPublicCurrency,
@@ -9,6 +10,8 @@ import {
 import {mutationOptions, queryOptions, useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {useCurrencyApi} from "@/app/context/api/ApiProvider";
 import {useOrganization} from "@/app/context/OrganizationProvider";
+import {useEffect, useMemo} from "react";
+import {frankfurterKeys} from "@/app/context/api/queries/frankfurter";
 
 export type Currency = ComAccountingApiCurrencyModelPublicCurrency;
 
@@ -37,6 +40,11 @@ export const currency = {
                 currency
             ),
         }),
+        delete: (api: CurrencyApi) => mutationOptions({
+            mutationFn: (currency: ApiV1CurrencyOrganizationIdCurrencyIdDeleteRequest) => api.apiV1CurrencyOrganizationIdCurrencyIdDelete(
+                currency
+            ),
+        }),
     },
 };
 
@@ -44,6 +52,25 @@ export function useCurrenciesQuery() {
     const api = useCurrencyApi();
     const organization = useOrganization()
     return useQuery(currency.queries.all(api, organization?.id));
+}
+
+export function useMainCurrency() {
+    const organization = useOrganization();
+    const queryClient = useQueryClient();
+    const {data: currencies} = useCurrenciesQuery();
+
+    const mainCurrency = useMemo(
+        () => currencies?.find(
+            currency => currency.id === organization?.mainCurrencyId
+        ) ?? null,
+        [organization, currencies]
+    );
+
+    useEffect(() => {
+        if (mainCurrency != null) queryClient.invalidateQueries({queryKey: frankfurterKeys.latest}).then();
+    }, [mainCurrency, queryClient]);
+
+    return mainCurrency;
 }
 
 export function useCreateCurrencyMutation() {
@@ -62,6 +89,17 @@ export function useUpdateCurrencyMutation() {
     const api = useCurrencyApi();
     return useMutation({
         ...currency.mutations.update(api),
+        onSuccess: () => queryClient.invalidateQueries({
+            queryKey: currencyKeys.all,
+        }),
+    })
+}
+
+export function useDeleteCurrencyMutation() {
+    const queryClient = useQueryClient();
+    const api = useCurrencyApi();
+    return useMutation({
+        ...currency.mutations.delete(api),
         onSuccess: () => queryClient.invalidateQueries({
             queryKey: currencyKeys.all,
         }),
