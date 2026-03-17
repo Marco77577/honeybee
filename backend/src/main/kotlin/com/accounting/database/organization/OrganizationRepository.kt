@@ -52,8 +52,8 @@ class OrganizationRepository {
     ) = transaction {
         val id = Organizations.insert {
             it[id] = Id.organisation()
-            it[displayName] = createOrganization.displayName
-            it[officialName] = createOrganization.displayName
+            it[displayName] = createOrganization.displayName.trim()
+            it[officialName] = createOrganization.displayName.trim()
             it[legalForm] = createOrganization.legalForm
         } get Organizations.id
 
