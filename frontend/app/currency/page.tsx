@@ -37,10 +37,10 @@ export function calculateRightHandExchangeRate(rate: number) {
 function LoadingCurrency() {
     return (
         <div
-            className={`grid grid-cols-subgrid col-span-6 items-center py-2.5 px-3 rounded-lg hover:bg-popover-element-hover`}>
+            className={`grid grid-cols-subgrid col-span-5 md:col-span-6 items-center py-2.5 px-3 rounded-lg hover:bg-popover-element-hover`}>
             <div><Skeleton>USD</Skeleton></div>
             <div><Skeleton>United States Dollar</Skeleton></div>
-            <div className={`flex items-center gap-2 justify-end-safe font-mono!`}>
+            <div className={`hidden md:flex items-center gap-2 justify-end-safe font-mono!`}>
                 <Skeleton>
                     <span className={`font-mono! flex items-center gap-1`}>
                         <span className={clsx(`font-mono!`)}>1</span>
@@ -172,17 +172,17 @@ export default function Currency() {
             <div className={`mx-auto container px-4 md:px-0`}>
                 <div className={`w-full max-w-xl mx-auto flex flex-col gap-3`}>
                     <div
-                        className={`grid grid-cols-[min-content_1fr_1fr_min-content_min-content_min-content] gap-x-3 rounded-lg p-2 bg-input-text-background border border-input-text-border text-input-text-foreground outline-3 outline-transparent hover:outline-input-text-border-outline`}>
+                        className={`grid grid-cols-[min-content_1fr_min-content_min-content_min-content] md:grid-cols-[min-content_1fr_1fr_min-content_min-content_min-content] gap-x-3 rounded-lg p-2 bg-input-text-background border border-input-text-border text-input-text-foreground outline-3 outline-transparent hover:outline-input-text-border-outline`}>
                         {
                             currencies
                                 ?.filter(currency => currency.id !== mainCurrency?.id)
                                 ?.map(currency => (
                                     <div
                                         key={currency.id}
-                                        className={`grid grid-cols-subgrid col-span-6 items-center py-2.5 px-3 rounded-lg hover:bg-popover-element-hover`}>
+                                        className={`grid grid-cols-subgrid col-span-5 md:col-span-6 items-center py-2.5 px-3 rounded-lg hover:bg-popover-element-hover`}>
                                         <div><CurrencyAbbreviation abbreviation={currency.abbreviation}/></div>
                                         <div>{currency.name}</div>
-                                        <div className={`flex items-center gap-2 justify-end-safe font-mono!`}>
+                                        <div className={`hidden md:flex items-center gap-2 justify-end-safe font-mono!`}>
                                             <span className={`font-mono! flex items-center gap-1`}>
                                                 <span
                                                     className={clsx(`font-mono!`, currency.manualExchangeRate !== undefined && `hidden`)}>
