@@ -15,8 +15,8 @@ data class Currency(
     val organization: String,
 
     @Serializable(with = LocalDateTimeSerializer::class)
-    val updatedAt: LocalDateTime,
+    val updatedAt: LocalDateTime = LocalDateTime.now(),
 
     @Serializable(with = LocalDateTimeSerializer::class)
-    val createdAt: LocalDateTime,
+    val createdAt: LocalDateTime = LocalDateTime.now(),
 )

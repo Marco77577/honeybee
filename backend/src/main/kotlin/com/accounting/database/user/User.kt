@@ -11,8 +11,8 @@ data class User(
     val role: UserRole,
 
     @Serializable(with = LocalDateTimeSerializer::class)
-    val updatedAt: LocalDateTime,
+    val updatedAt: LocalDateTime = LocalDateTime.now(),
 
     @Serializable(with = LocalDateTimeSerializer::class)
-    val createdAt: LocalDateTime,
+    val createdAt: LocalDateTime = LocalDateTime.now(),
 )
