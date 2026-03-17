@@ -8,15 +8,13 @@ import com.accounting.config.authentication.OIDC_AUTH
 import com.accounting.config.authentication.assertMayReadOrganization
 import com.accounting.config.authentication.assertMayWriteOrganization
 import com.accounting.database.currency.CurrencyRepository
-import io.github.smiley4.ktoropenapi.get
-import io.github.smiley4.ktoropenapi.patch
-import io.github.smiley4.ktoropenapi.post
-import io.github.smiley4.ktoropenapi.route
+import io.github.smiley4.ktoropenapi.*
 import io.ktor.http.*
 import io.ktor.server.auth.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.server.util.*
 import org.koin.ktor.ext.inject
 
 fun Route.currency() {
@@ -129,6 +127,43 @@ fun Route.currency() {
                     HttpStatusCode.OK,
                     PublicCurrency.from(currency)
                 )
+            }
+
+            delete(
+                "/{currencyId}",
+                builder = {
+                    description = "Delete a currency"
+                    tags = listOf("currency")
+                    request {
+                        pathParameter<String>("organizationId") {
+                            description = "The id of the organization owning the currency"
+                            required = true
+                        }
+                        pathParameter<String>("currencyId") {
+                            description = "The id of the currency that is to be deleted"
+                            required = true
+                        }
+                    }
+                    response {
+                        code(HttpStatusCode.NoContent) {
+                            description = "currency deleted"
+                        }
+                        code(HttpStatusCode.BadRequest) {
+                            description = "invalid request"
+                            body<Error>()
+                        }
+                    }
+                }
+            ) {
+                val organizationId = assertMayWriteOrganization()
+                val currencyId = call.parameters.getOrFail("currencyId")
+
+                currencyRepository.deleteCurrency(
+                    organizationId = organizationId,
+                    currencyId = currencyId
+                )
+
+                call.respond(HttpStatusCode.NoContent)
             }
         }
     }

@@ -4,6 +4,7 @@ import com.accounting.api.currency.model.CreateCurrency
 import com.accounting.api.currency.model.UpdateCurrency
 import com.accounting.database.Id
 import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.math.BigDecimal
 
@@ -54,6 +55,12 @@ class CurrencyRepository {
             .select { Currencies.id eq updateCurrency.id }
             .single()
             .toCurrency()
+    }
+
+    fun deleteCurrency(organizationId: String, currencyId: String) = transaction {
+        Currencies.deleteWhere {
+            (Currencies.id eq currencyId) and (Currencies.organization eq organizationId)
+        }
     }
 
     /**
