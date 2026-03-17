@@ -73,6 +73,17 @@
                 }
               }
             }
+          },
+          "400" : {
+            "description" : "invalid request",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.config.Error"
+                }
+              }
+            }
           }
         },
         "deprecated" : false,
@@ -229,6 +240,56 @@
           "oidc" : [ ]
         } ]
       }
+    },
+    "/api/v1/currency/{organizationId}/{currencyId}" : {
+      "delete" : {
+        "tags" : [ "currency", "v1" ],
+        "description" : "Delete a currency",
+        "parameters" : [ {
+          "name" : "organizationId",
+          "in" : "path",
+          "description" : "The id of the organization owning the currency",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        }, {
+          "name" : "currencyId",
+          "in" : "path",
+          "description" : "The id of the currency that is to be deleted",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "currency deleted",
+            "headers" : { }
+          },
+          "400" : {
+            "description" : "invalid request",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.config.Error"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      }
     }
   },
   "components" : {
@@ -276,6 +337,27 @@
         "required" : [ "displayName", "fiscalYear", "legalForm" ],
         "title" : "CreateOrganization"
       },
+      "com.accounting.config.Error" : {
+        "type" : "object",
+        "properties" : {
+          "errorCode" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "message" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "statusCode" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          }
+        },
+        "required" : [ "errorCode", "message", "statusCode" ],
+        "title" : "Error"
+      },
       "com.accounting.api.currency.model.PublicCurrency" : {
         "type" : "object",
         "properties" : {
@@ -319,27 +401,6 @@
         },
         "required" : [ "abbreviation", "name" ],
         "title" : "CreateCurrency"
-      },
-      "com.accounting.config.Error" : {
-        "type" : "object",
-        "properties" : {
-          "errorCode" : {
-            "type" : "integer",
-            "format" : "int32",
-            "title" : "Int"
-          },
-          "message" : {
-            "type" : "string",
-            "title" : "String"
-          },
-          "statusCode" : {
-            "type" : "integer",
-            "format" : "int32",
-            "title" : "Int"
-          }
-        },
-        "required" : [ "errorCode", "message", "statusCode" ],
-        "title" : "Error"
       },
       "com.accounting.api.currency.model.UpdateCurrency" : {
         "type" : "object",
