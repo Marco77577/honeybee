@@ -45,7 +45,9 @@ class CurrencyRepository {
         ) {
             it[name] = updateCurrency.name
             it[abbreviation] = updateCurrency.abbreviation
-            it[manualExchangeRate] = BigDecimal(updateCurrency.manualExchangeRate.toString())
+            it[manualExchangeRate] = updateCurrency.manualExchangeRate?.let {
+                BigDecimal(updateCurrency.manualExchangeRate.toString())
+            }
         }
 
         Currencies
