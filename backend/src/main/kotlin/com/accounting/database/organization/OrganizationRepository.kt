@@ -8,6 +8,7 @@ import com.accounting.database.category.Categories
 import com.accounting.database.category.defaultCategories
 import com.accounting.database.currency.Currencies
 import com.accounting.database.currency.DefaultCurrency
+import com.accounting.database.fiscalyear.FiscalYears
 import com.accounting.database.organization.Organizations.createdAt
 import com.accounting.database.organization.Organizations.defaultPaymentAccount
 import com.accounting.database.organization.Organizations.defaultRevenueAccount
@@ -22,6 +23,7 @@ import com.accounting.database.user.UserRole
 import com.accounting.database.user.Users
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
+import java.time.LocalDate
 
 /**
  * Repository class for accessing and manipulating [Organization]s.
@@ -115,6 +117,14 @@ class OrganizationRepository {
             it[mainCurrency] = mainCurrencyId
             it[this.defaultPaymentAccount] = defaultPaymentAccount?.id
             it[this.defaultRevenueAccount] = defaultRevenueAccount?.id
+        }
+
+        FiscalYears.insert {
+            it[FiscalYears.id] = Id.fiscalYear()
+            it[FiscalYears.start] = LocalDate.of(createOrganization.fiscalYear, 1, 1)
+            it[FiscalYears.end] = LocalDate.of(createOrganization.fiscalYear, 12, 31)
+            it[FiscalYears.isActive] = true
+            it[FiscalYears.organization] = id
         }
 
         Organizations
