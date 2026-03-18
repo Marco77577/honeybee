@@ -1,6 +1,7 @@
 package com.accounting.api
 
 import com.accounting.api.account.account
+import com.accounting.api.category.category
 import com.accounting.api.currency.currency
 import com.accounting.api.organization.organization
 import com.accounting.util.isProduction
@@ -33,6 +34,7 @@ fun Application.configureApi() {
         }) {
             organization()
             currency()
+            category()
             account()
         }
 
