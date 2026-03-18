@@ -3,8 +3,9 @@ package com.accounting.database.organization
 import com.accounting.api.organization.model.CreateOrganization
 import com.accounting.config.authentication.AuthenticatedUser
 import com.accounting.database.Id
-import com.accounting.database.account.AccountCategory
 import com.accounting.database.account.Accounts
+import com.accounting.database.category.Categories
+import com.accounting.database.category.defaultCategories
 import com.accounting.database.currency.Currencies
 import com.accounting.database.currency.DefaultCurrency
 import com.accounting.database.organization.Organizations.createdAt
@@ -83,28 +84,37 @@ class OrganizationRepository {
             it[Currencies.organization] = id
         } get Currencies.id
 
-        val defaultPaymentAccountId = Accounts.insert {
-            it[Accounts.id] = Id.account()
-            it[Accounts.number] = 1020
-            it[Accounts.name] = "Bank"
-            it[Accounts.color] = "ff00ff"
-            it[Accounts.category] = AccountCategory.BANK_ACCOUNT
-            it[Accounts.organization] = id
-        } get Accounts.id
+        val recipe = defaultCategories.build(id)
+        val categories = recipe.categories
+        val accounts = recipe.accounts
 
-        val defaultRevenueAccountId = Accounts.insert {
-            it[Accounts.id] = Id.account()
-            it[Accounts.number] = 3200
-            it[Accounts.name] = "Gross Revenues"
-            it[Accounts.color] = "00ff00"
-            it[Accounts.category] = AccountCategory.SERVICE_REVENUE
-            it[Accounts.organization] = id
-        } get Accounts.id
+        categories.forEach { category ->
+            Categories.insert {
+                it[Categories.id] = category.id
+                it[name] = category.name
+                it[editable] = category.editable
+                it[parent] = category.parent
+                it[organization] = category.organization
+            }
+        }
+
+        accounts.forEach { account ->
+            Accounts.insert {
+                it[Accounts.id] = account.id
+                it[number] = account.number
+                it[name] = account.name
+                it[category] = account.category
+                it[organization] = account.organization
+            }
+        }
+
+        val defaultPaymentAccount = accounts.find { it.number == 1020 }
+        val defaultRevenueAccount = accounts.find { it.number == 3200 }
 
         Organizations.update({ Organizations.id eq id }) {
             it[mainCurrency] = mainCurrencyId
-            it[defaultPaymentAccount] = defaultPaymentAccountId
-            it[defaultRevenueAccount] = defaultRevenueAccountId
+            it[this.defaultPaymentAccount] = defaultPaymentAccount?.id
+            it[this.defaultRevenueAccount] = defaultRevenueAccount?.id
         }
 
         Organizations

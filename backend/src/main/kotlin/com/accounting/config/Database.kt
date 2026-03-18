@@ -1,6 +1,7 @@
 package com.accounting.config
 
 import com.accounting.database.account.Accounts
+import com.accounting.database.category.Categories
 import com.accounting.database.currency.Currencies
 import com.accounting.database.fiscalyear.FiscalYears
 import com.accounting.database.organization.Organizations
@@ -37,6 +38,7 @@ fun Application.configureDatabase() {
             Currencies,
             FiscalYears,
             Accounts,
+            Categories,
             Transactions,
             Users,
             Organizations,
