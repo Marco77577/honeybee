@@ -77,7 +77,8 @@ export default function SetupOrganization() {
                         onValueChange={handleOrganizationNameChange}
                         placeholder="Enter the name of your organization to get started ..."/>
                 </div>
-                <AutoHeight open={isOrganizationNameSet}>
+                <AutoHeight open={isOrganizationNameSet}
+                            allowOverflow={true}>
                     <div className={`flex flex-col gap-6`}>
                         <Heading2 title={`What Is ${organizationName} Legally?`}
                                   icon={<Scale size={40} strokeWidth={1}/>}/>
@@ -101,7 +102,8 @@ export default function SetupOrganization() {
                         </div>
                     </div>
                 </AutoHeight>
-                <AutoHeight open={isLegalFormSet && isOrganizationNameSet}>
+                <AutoHeight open={isLegalFormSet && isOrganizationNameSet}
+                            allowOverflow={true}>
                     <div className={`flex flex-col gap-6`}>
                         <Heading2 title={`What Year Will Be Your First Fiscal Period?`}
                                   icon={<Calendar size={40} strokeWidth={1}/>}/>
@@ -130,7 +132,8 @@ export default function SetupOrganization() {
                                 subtitle={`Create book entries starting on ${formatFiscalYear(previousYear)}.`}
                                 icon={<CalendarClock/>}
                             />
-                            <AutoHeight open={firstFiscalYear === previousYear}>
+                            <AutoHeight open={firstFiscalYear === previousYear}
+                                        allowOverflow={true}>
                                 <SelectField
                                     icon={<CalendarSearch/>}
                                     value={previousYear.toString()}
@@ -141,7 +144,8 @@ export default function SetupOrganization() {
                         </div>
                     </div>
                 </AutoHeight>
-                <AutoHeight open={isFirstFiscalYearSet && isLegalFormSet && isOrganizationNameSet}>
+                <AutoHeight open={isFirstFiscalYearSet && isLegalFormSet && isOrganizationNameSet}
+                            allowOverflow={true}>
                     <PrimaryButton title="Finish Setup" onClick={() => {
                         if (!organizationName || !legalForm || !firstFiscalYear) return;
                         createOrganization.mutate(

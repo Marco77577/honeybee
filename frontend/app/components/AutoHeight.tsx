@@ -5,11 +5,13 @@ import {useMeasure} from "react-use";
 interface AutoHeightProps {
     children: ReactNode;
     open: boolean;
+    allowOverflow: boolean;
 }
 
 export function AutoHeight({
                                children,
                                open,
+                               allowOverflow,
                                className,
                                ...props
                            }: AutoHeightProps & React.HTMLAttributes<HTMLDivElement>) {
@@ -31,7 +33,8 @@ export function AutoHeight({
         <div
             {...props}
             className={clsx(
-                `overflow-hidden px-2 -mx-2 transition-all duration-500`,
+                `overflow-hidden transition-all duration-500`,
+                allowOverflow && `px-2 -mx-2`,
                 open && `pointer-events-auto opacity-100`,
                 !open && `pointer-events-none opacity-0`,
                 className
@@ -43,10 +46,14 @@ export function AutoHeight({
                 open && `pointer-events-auto opacity-100 mt-0`,
                 !open && `pointer-events-none opacity-0 -mt-9`,
             )}>
-                <div className={`px-2 -mx-2 py-2`}>
+                <div className={clsx(allowOverflow && `px-2 -mx-2 py-2`)}>
                     {children}
                 </div>
             </div>
         </div>
     );
+}
+
+AutoHeight.defaultProps = {
+    allowOverflow: false
 }

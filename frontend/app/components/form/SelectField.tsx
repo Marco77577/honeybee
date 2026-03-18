@@ -46,7 +46,7 @@ export default function SelectField({
                     placeholder={placeholder}/>
             </div>
             <AutoHeight open={isOpen}>
-                <div className={`pt-1 -mb-2`}>
+                <div className={`pt-1`}>
                     <PopoverDivider/>
                     <div className={`p-2`}>
                         {
