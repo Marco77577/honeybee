@@ -16,4 +16,8 @@ object Accounts : Table("accounts") {
     val updatedAt = datetime("updated_at").defaultExpression(CurrentDateTime)
     val createdAt = datetime("created_at").defaultExpression(CurrentDateTime)
     override val primaryKey = PrimaryKey(id)
+
+    init {
+        uniqueIndex(number, organization)
+    }
 }
