@@ -290,6 +290,404 @@
           "oidc" : [ ]
         } ]
       }
+    },
+    "/api/v1/category/{organizationId}" : {
+      "get" : {
+        "tags" : [ "category", "v1" ],
+        "description" : "Get categories of an organization",
+        "parameters" : [ {
+          "name" : "organizationId",
+          "in" : "path",
+          "description" : "The id of the organization owning the categories",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "categories of an organization",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/com.accounting.api.category.model.PublicCategory"
+                  },
+                  "title" : "List<PublicCategory>"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      },
+      "post" : {
+        "tags" : [ "category", "v1" ],
+        "description" : "Create a new category",
+        "parameters" : [ {
+          "name" : "organizationId",
+          "in" : "path",
+          "description" : "The id of the organization owning the categories",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "new category",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/com.accounting.api.category.model.CreateCategory"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "category",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.api.category.model.PublicCategory"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid request",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.config.Error"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      },
+      "patch" : {
+        "tags" : [ "category", "v1" ],
+        "description" : "Update a category",
+        "parameters" : [ {
+          "name" : "organizationId",
+          "in" : "path",
+          "description" : "The id of the organization owning the categories",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "updated category",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/com.accounting.api.category.model.UpdateCategory"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "category",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.api.category.model.PublicCategory"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid request",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.config.Error"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      }
+    },
+    "/api/v1/category/{organizationId}/{categoryId}" : {
+      "delete" : {
+        "tags" : [ "category", "v1" ],
+        "description" : "Delete a category",
+        "parameters" : [ {
+          "name" : "organizationId",
+          "in" : "path",
+          "description" : "The id of the organization owning the category",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        }, {
+          "name" : "categoryId",
+          "in" : "path",
+          "description" : "The id of the category that is to be deleted",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "category deleted",
+            "headers" : { }
+          },
+          "400" : {
+            "description" : "invalid request",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.config.Error"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      }
+    },
+    "/api/v1/account/{organizationId}" : {
+      "get" : {
+        "tags" : [ "account", "v1" ],
+        "description" : "Get accounts of an organization",
+        "parameters" : [ {
+          "name" : "organizationId",
+          "in" : "path",
+          "description" : "The id of the organization owning the accounts",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "accounts of an organization",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/com.accounting.api.account.model.PublicAccount"
+                  },
+                  "title" : "List<PublicAccount>"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      },
+      "post" : {
+        "tags" : [ "account", "v1" ],
+        "description" : "Create a new account",
+        "parameters" : [ {
+          "name" : "organizationId",
+          "in" : "path",
+          "description" : "The id of the organization owning the accounts",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "new account",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/com.accounting.api.account.model.CreateAccount"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "account",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.api.account.model.PublicAccount"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid request",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.config.Error"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      },
+      "patch" : {
+        "tags" : [ "account", "v1" ],
+        "description" : "Update an account",
+        "parameters" : [ {
+          "name" : "organizationId",
+          "in" : "path",
+          "description" : "The id of the organization owning the accounts",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "updated account",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/com.accounting.api.account.model.UpdateAccount"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "account",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.api.account.model.PublicAccount"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid request",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.config.Error"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      }
+    },
+    "/api/v1/account/{organizationId}/{accountId}" : {
+      "delete" : {
+        "tags" : [ "account", "v1" ],
+        "description" : "Delete an account",
+        "parameters" : [ {
+          "name" : "organizationId",
+          "in" : "path",
+          "description" : "The id of the organization owning the account",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        }, {
+          "name" : "accountId",
+          "in" : "path",
+          "description" : "The id of the account that is to be deleted",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "account deleted",
+            "headers" : { }
+          },
+          "400" : {
+            "description" : "invalid request",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.config.Error"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      }
     }
   },
   "components" : {
@@ -425,6 +823,143 @@
         },
         "required" : [ "abbreviation", "id", "name" ],
         "title" : "UpdateCurrency"
+      },
+      "com.accounting.api.category.model.PublicCategory" : {
+        "type" : "object",
+        "properties" : {
+          "editable" : {
+            "type" : "boolean",
+            "title" : "Boolean"
+          },
+          "id" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "name" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "parent" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          }
+        },
+        "required" : [ "editable", "id", "name" ],
+        "title" : "PublicCategory"
+      },
+      "com.accounting.api.category.model.CreateCategory" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "parent" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        },
+        "required" : [ "name", "parent" ],
+        "title" : "CreateCategory"
+      },
+      "com.accounting.api.category.model.UpdateCategory" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "name" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "parent" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        },
+        "required" : [ "id", "name", "parent" ],
+        "title" : "UpdateCategory"
+      },
+      "com.accounting.api.account.model.PublicAccount" : {
+        "type" : "object",
+        "properties" : {
+          "category" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "description" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "id" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "name" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "number" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          }
+        },
+        "required" : [ "category", "id", "name", "number" ],
+        "title" : "PublicAccount"
+      },
+      "com.accounting.api.account.model.CreateAccount" : {
+        "type" : "object",
+        "properties" : {
+          "category" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "description" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "name" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "number" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          }
+        },
+        "required" : [ "category", "name", "number" ],
+        "title" : "CreateAccount"
+      },
+      "com.accounting.api.account.model.UpdateAccount" : {
+        "type" : "object",
+        "properties" : {
+          "category" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "description" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "id" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "name" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "number" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          }
+        },
+        "required" : [ "category", "id", "name", "number" ],
+        "title" : "UpdateAccount"
       }
     },
     "examples" : { },
