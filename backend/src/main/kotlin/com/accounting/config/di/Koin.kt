@@ -1,5 +1,7 @@
 package com.accounting.config.di
 
+import com.accounting.database.account.AccountRepository
+import com.accounting.database.category.CategoryRepository
 import com.accounting.database.currency.CurrencyRepository
 import com.accounting.database.organization.OrganizationRepository
 import com.accounting.database.user.UserRepository
@@ -17,6 +19,8 @@ fun Application.configureKoin() {
                 singleOf(::OrganizationRepository)
                 singleOf(::CurrencyRepository)
                 singleOf(::UserRepository)
+                singleOf(::AccountRepository)
+                singleOf(::CategoryRepository)
             }
         )
     }
