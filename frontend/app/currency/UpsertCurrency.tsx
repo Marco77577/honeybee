@@ -110,11 +110,14 @@ export default function UpsertCurrency({edit, onSuccess}: UpsertCurrencyProps & 
     }
 
     const handleReset = () => {
-        setAbbreviation('');
-        setName('');
-        setManualExchangeRate(0.5);
-        setExchangeRateMain(0.5);
-        setExchangeRateCurrency(1);
+        if (!edit) {
+            setAbbreviation('');
+            setName('');
+            setManualExchangeRate(0.5);
+            setExchangeRateMain(0.5);
+            setExchangeRateCurrency(1);
+
+        }
         setIsAbbreviationError(false);
         setIsNameError(false);
         setIsServerError(false);
