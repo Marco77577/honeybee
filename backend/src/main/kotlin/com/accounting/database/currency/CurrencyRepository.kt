@@ -27,7 +27,7 @@ class CurrencyRepository {
             it[id] = Id.currency()
             it[name] = createCurrency.name.trim()
             it[abbreviation] = createCurrency.abbreviation.trim()
-            it[manualExchangeRate] = BigDecimal(createCurrency.manualExchangeRate.toString())
+            it[manualExchangeRate] = createCurrency.manualExchangeRate?.let { rate -> BigDecimal(rate.toString()) }
             it[organization] = organizationId
         } get Currencies.id
 
