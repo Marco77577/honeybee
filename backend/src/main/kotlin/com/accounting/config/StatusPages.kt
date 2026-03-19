@@ -7,6 +7,7 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.Serializable
+import org.jetbrains.exposed.exceptions.ExposedSQLException
 
 class NotAuthenticatedException : Exception("user is not authenticated")
 class NotAllowedToViewOrganization : Exception("user may not view organization")
@@ -58,6 +59,16 @@ fun Application.configureStatusPages() {
                     statusCode = HttpStatusCode.Unauthorized.value,
                     errorCode = 4,
                     message = cause.message ?: "Unauthorized"
+                )
+            )
+        }
+        exception<ExposedSQLException> { call, cause ->
+            call.respond(
+                HttpStatusCode.BadRequest,
+                Error(
+                    statusCode = HttpStatusCode.BadRequest.value,
+                    errorCode = 5,
+                    message = cause.message ?: "Bad Request"
                 )
             )
         }
