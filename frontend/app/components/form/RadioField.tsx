@@ -21,7 +21,6 @@ export default function RadioField<T extends (string | number | readonly string[
                                                                                                            ...props
                                                                                                        }: InputFieldProps<T> & React.HTMLAttributes<HTMLLabelElement>) {
     const handleKeyDown = (e: React.KeyboardEvent) => {
-        console.log(e.key);
         if (e.key === " ") {
             e.preventDefault();
             onValueChange(value);
