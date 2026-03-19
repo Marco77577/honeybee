@@ -197,7 +197,8 @@ export default function UpsertCurrency({edit, onSuccess}: UpsertCurrencyProps & 
                 <Heading3 title={`Exchange Rate`}/>
                 <div className={`flex flex-col gap-3`}>
                     <p>What exchange rate is to be applied when you use this currency?</p>
-                    <AutoHeight open={latestExchangeRates?.isCurrencyAvailable(abbreviation) === true}>
+                    <AutoHeight open={latestExchangeRates?.isCurrencyAvailable(abbreviation) === true}
+                                allowOverflow={true}>
                         <RadioField icon={<BookSearch/>}
                                     title={`Automatic Exchange Rate`}
                                     subtitle={`Use the Frankfurt API to determine the current exchange rate when booking entries.`}
