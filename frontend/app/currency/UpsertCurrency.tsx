@@ -172,8 +172,19 @@ export default function UpsertCurrency({edit, onSuccess}: UpsertCurrencyProps & 
         );
     }
 
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            if (edit) {
+                handleUpdateClick();
+            } else {
+                handleCreateClick();
+            }
+        }
+    };
+
     return (
-        <div className={`w-full max-w-xl mx-auto flex flex-col gap-3 py-4`}>
+        <div className={`w-full max-w-xl mx-auto flex flex-col gap-3 py-4`} onKeyDown={handleKeyDown}>
             <div className={`flex flex-col gap-1`}>
                 <Heading2 title={edit ? `Edit Currency` : `New Currency`}
                           icon={<BanknoteArrowDown size={40} strokeWidth={1}/>}/>
