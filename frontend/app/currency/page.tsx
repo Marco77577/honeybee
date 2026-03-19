@@ -19,6 +19,7 @@ import UpsertCurrency from "@/app/currency/UpsertCurrency";
 import {useOrganization} from "@/app/context/OrganizationProvider";
 import Heading2 from "@/app/components/title/Heading2";
 import SecondaryButton from "@/app/components/button/SecondaryButton";
+import ClickableIcon from "@/app/components/ClickableIcon";
 
 export function calculateLeftHandExchangeRate(rate: number) {
     let left = 1;
@@ -53,8 +54,8 @@ function LoadingCurrency() {
                 </Skeleton>
             </div>
             <div><Skeleton>Frankfurter</Skeleton></div>
-            <div><Skeleton><Pencil size={20}/></Skeleton></div>
-            <div><Skeleton><Trash size={20}/></Skeleton></div>
+            <div><Skeleton><ClickableIcon><Pencil size={20}/></ClickableIcon></Skeleton></div>
+            <div><Skeleton><ClickableIcon><Trash size={20}/></ClickableIcon></Skeleton></div>
         </div>
     )
 }
@@ -150,7 +151,8 @@ export default function Currency() {
                             <div className={`flex flex-col gap-1`}>
                                 <Heading2 title={`Delete Currency`}
                                           icon={<BanknoteX size={40} strokeWidth={1}/>}/>
-                                <p>Are you sure you want to delete currency <span className={`inline-flex items-center gap-2`}>
+                                <p>Are you sure you want to delete currency <span
+                                    className={`inline-flex items-center gap-2`}>
                                     <CurrencyAbbreviation
                                         abbreviation={deletingCurrency?.abbreviation}/><span>{deletingCurrency?.name}</span></span>?
                                 </p>
@@ -182,7 +184,8 @@ export default function Currency() {
                                         className={`grid grid-cols-subgrid col-span-5 md:col-span-6 items-center py-2.5 px-3 rounded-lg hover:bg-popover-element-hover`}>
                                         <div><CurrencyAbbreviation abbreviation={currency.abbreviation}/></div>
                                         <div>{currency.name}</div>
-                                        <div className={`hidden md:flex items-center gap-2 justify-end-safe font-mono!`}>
+                                        <div
+                                            className={`hidden md:flex items-center gap-2 justify-end-safe font-mono!`}>
                                             <span className={`font-mono! flex items-center gap-1`}>
                                                 <span
                                                     className={clsx(`font-mono!`, currency.manualExchangeRate !== undefined && `hidden`)}>
@@ -217,18 +220,14 @@ export default function Currency() {
                                             <span
                                                 className={clsx(`text-xs rounded-md bg-popover-element-hover p-1`)}>Manual</span>
                                         </div>
-                                        <div
-                                            className={`rounded-md cursor-pointer p-2 hover:bg-input-text-border-outline`}
-                                            title={`Edit Currency`}
-                                            onClick={() => handleEditClick(currency)}>
+                                        <ClickableIcon title={`Edit Currency`}
+                                                       onClick={() => handleEditClick(currency)}>
                                             <Pencil size={20} strokeWidth={1}/>
-                                        </div>
-                                        <div
-                                            className={`rounded-md cursor-pointer p-2 hover:bg-input-text-border-outline`}
-                                            title={`Delete Currency`}
-                                            onClick={() => handleDeleteClick(currency)}>
+                                        </ClickableIcon>
+                                        <ClickableIcon title={`Delete Currency`}
+                                                       onClick={() => handleDeleteClick(currency)}>
                                             <Trash size={20} strokeWidth={1}/>
-                                        </div>
+                                        </ClickableIcon>
                                     </div>
                                 )) ?? Array.from({length: 5}, (_, i) => <LoadingCurrency key={i}/>)
                         }
