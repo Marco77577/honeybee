@@ -215,7 +215,7 @@ export default function UpsertCurrency({edit, onSuccess}: UpsertCurrencyProps & 
                                 value={manualExchangeRate}
                                 checked={manualExchangeRate !== null}
                                 onValueChange={handleManualExchangeRateClick}/>
-                    <AutoHeight open={manualExchangeRate !== null}>
+                    <AutoHeight open={manualExchangeRate !== null} allowOverflow={true}>
                         <div className={`flex items-center gap-2`}>
                             <InputField
                                 trailing={<CurrencyAbbreviation abbreviation={abbreviation}/>}
