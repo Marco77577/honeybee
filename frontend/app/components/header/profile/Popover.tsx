@@ -9,13 +9,13 @@ interface PopoverProps {
 }
 
 export function Popover({trigger, children, align = "right", alwaysOpen = false}: PopoverProps) {
-    const [isOpen, setIsOpen] = useState(false);
+    const [open, setOpen] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
     useEffect(
         () => {
             function handleClickOutside(event: MouseEvent) {
                 if (ref.current && !ref.current.contains(event.target as Node)) {
-                    setIsOpen(false);
+                    setOpen(false);
                 }
             }
 
@@ -26,7 +26,7 @@ export function Popover({trigger, children, align = "right", alwaysOpen = false}
     );
 
     const triggerWithHandler = cloneElement(trigger, {
-        onClick: () => setIsOpen((prev) => !prev),
+        onClick: () => setOpen((prev) => !prev),
     });
 
     return (
@@ -37,7 +37,7 @@ export function Popover({trigger, children, align = "right", alwaysOpen = false}
                     "absolute top-full w-max opacity-0 mt-0 bg-popover-background border border-popover-border rounded-xl pointer-events-none transition-all",
                     alwaysOpen && "static w-full!",
                     align === "right" ? "right-0" : "left-0",
-                    (isOpen || alwaysOpen) && "opacity-100 mt-3 pointer-events-auto!"
+                    (open || alwaysOpen) && "opacity-100 mt-3 pointer-events-auto!"
                 )}
             >
                 {children}
