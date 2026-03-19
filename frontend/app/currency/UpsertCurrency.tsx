@@ -37,7 +37,7 @@ export default function UpsertCurrency({edit, onSuccess}: UpsertCurrencyProps & 
     // states
     const [abbreviation, setAbbreviation] = useState<string>(edit ? edit.abbreviation : '');
     const [name, setName] = useState<string>(edit ? edit.name : '');
-    const [manualExchangeRate, setManualExchangeRate] = useState<number | null>(edit?.manualExchangeRate ? edit.manualExchangeRate : null);
+    const [manualExchangeRate, setManualExchangeRate] = useState<number | null>(edit ? edit.manualExchangeRate ?? null : 0.5);
     const [exchangeRateMain, setExchangeRateMain] = useState<number>(edit?.manualExchangeRate ? calculateRightHandExchangeRate(edit.manualExchangeRate) : 0.5);
     const [exchangeRateCurrency, setExchangeRateCurrency] = useState<number>(edit?.manualExchangeRate ? calculateLeftHandExchangeRate(edit.manualExchangeRate) : 1);
     const [isAbbreviationError, setIsAbbreviationError] = useState<boolean>(false);
