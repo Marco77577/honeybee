@@ -47,7 +47,7 @@ export function AutoHeight({
                 !open && `pointer-events-none opacity-0 -mt-9`,
             )}>
                 <div className={clsx(allowOverflow && `px-2 -mx-2 py-2`)}>
-                    {children}
+                    {open && children}
                 </div>
             </div>
         </div>
