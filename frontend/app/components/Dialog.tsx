@@ -36,10 +36,11 @@ Dialog.Trigger = function DialogTrigger({children, ...props}: ChildProps & React
     const {open} = useContext(DialogContext);
 
     return (
-        <div onClick={e => {
-            e.stopPropagation();
-            open();
-        }} {...props}>
+        <div className={`contents`}
+             onClick={e => {
+                 e.stopPropagation();
+                 open();
+             }} {...props}>
             {children}
         </div>
     );
