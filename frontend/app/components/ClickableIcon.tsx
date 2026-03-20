@@ -13,7 +13,7 @@ export default function ClickableIcon({
     return (
         <div
             {...props}
-            className={clsx(`rounded-md cursor-pointer p-2 hover:bg-input-text-border-outline`, className)}>
+            className={clsx(`inline-block rounded-md cursor-pointer p-2 hover:bg-input-text-border-outline`, className)}>
             {children}
         </div>
     );
