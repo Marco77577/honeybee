@@ -13,6 +13,8 @@ export default function ClickableIcon({
     return (
         <div
             {...props}
+            tabIndex={0}
+            onKeyDown={e => e.key === `Enter` && e.currentTarget.click()}
             className={clsx(`inline-block rounded-md cursor-pointer p-2 hover:bg-input-text-border-outline`, className)}>
             {children}
         </div>
