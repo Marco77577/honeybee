@@ -131,7 +131,7 @@ h1, h2, h3 {
 }
 
 p {
-    @apply font-madurai text-lg;
+    @apply font-madurai text-base;
 }
 
 button {
