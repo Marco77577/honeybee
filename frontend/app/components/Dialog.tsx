@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useEffect, useState} from "react";
+import React, {createContext, useContext, useEffect, useRef, useState} from "react";
 import clsx from "clsx";
 import {createPortal} from "react-dom";
 
@@ -52,7 +52,9 @@ Dialog.Content = function DialogContent({
                                             className,
                                             ...props
                                         }: ChildProps & React.HTMLAttributes<HTMLDivElement>) {
+    const ref = useRef<HTMLDivElement>(null);
     const {isOpen, open, close} = useContext(DialogContext);
+
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === "Escape") close();
@@ -61,6 +63,18 @@ Dialog.Content = function DialogContent({
         if (isOpen) document.addEventListener("keydown", handleKeyDown);
         return () => document.removeEventListener("keydown", handleKeyDown);
     }, [isOpen, close]);
+
+    useEffect(() => {
+        if (!isOpen) return;
+        const element = ref.current;
+        if (!element) return;
+
+        const focusable = element.querySelector<HTMLElement>(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+
+        focusable?.focus();
+    }, [isOpen]);
 
     if (!open) return null;
 
@@ -78,6 +92,7 @@ Dialog.Content = function DialogContent({
                 className)}>
             <div className={`w-full max-w-xl mx-auto flex flex-col gap-3`}>
                 <div
+                    ref={ref}
                     onClick={e => e.stopPropagation()}
                     className={`rounded-lg p-2 px-5 bg-input-text-background border border-input-text-border text-input-text-foreground outline-3 outline-transparent hover:outline-input-text-border-outline`}>
                     {children}
