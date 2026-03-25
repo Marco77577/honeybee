@@ -94,7 +94,7 @@ export default function AccountBrowser({
                                     <Dialog>
                                         <Dialog.Trigger tabIndex={0}>
                                             <ClickableIcon title={`Edit Account`}>
-                                                <FolderPen size={20} strokeWidth={1}/>
+                                                <Pen size={20} strokeWidth={1}/>
                                             </ClickableIcon>
                                         </Dialog.Trigger>
                                         <Dialog.Content>
