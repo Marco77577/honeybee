@@ -27,7 +27,7 @@ export default function InputField({
         <div
             {...props}
             className={clsx(
-                `flex items-center gap-3 rounded-lg p-3 bg-input-text-background border border-input-text-border focus-within:border-input-text-border-focused outline-3 outline-transparent focus-within:outline-input-text-border-outline text-base`,
+                `flex items-center gap-3 rounded-lg p-3 bg-input-text-background border border-input-text-border focus-within:border-input-text-border-focused outline-3 outline-transparent focus-within:outline-input-text-border-outline text-base overflow-hidden`,
                 disabled && `bg-popover-element-hover`,
                 error && `border-error! focus-within:outline-error/30!`,
                 className
@@ -40,7 +40,7 @@ export default function InputField({
                 onChange={e => onValueChange(e.target.value)}
                 id={id}
                 className={clsx(
-                    `flex-1 outline-0 placeholder-input-text-placeholder`,
+                    `grow outline-0 placeholder-input-text-placeholder`,
                     !leading && trailing && `text-end`,
                 )}
                 type="text"
