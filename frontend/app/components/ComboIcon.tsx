@@ -4,11 +4,11 @@ import clsx from "clsx";
 
 interface ComboIconProps {
     main: LucideIcon,
-    mainSize: number,
-    mainStrokeWidth: number,
+    mainSize?: number,
+    mainStrokeWidth?: number,
     secondary: LucideIcon,
-    secondarySize: number,
-    secondaryStrokeWidth: number,
+    secondarySize?: number,
+    secondaryStrokeWidth?: number,
 }
 
 export default function ComboIcon({
