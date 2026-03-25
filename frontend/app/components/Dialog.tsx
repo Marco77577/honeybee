@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState} from "react";
+import React, {createContext, useContext, useEffect, useState} from "react";
 import clsx from "clsx";
 import {createPortal} from "react-dom";
 
@@ -53,6 +53,14 @@ Dialog.Content = function DialogContent({
                                             ...props
                                         }: ChildProps & React.HTMLAttributes<HTMLDivElement>) {
     const {isOpen, open, close} = useContext(DialogContext);
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") close();
+        };
+
+        if (isOpen) document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+    }, [isOpen, close]);
 
     if (!open) return null;
 
