@@ -93,7 +93,7 @@ export default function UpsertCurrency({
 
     const handleExchangeRateMainChange = (value: string) => {
         if (value === '') value = `0.5`;
-        let exchangeRateMain = value.replace(/\D\./g, "") as unknown as number;
+        let exchangeRateMain = value.replace(/[\D.]/g, "") as unknown as number;
         if (exchangeRateMain < 0) exchangeRateMain = 0.1;
         setExchangeRateMain(exchangeRateMain);
         setManualExchangeRate(exchangeRateMain / exchangeRateCurrency);
@@ -101,7 +101,7 @@ export default function UpsertCurrency({
 
     const handleExchangeRateCurrencyChange = (value: string) => {
         if (value === '') value = `1`;
-        let exchangeRateCurrency = value.replace(/\D\./g, "") as unknown as number;
+        let exchangeRateCurrency = value.replace(/[\D.]/g, "") as unknown as number;
         if (exchangeRateCurrency < 0) exchangeRateCurrency = 0.1;
         setExchangeRateCurrency(exchangeRateCurrency);
         setManualExchangeRate(exchangeRateMain / exchangeRateCurrency);
