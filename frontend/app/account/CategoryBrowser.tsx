@@ -123,7 +123,10 @@ export default function CategoryBrowser({
                                 className={`absolute top-0 right-2 bottom-0 flex items-center rounded-lg`}>
                                 <ClickableIcon
                                     title={`Close Category Panel`}
-                                    onClick={onCollapsePanel}>
+                                    onClick={e => {
+                                        e.stopPropagation();
+                                        onCollapsePanel();
+                                    }}>
                                     <PanelLeftClose size={20} strokeWidth={1}/>
                                 </ClickableIcon>
                             </div>}
