@@ -2,7 +2,7 @@ import {Account} from "@/app/context/api/queries/accounts";
 import React, {useState} from "react";
 import ClickableIcon from "@/app/components/ClickableIcon";
 import {Dialog, DialogContext} from "@/app/components/Dialog";
-import {FolderPen, Inbox, Plus, Search, Trash} from "lucide-react";
+import {FolderPen, Inbox, Pen, Plus, Search, Trash} from "lucide-react";
 import UpsertAccount from "@/app/account/UpsertAccount";
 import clsx from "clsx";
 import CurrencyAbbreviation from "@/app/currency/CurrencyAbbreviation";
@@ -86,7 +86,7 @@ export default function AccountBrowser({
                                 </div>
                                 <div
                                     className={clsx(
-                                        `absolute top-0 right-0 md:right-2 bottom-0 bg-popover-element-hover flex items-center rounded-lg opacity-0 focus-within:opacity-100 pointer-events-none focus-within:pointer-events-auto`,
+                                        `absolute top-0 right-0 md:right-2 bottom-0 bg-popover-element-hover flex items-center rounded-lg opacity-0 focus-within:opacity-100 pointer-events-none md:pointer-events-auto focus-within:pointer-events-auto`,
                                         account.id === filtered?.[0]?.id && `right-11!`,
                                         account.id === selectedAccount?.id && `pointer-events-auto! opacity-100 md:opacity-0`
                                     )}
@@ -130,6 +130,3 @@ export default function AccountBrowser({
         </div>
     );
 }
-
-// todo better edit icon
-// todo mobile solution

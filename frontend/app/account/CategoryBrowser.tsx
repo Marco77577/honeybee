@@ -132,7 +132,7 @@ export default function CategoryBrowser({
                             </div>}
                             {category.parent && <div
                                 className={clsx(
-                                    `absolute top-0 right-0 md:right-2 bottom-0 bg-popover-element-hover flex items-center rounded-lg opacity-0 focus-within:opacity-100 pointer-events-none focus-within:pointer-events-auto`,
+                                    `absolute top-0 right-0 md:right-2 bottom-0 bg-popover-element-hover flex items-center rounded-lg opacity-0 focus-within:opacity-100 pointer-events-none md:pointer-events-auto focus-within:pointer-events-auto`,
                                     category.id === selectedCategory?.id && `pointer-events-auto! opacity-100 md:opacity-0`
                                 )}
                                 data-options>
