@@ -7,8 +7,8 @@ interface InputFieldProps {
     value: string | undefined,
     placeholder?: string,
     onValueChange: (value: string) => void,
-    disabled: boolean,
-    error: boolean,
+    disabled?: boolean,
+    error?: boolean,
 }
 
 export default function InputField({
@@ -18,8 +18,8 @@ export default function InputField({
                                        placeholder,
                                        onValueChange,
                                        className,
-                                       disabled,
-                                       error,
+                                       disabled = false,
+                                       error = false,
                                        ...props
                                    }: InputFieldProps & React.HTMLAttributes<HTMLDivElement>) {
     const id = useId();
@@ -52,8 +52,3 @@ export default function InputField({
         </div>
     )
 }
-
-InputField.defaultProps = {
-    disabled: false,
-    error: false,
-};

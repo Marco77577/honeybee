@@ -4,12 +4,12 @@ import {LoaderCircle} from "lucide-react";
 
 interface SecondaryButtonProps {
     title: string,
-    loading: boolean,
+    loading?: boolean,
 }
 
 export default function SecondaryButton({
                                             title,
-                                            loading,
+                                            loading = false,
                                             className,
                                             ...props
                                         }: SecondaryButtonProps & React.HTMLAttributes<HTMLButtonElement>) {
@@ -24,8 +24,4 @@ export default function SecondaryButton({
             <span>{title}</span>
         </button>
     )
-}
-
-SecondaryButton.defaultProps = {
-    loading: false
 }

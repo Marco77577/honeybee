@@ -22,10 +22,14 @@ import {calculateLeftHandExchangeRate, calculateRightHandExchangeRate} from "@/a
 
 interface UpsertCurrencyProps {
     edit?: Currency,
-    onSuccess: () => void,
+    onSuccess?: () => void,
 }
 
-export default function UpsertCurrency({edit, onSuccess}: UpsertCurrencyProps & React.HTMLAttributes<HTMLDivElement>) {
+export default function UpsertCurrency({
+                                           edit = undefined,
+                                           onSuccess = () => {
+                                           }
+                                       }: UpsertCurrencyProps & React.HTMLAttributes<HTMLDivElement>) {
     // dependencies
     const queryClient = useQueryClient();
     const organization = useOrganization();
@@ -256,10 +260,4 @@ export default function UpsertCurrency({edit, onSuccess}: UpsertCurrencyProps & 
             </div>
         </div>
     )
-}
-
-UpsertCurrency.defaultProps = {
-    edit: undefined,
-    onSuccess: () => {
-    }
 }

@@ -4,14 +4,14 @@ import {LoaderCircle} from "lucide-react";
 
 interface PrimaryButtonProps {
     title: string,
-    disabled: boolean,
-    loading: boolean,
+    disabled?: boolean,
+    loading?: boolean,
 }
 
 export default function PrimaryButton({
                                           title,
-                                          disabled,
-                                          loading,
+                                          disabled = false,
+                                          loading = false,
                                           className,
                                           ...props
                                       }: PrimaryButtonProps & React.HTMLAttributes<HTMLButtonElement>) {
@@ -31,9 +31,4 @@ export default function PrimaryButton({
             <span>{title}</span>
         </button>
     )
-}
-
-PrimaryButton.defaultProps = {
-    disabled: false,
-    loading: false
 }

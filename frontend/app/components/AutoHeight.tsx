@@ -5,13 +5,13 @@ import {useMeasure} from "react-use";
 interface AutoHeightProps {
     children: ReactNode;
     open: boolean;
-    allowOverflow: boolean;
+    allowOverflow?: boolean;
 }
 
 export function AutoHeight({
                                children,
                                open,
-                               allowOverflow,
+                               allowOverflow = false,
                                className,
                                ...props
                            }: AutoHeightProps & React.HTMLAttributes<HTMLDivElement>) {
@@ -52,8 +52,4 @@ export function AutoHeight({
             </div>
         </div>
     );
-}
-
-AutoHeight.defaultProps = {
-    allowOverflow: false
 }
