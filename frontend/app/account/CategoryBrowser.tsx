@@ -20,6 +20,8 @@ export default function CategoryBrowser({
                                             onCategory,
                                             className,
                                         }: CategoryBrowserProps & React.HTMLAttributes<HTMLDivElement>) {
+    const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+
     const [open, setOpen] = useState(new Set(
         categories
             .filter(category => category.parent == null)
@@ -46,6 +48,7 @@ export default function CategoryBrowser({
             return next;
         });
         onCategory(category);
+        setSelectedCategory(category);
     }
 
     const childrenOf = (category?: Category) => {
@@ -106,7 +109,7 @@ export default function CategoryBrowser({
                     <AutoHeight key={category.id}
                                 open={open.has(category.id) || (category.parent != null && open.has(category.parent))}>
                         <div onClick={() => toggleOpen(category)}
-                             className={`relative flex items-center gap-6 py-2.5 px-3 rounded-lg hover:bg-popover-element-hover cursor-pointer hover:**:data-options:opacity-100`}
+                             className={`relative flex items-center gap-6 md:py-2.5 md:px-3 rounded-lg hover:bg-popover-element-hover cursor-pointer hover:**:data-options:opacity-100`}
                              style={{paddingLeft: `${10 * levelOf(category)}px`}}>
                             <div className={`flex items-center gap-2 py-1`}>
                                 {(open.has(category.id) && hasChildren(category)) &&
@@ -125,7 +128,10 @@ export default function CategoryBrowser({
                                 </ClickableIcon>
                             </div>}
                             {category.parent && <div
-                                className={clsx(`absolute top-0 right-2 bottom-0 bg-popover-element-hover flex items-center rounded-lg opacity-0 focus-within:opacity-100`)}
+                                className={clsx(
+                                    `absolute top-0 right-0 md:right-2 bottom-0 bg-popover-element-hover flex items-center rounded-lg opacity-0 focus-within:opacity-100 pointer-events-none focus-within:pointer-events-auto`,
+                                    category.id === selectedCategory?.id && `pointer-events-auto! opacity-100 md:opacity-0`
+                                )}
                                 data-options>
                                 {category.editable && <Dialog>
                                     <Dialog.Trigger>

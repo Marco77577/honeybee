@@ -53,7 +53,7 @@ export default function AccountPage() {
                                         </div>}
                                 </Panel>
                                 <Separator className={`bg-input-text-border w-px outline-none`}/>
-                                <Panel minSize={200}>
+                                <Panel>
                                     <AccountBrowser
                                         categories={categories}
                                         category={category ?? categories[0]}

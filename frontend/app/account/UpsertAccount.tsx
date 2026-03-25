@@ -141,7 +141,7 @@ export default function UpsertAccount({
                           icon={<Inbox size={40} strokeWidth={1}/>}/>
                 {!edit && <p>What account would you like to add?</p>}
                 <div className={`flex flex-col gap-2`}>
-                    <div className={`flex items-center gap-2`}>
+                    <div className={`flex flex-col md:flex-row md:items-center gap-2`}>
                         <InputField
                             leading={<Inbox strokeWidth={1}/>}
                             placeholder={`1000`}

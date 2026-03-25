@@ -1,5 +1,5 @@
 import {Account} from "@/app/context/api/queries/accounts";
-import React from "react";
+import React, {useState} from "react";
 import ClickableIcon from "@/app/components/ClickableIcon";
 import {Dialog, DialogContext} from "@/app/components/Dialog";
 import {FolderPen, Inbox, Plus, Search, Trash} from "lucide-react";
@@ -24,6 +24,8 @@ export default function AccountBrowser({
                                            className,
                                            ...props
                                        }: AccountBrowserProps & React.HTMLAttributes<HTMLDivElement>) {
+    const [selectedAccount, setSelectedAccount] = useState<Account | null>(null);
+
     const childrenOf = (category?: Category) => {
         return categories.filter(c => c.parent === category?.id);
     }
@@ -51,7 +53,7 @@ export default function AccountBrowser({
                 <span className={`text-center`}>There is no account in this category.</span>
             </div>}
             <div
-                className={`absolute top-4 right-4 z-10 flex items-center rounded-lg`}>
+                className={`absolute top-1 md:top-4 right-2 md:right-4 z-10 flex items-center rounded-lg`}>
                 <Dialog>
                     <Dialog.Trigger tabIndex={0}>
                         <ClickableIcon title={`Add Account`}>
@@ -74,8 +76,8 @@ export default function AccountBrowser({
                     ?.map(account => (
                         <AutoHeight key={account.id}
                                     open={displayByParents.some(category => category.id === account.category)}>
-                            <div
-                                className={`relative flex items-center gap-6 py-2.5 px-3 rounded-lg hover:bg-popover-element-hover cursor-pointer hover:**:data-options:opacity-100`}>
+                            <div onClick={() => setSelectedAccount(account)}
+                                 className={`relative flex items-center gap-6 md:py-2.5 md:px-3 rounded-lg hover:bg-popover-element-hover cursor-pointer hover:**:data-options:opacity-100`}>
                                 <div
                                     className={`flex items-center gap-2 py-1`}>
                                     <CurrencyAbbreviation className={`relative top-px text-input-text-placeholder`}
@@ -84,8 +86,9 @@ export default function AccountBrowser({
                                 </div>
                                 <div
                                     className={clsx(
-                                        `hidden absolute top-0 right-2 bottom-0 bg-popover-element-hover md:flex items-center rounded-lg opacity-0 focus-within:opacity-100`,
-                                        account.id === filtered?.[0]?.id && `right-11`
+                                        `absolute top-0 right-0 md:right-2 bottom-0 bg-popover-element-hover flex items-center rounded-lg opacity-0 focus-within:opacity-100 pointer-events-none focus-within:pointer-events-auto`,
+                                        account.id === filtered?.[0]?.id && `right-11`,
+                                        account.id === selectedAccount?.id && `pointer-events-auto! opacity-100 md:opacity-0`
                                     )}
                                     data-options>
                                     <Dialog>
@@ -127,3 +130,6 @@ export default function AccountBrowser({
         </div>
     );
 }
+
+// todo better edit icon
+// todo mobile solution
