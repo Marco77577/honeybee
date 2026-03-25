@@ -195,7 +195,7 @@ export default function UpsertCurrency({
                 {!edit && <p>What currency would you like to add?</p>}
                 <div className={`flex items-center gap-2`}>
                     <InputField
-                        leading={<DollarSign/>}
+                        leading={<DollarSign strokeWidth={1}/>}
                         placeholder={`USD`}
                         value={abbreviation}
                         className={`max-w-25`}
@@ -203,7 +203,7 @@ export default function UpsertCurrency({
                         disabled={edit !== undefined}
                         error={isAbbreviationError}/>
                     <InputField
-                        leading={<Tag/>}
+                        leading={<Tag strokeWidth={1}/>}
                         placeholder={`United States Dollar`}
                         value={name}
                         className={`flex-1`}
@@ -217,14 +217,14 @@ export default function UpsertCurrency({
                     <p>What exchange rate is to be applied when you use this currency?</p>
                     <AutoHeight open={latestExchangeRates?.isCurrencyAvailable(abbreviation) === true}
                                 allowOverflow={true}>
-                        <RadioField icon={<BookSearch/>}
+                        <RadioField icon={<BookSearch strokeWidth={1}/>}
                                     title={`Automatic Exchange Rate`}
                                     subtitle={`Use the Frankfurt API to determine the current exchange rate when booking entries.`}
                                     value={manualExchangeRate}
                                     checked={manualExchangeRate === null}
                                     onValueChange={() => setManualExchangeRate(null)}/>
                     </AutoHeight>
-                    <RadioField icon={<BookSearch/>}
+                    <RadioField icon={<BookSearch strokeWidth={1}/>}
                                 title={`Manual Exchange Rate`}
                                 subtitle={`Define exchange rate manually.`}
                                 value={manualExchangeRate}
