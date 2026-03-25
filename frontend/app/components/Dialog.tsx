@@ -1,5 +1,6 @@
 import React, {createContext, useContext, useState} from "react";
 import clsx from "clsx";
+import {createPortal} from "react-dom";
 
 interface DialogProvider {
     isOpen: boolean,
@@ -55,7 +56,7 @@ Dialog.Content = function DialogContent({
 
     if (!open) return null;
 
-    return (
+    return createPortal(
         <div
             {...props}
             onClick={e => {
@@ -74,6 +75,7 @@ Dialog.Content = function DialogContent({
                     {children}
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };
