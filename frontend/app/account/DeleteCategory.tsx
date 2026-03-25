@@ -56,7 +56,7 @@ export default function DeleteCategory({
                 <p>Are you sure you want to delete category {category.name}?</p>
                 <p>This cannot be undone.</p>
                 {isServerError && <div className={`text-error text-end`}>Unable to delete category.</div>}
-                <div className={`flex items-center justify-end gap-3`}>
+                <div className={`flex items-center justify-end gap-3 mt-4`}>
                     <SecondaryButton title={`Delete`}
                                      loading={deleteCategory.isPending}
                                      onClick={handleCategoryDelete}/>

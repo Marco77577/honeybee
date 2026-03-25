@@ -61,7 +61,7 @@ export default function DeleteCurrency({
                 </p>
                 <p>This cannot be undone.</p>
                 {isServerError && <div className={`text-error text-end`}>Unable to delete currency.</div>}
-                <div className={`flex items-center justify-end gap-3`}>
+                <div className={`flex items-center justify-end gap-3 mt-4`}>
                     <SecondaryButton title={`Delete`}
                                      loading={deleteCurrency.isPending}
                                      onClick={handleCurrencyDelete}/>

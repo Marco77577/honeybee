@@ -56,7 +56,7 @@ export default function DeleteAccount({
                 <p>Are you sure you want to delete account {account.name}?</p>
                 <p>This cannot be undone.</p>
                 {isServerError && <div className={`text-error text-end`}>Unable to delete account.</div>}
-                <div className={`flex items-center justify-end gap-3`}>
+                <div className={`flex items-center justify-end gap-3 mt-4`}>
                     <SecondaryButton title={`Delete`}
                                      loading={deleteAccount.isPending}
                                      onClick={handleAccountDelete}/>
