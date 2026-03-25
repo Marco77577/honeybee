@@ -87,7 +87,7 @@ export default function AccountBrowser({
                                 <div
                                     className={clsx(
                                         `absolute top-0 right-0 md:right-2 bottom-0 bg-popover-element-hover flex items-center rounded-lg opacity-0 focus-within:opacity-100 pointer-events-none focus-within:pointer-events-auto`,
-                                        account.id === filtered?.[0]?.id && `right-11`,
+                                        account.id === filtered?.[0]?.id && `right-11!`,
                                         account.id === selectedAccount?.id && `pointer-events-auto! opacity-100 md:opacity-0`
                                     )}
                                     data-options>
