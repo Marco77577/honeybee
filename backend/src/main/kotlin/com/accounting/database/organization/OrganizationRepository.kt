@@ -1,5 +1,6 @@
 package com.accounting.database.organization
 
+import com.accounting.api.organization.model.UpdateOrganization
 import com.accounting.api.organization.model.CreateOrganization
 import com.accounting.config.authentication.AuthenticatedUser
 import com.accounting.database.Id
@@ -22,6 +23,7 @@ import com.accounting.database.user.User
 import com.accounting.database.user.UserRole
 import com.accounting.database.user.Users
 import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDate
 
@@ -131,6 +133,26 @@ class OrganizationRepository {
             .select { Organizations.id eq id }
             .single()
             .toOrganization()
+    }
+
+    fun updateOrganization(updateOrganization: UpdateOrganization) = transaction {
+        Organizations.update(
+            { Organizations.id eq updateOrganization.id }
+        ) {
+            it[displayName] = updateOrganization.displayName
+            it[officialName] = updateOrganization.officialName
+            it[defaultPaymentAccount] = updateOrganization.defaultPaymentAccount
+            it[defaultRevenueAccount] = updateOrganization.defaultRevenueAccount
+        }
+
+        Organizations
+            .select { Organizations.id eq updateOrganization.id }
+            .single()
+            .toOrganization()
+    }
+
+    fun deleteOrganization(organizationId: String) = transaction {
+        Organizations.deleteWhere { Organizations.id eq organizationId }
     }
 
     /**

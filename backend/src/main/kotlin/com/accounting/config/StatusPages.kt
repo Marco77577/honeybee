@@ -12,6 +12,8 @@ import org.jetbrains.exposed.exceptions.ExposedSQLException
 class NotAuthenticatedException : Exception("user is not authenticated")
 class NotAllowedToViewOrganization : Exception("user may not view organization")
 class NotAllowedToWriteOrganization : Exception("user may not write organization")
+class NotOwner : Exception("user is not owner")
+class NotAdmin : Exception("user is not admin")
 class CategoryCycleException : Exception("category cycle detected")
 
 @Serializable
@@ -80,6 +82,26 @@ fun Application.configureStatusPages() {
                     statusCode = HttpStatusCode.BadRequest.value,
                     errorCode = 6,
                     message = cause.message ?: "Bad Request"
+                )
+            )
+        }
+        exception<NotOwner> { call, cause ->
+            call.respond(
+                HttpStatusCode.Forbidden,
+                Error(
+                    statusCode = HttpStatusCode.Forbidden.value,
+                    errorCode = 7,
+                    message = cause.message ?: "Forbidden"
+                )
+            )
+        }
+        exception<NotAdmin> { call, cause ->
+            call.respond(
+                HttpStatusCode.Forbidden,
+                Error(
+                    statusCode = HttpStatusCode.Forbidden.value,
+                    errorCode = 8,
+                    message = cause.message ?: "Forbidden"
                 )
             )
         }

@@ -1,7 +1,9 @@
 package com.accounting.config.authentication
 
+import com.accounting.config.NotAdmin
 import com.accounting.config.NotAllowedToViewOrganization
 import com.accounting.config.NotAuthenticatedException
+import com.accounting.config.NotOwner
 import com.accounting.database.user.UserRepository
 import com.auth0.jwk.JwkProvider
 import com.auth0.jwk.JwkProviderBuilder
@@ -128,5 +130,31 @@ fun RoutingContext.assertMayWriteOrganization(): String {
     val userRepository by route.inject<UserRepository>()
     val user = requireUser()
     if (!userRepository.mayWrite(user.id, organizationId)) throw NotAllowedToViewOrganization()
+    return organizationId
+}
+
+/**
+ * Asserts that the current user is the owner of an organization.
+ * @throws NotAllowedToViewOrganization if the user is not the owner of the organization.
+ */
+context(route: Route)
+fun RoutingContext.assertIsOwner(): String {
+    val organizationId = call.parameters.getOrFail("organizationId")
+    val userRepository by route.inject<UserRepository>()
+    val user = requireUser()
+    if (!userRepository.isOwner(user.id, organizationId)) throw NotOwner()
+    return organizationId
+}
+
+/**
+ * Asserts that the current user is the owner of an organization.
+ * @throws NotAllowedToViewOrganization if the user is not the owner of the organization.
+ */
+context(route: Route)
+fun RoutingContext.assertIsAdmin(): String {
+    val organizationId = call.parameters.getOrFail("organizationId")
+    val userRepository by route.inject<UserRepository>()
+    val user = requireUser()
+    if (!userRepository.isAdmin(user.id, organizationId)) throw NotAdmin()
     return organizationId
 }
