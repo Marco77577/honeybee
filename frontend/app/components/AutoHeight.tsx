@@ -15,7 +15,7 @@ export function AutoHeight({
                                className,
                                ...props
                            }: AutoHeightProps & React.HTMLAttributes<HTMLDivElement>) {
-    const [ref, {height: measuredHeight}] = useMeasure();
+    const [ref, {height: measuredHeight}] = useMeasure<HTMLDivElement>();
     const [height, setHeight] = useState(`0px`);
 
     useLayoutEffect(() => {
