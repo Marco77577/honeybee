@@ -41,7 +41,7 @@ export default function AccountBrowser({
                 <span className={`text-center`}>There is no account in this category.</span>
             </div>}
             <div
-                className={`absolute top-1 md:top-4 right-2 md:right-4 z-10 flex items-center rounded-lg`}>
+                className={`absolute top-1 md:top-3.5 right-2 md:right-4 z-10 flex items-center rounded-lg`}>
                 <Dialog>
                     <Dialog.Trigger tabIndex={0}>
                         <ClickableIcon title={`Add Account`}>
