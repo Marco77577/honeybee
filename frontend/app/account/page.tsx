@@ -13,8 +13,8 @@ import {DragDropProvider} from "@dnd-kit/react";
 import {Dialog, DialogContext} from "@/app/components/Dialog";
 import MoveCategory from "@/app/account/MoveCategory";
 import MoveAccount from "@/app/account/MoveAccount";
-
-// todo loading skeletons
+import SkeletonCategoryBrowser from "@/app/account/SkeletonCategoryBrowser";
+import SkeletonAccountBrowser from "@/app/account/SkeletonAccountBrowser";
 
 type DragEndEvent = Parameters<NonNullable<React.ComponentProps<typeof DragDropProvider>['onDragEnd']>>[0];
 
@@ -48,45 +48,43 @@ export default function AccountPage() {
                               icon={<Inbox size={40} strokeWidth={1}/>}/>
                     <div
                         className={`rounded-lg bg-input-text-background border border-input-text-border text-input-text-foreground outline-3 outline-transparent hover:outline-input-text-border-outline`}>
-                        {(categories && accounts) &&
-                            <DragDropProvider onDragEnd={handleDragEnd}>
-                                <Group onLayoutChanged={
-                                    () => setIsCategoryPanelCollapsed(categoryPanelRef.current?.isCollapsed() ?? false)}>
-                                    <Panel panelRef={categoryPanelRef}
-                                           minSize={200}
-                                           collapsible
-                                           collapsedSize={52}
-                                           defaultSize="30%">
-                                        {!isCategoryPanelCollapsed && <CategoryBrowser categories={categories}
-                                                                                       onCollapsePanel={() => categoryPanelRef.current?.collapse()}
-                                                                                       onCategory={setCategory}/>}
-                                        {isCategoryPanelCollapsed &&
-                                            <div className={`flex flex-col gap-3 p-2 h-full cursor-pointer`}
-                                                 onClick={() => categoryPanelRef.current?.expand()}>
-                                                <div>
-                                                    <ClickableIcon title={`Open Category Panel`}>
-                                                        <PanelLeftOpen size={20} strokeWidth={1}/>
-                                                    </ClickableIcon>
-                                                </div>
-                                                <div className={`pt-8`}>
+                        <DragDropProvider onDragEnd={handleDragEnd}>
+                            <Group onLayoutChanged={
+                                () => setIsCategoryPanelCollapsed(categoryPanelRef.current?.isCollapsed() ?? false)}>
+                                <Panel panelRef={categoryPanelRef}
+                                       minSize={200}
+                                       collapsible
+                                       collapsedSize={52}
+                                       defaultSize="30%">
+                                    {(!isCategoryPanelCollapsed && categories) &&
+                                        <CategoryBrowser categories={categories}
+                                                         onCollapsePanel={() => categoryPanelRef.current?.collapse()}
+                                                         onCategory={setCategory}/>}
+                                    {(!isCategoryPanelCollapsed && !categories) && <SkeletonCategoryBrowser/>}
+                                    {isCategoryPanelCollapsed &&
+                                        <div className={`flex flex-col gap-3 p-2 h-full cursor-pointer`}
+                                             onClick={() => categoryPanelRef.current?.expand()}>
+                                            <div>
+                                                <ClickableIcon title={`Open Category Panel`}>
+                                                    <PanelLeftOpen size={20} strokeWidth={1}/>
+                                                </ClickableIcon>
+                                            </div>
+                                            <div className={`pt-8`}>
                                                     <span
                                                         className={`block whitespace-nowrap -rotate-90`}>Categories</span>
-                                                </div>
-                                            </div>}
-                                    </Panel>
-                                    <Separator className={`bg-input-text-border w-px outline-none`}/>
-                                    <Panel>
-                                        <AccountBrowser
-                                            categories={categories}
-                                            category={category ?? categories[0]}
-                                            accounts={accounts}/>
-                                    </Panel>
-                                </Group>
-                            </DragDropProvider>
-                        }
-                        {(!categories || !accounts) &&
-                            <div>screen is loading</div>
-                        }
+                                            </div>
+                                        </div>}
+                                </Panel>
+                                <Separator className={`bg-input-text-border w-px outline-none`}/>
+                                <Panel>
+                                    {(!categories || !accounts) && <SkeletonAccountBrowser/>}
+                                    {(categories && accounts) && <AccountBrowser
+                                        categories={categories}
+                                        category={category ?? categories[0]}
+                                        accounts={accounts}/>}
+                                </Panel>
+                            </Group>
+                        </DragDropProvider>
                         {(sourceCategory && targetCategory) && <Dialog immediate={true}>
                             <Dialog.Content>
                                 <DialogContext.Consumer>
