@@ -48,7 +48,7 @@ export default function SelectField({
             <AutoHeight open={isOpen}>
                 <div className={`pt-1`}>
                     <PopoverDivider/>
-                    <div className={`p-2`}>
+                    <div className={`p-2 max-h-60 overflow-y-scroll`}>
                         {
                             options.map(option =>
                                 <div
