@@ -22,6 +22,7 @@ class TransactionRepository {
         Transactions
             .select { Transactions.organization eq organizationId }
             .limit(size, page * size)
+            .orderBy(Transactions.date to SortOrder.DESC)
             .map { it.toTransaction() }
     }
 
@@ -36,6 +37,7 @@ class TransactionRepository {
                 (Transactions.organization eq organizationId) and ((Transactions.debitAccount eq accountId) or (Transactions.creditAccount eq accountId))
             }
             .limit(size, page * size)
+            .orderBy(Transactions.date to SortOrder.DESC)
             .map { it.toTransaction() }
     }
 
