@@ -18,10 +18,11 @@ export const DialogContext = createContext<DialogProvider>({
 
 interface ChildProps {
     children: React.ReactNode,
+    immediate?: boolean,
 }
 
-export function Dialog({children}: ChildProps) {
-    const [isOpen, setIsOpen] = useState(false);
+export function Dialog({children, immediate = false}: ChildProps) {
+    const [isOpen, setIsOpen] = useState(immediate);
 
     const close = () => setIsOpen(false);
     const open = () => setIsOpen(true);

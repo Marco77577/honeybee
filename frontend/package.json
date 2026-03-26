@@ -10,6 +10,7 @@
     "generate-api": "openapi-generator-cli generate -i openapi.json -g typescript-fetch -o ./app/generated/api --additional-properties=supportsES6=true,typescriptThreePlus=true"
   },
   "dependencies": {
+    "@dnd-kit/react": "^0.3.2",
     "@radix-ui/themes": "^3.3.0",
     "@tanstack/react-query": "^5.90.21",
     "clsx": "^2.1.1",
