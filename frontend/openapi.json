@@ -93,7 +93,7 @@
       },
       "patch" : {
         "tags" : [ "organization", "v1" ],
-        "description" : "Update a organization",
+        "description" : "Update an organization",
         "parameters" : [ ],
         "requestBody" : {
           "description" : "updated organization",
@@ -771,6 +771,305 @@
           "oidc" : [ ]
         } ]
       }
+    },
+    "/api/v1/transaction/{organizationId}/{size}/{page}" : {
+      "get" : {
+        "tags" : [ "transaction", "v1" ],
+        "description" : "Get transactions of an organization",
+        "parameters" : [ {
+          "name" : "organizationId",
+          "in" : "path",
+          "description" : "The id of the organization owning the transactions",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        }, {
+          "name" : "size",
+          "in" : "path",
+          "description" : "The size of the page that is to be returned",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          }
+        }, {
+          "name" : "page",
+          "in" : "path",
+          "description" : "The page that is to be returned",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "transactions of an organization",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/com.accounting.api.transaction.model.PublicTransaction"
+                  },
+                  "title" : "List<PublicTransaction>"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      }
+    },
+    "/api/v1/transaction/{organizationId}/{accountId}/{size}/{page}" : {
+      "get" : {
+        "tags" : [ "transaction", "v1" ],
+        "description" : "Get transactions of an organization",
+        "parameters" : [ {
+          "name" : "organizationId",
+          "in" : "path",
+          "description" : "The id of the organization owning the transactions",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        }, {
+          "name" : "accountId",
+          "in" : "path",
+          "description" : "The id of the account whose transactions are to be returned",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        }, {
+          "name" : "size",
+          "in" : "path",
+          "description" : "The size of the page that is to be returned",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          }
+        }, {
+          "name" : "page",
+          "in" : "path",
+          "description" : "The page that is to be returned",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "transactions of an organization",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/com.accounting.api.transaction.model.PublicTransaction"
+                  },
+                  "title" : "List<PublicTransaction>"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      }
+    },
+    "/api/v1/transaction/{organizationId}" : {
+      "post" : {
+        "tags" : [ "transaction", "v1" ],
+        "description" : "Create a new transaction",
+        "parameters" : [ {
+          "name" : "organizationId",
+          "in" : "path",
+          "description" : "The id of the organization owning the transactions",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "new transaction",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/com.accounting.api.transaction.model.CreateTransaction"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "transaction",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.api.transaction.model.PublicTransaction"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid request",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/java.lang.Error"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      },
+      "patch" : {
+        "tags" : [ "transaction", "v1" ],
+        "description" : "Update a transaction",
+        "parameters" : [ {
+          "name" : "organizationId",
+          "in" : "path",
+          "description" : "The id of the organization owning the transactions",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "updated transaction",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/com.accounting.api.transaction.model.UpdateTransaction"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "transaction",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.api.transaction.model.PublicTransaction"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid request",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/java.lang.Error"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      }
+    },
+    "/api/v1/transaction/{organizationId}/{transactionId}" : {
+      "delete" : {
+        "tags" : [ "transaction", "v1" ],
+        "description" : "Delete a transaction",
+        "parameters" : [ {
+          "name" : "organizationId",
+          "in" : "path",
+          "description" : "The id of the organization owning the transaction",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        }, {
+          "name" : "transactionId",
+          "in" : "path",
+          "description" : "The id of the transaction that is to be deleted",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "transaction deleted",
+            "headers" : { }
+          },
+          "400" : {
+            "description" : "invalid request",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/java.lang.Error"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      }
     }
   },
   "components" : {
@@ -1082,6 +1381,121 @@
         },
         "required" : [ "category", "id", "name", "number" ],
         "title" : "UpdateAccount"
+      },
+      "com.accounting.api.transaction.model.PublicTransaction" : {
+        "type" : "object",
+        "properties" : {
+          "amount" : {
+            "type" : "number",
+            "format" : "double",
+            "title" : "Double"
+          },
+          "creditAccount" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "date" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "debitAccount" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "id" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "title" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        },
+        "required" : [ "amount", "creditAccount", "date", "debitAccount", "id", "title" ],
+        "title" : "PublicTransaction"
+      },
+      "com.accounting.api.transaction.model.CreateTransaction" : {
+        "type" : "object",
+        "properties" : {
+          "amount" : {
+            "type" : "number",
+            "format" : "double",
+            "title" : "Double"
+          },
+          "creditAccount" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "date" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "debitAccount" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "title" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        },
+        "required" : [ "amount", "creditAccount", "date", "debitAccount", "title" ],
+        "title" : "CreateTransaction"
+      },
+      "kotlin.Throwable" : {
+        "anyOf" : [ {
+          "$ref" : "#/components/schemas/java.lang.Error"
+        } ],
+        "title" : "Throwable"
+      },
+      "java.lang.Error" : {
+        "type" : "object",
+        "properties" : {
+          "cause" : {
+            "oneOf" : [ {
+              "type" : "null"
+            }, {
+              "$ref" : "#/components/schemas/kotlin.Throwable"
+            } ]
+          },
+          "message" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          }
+        },
+        "title" : "Error"
+      },
+      "com.accounting.api.transaction.model.UpdateTransaction" : {
+        "type" : "object",
+        "properties" : {
+          "amount" : {
+            "type" : "number",
+            "format" : "double",
+            "title" : "Double"
+          },
+          "creditAccount" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "date" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "debitAccount" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "id" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "title" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        },
+        "required" : [ "amount", "creditAccount", "date", "debitAccount", "id", "title" ],
+        "title" : "UpdateTransaction"
       }
     },
     "examples" : { },

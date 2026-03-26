@@ -1,7 +1,14 @@
 "use client"
 
 import React, {createContext, useContext, useMemo} from "react";
-import {AccountApi, CategoryApi, Configuration, CurrencyApi, OrganizationApi} from "@/app/generated/api";
+import {
+    AccountApi,
+    CategoryApi,
+    Configuration,
+    CurrencyApi,
+    OrganizationApi,
+    TransactionApi
+} from "@/app/generated/api";
 import {useAuth} from "react-oidc-context";
 
 interface ApiProvider {
@@ -9,6 +16,7 @@ interface ApiProvider {
     currencyApi: CurrencyApi,
     categoryApi: CategoryApi,
     accountApi: AccountApi,
+    transactionApi: TransactionApi,
 }
 
 export const ApiContext = createContext<ApiProvider | null>(null)
@@ -37,6 +45,12 @@ export function useAccountApi() {
     return context.accountApi
 }
 
+export function useTransactionApi() {
+    const context = useContext(ApiContext);
+    if (!context) throw new Error("api provider not initialized");
+    return context.transactionApi
+}
+
 export function ApiProvider({children}: { children: React.ReactNode }) {
     const auth = useAuth();
     const value = useMemo(
@@ -50,6 +64,7 @@ export function ApiProvider({children}: { children: React.ReactNode }) {
                 currencyApi: new CurrencyApi(config),
                 categoryApi: new CategoryApi(config),
                 accountApi: new AccountApi(config),
+                transactionApi: new TransactionApi(config),
             };
         },
         [auth.user?.access_token]
