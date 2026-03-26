@@ -81,7 +81,7 @@ fun Route.organization() {
 
             patch(
                 builder = {
-                    description = "Update a organization"
+                    description = "Update an organization"
                     tags = listOf("organization")
                     request {
                         body<UpdateOrganization> {
