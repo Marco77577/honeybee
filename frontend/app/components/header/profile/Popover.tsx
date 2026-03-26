@@ -37,7 +37,7 @@ export function Popover({trigger, children, align = "right", alwaysOpen = false}
                     "absolute top-full w-max opacity-0 mt-0 bg-popover-background border border-popover-border rounded-xl pointer-events-none transition-all",
                     alwaysOpen && "static w-full!",
                     align === "right" ? "right-0" : "left-0",
-                    (open || alwaysOpen) && "opacity-100 mt-3 pointer-events-auto!"
+                    (open || alwaysOpen) && "opacity-100 mt-3 pointer-events-auto! z-20"
                 )}
             >
                 {children}
