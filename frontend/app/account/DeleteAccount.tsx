@@ -53,7 +53,7 @@ export default function DeleteAccount({
             <div className={`flex flex-col gap-1`}>
                 <Heading2 title={`Delete Account`}
                           icon={<Trash size={40} strokeWidth={1}/>}/>
-                <p>Are you sure you want to delete account {account.name}?</p>
+                <p>Are you sure you want to delete account <span className={`font-bold`}>{account.name}</span>?</p>
                 <p>This cannot be undone.</p>
                 {isServerError && <div className={`text-error text-end`}>Unable to delete account.</div>}
                 <div className={`flex items-center justify-end gap-3 mt-4`}>

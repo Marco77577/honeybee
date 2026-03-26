@@ -53,7 +53,7 @@ export default function DeleteCategory({
             <div className={`flex flex-col gap-1`}>
                 <Heading2 title={`Delete Category`}
                           icon={<Trash size={40} strokeWidth={1}/>}/>
-                <p>Are you sure you want to delete category {category.name}?</p>
+                <p>Are you sure you want to delete category <span className={`font-bold`}>{category.name}</span>?</p>
                 <p>This cannot be undone.</p>
                 {isServerError && <div className={`text-error text-end`}>Unable to delete category.</div>}
                 <div className={`flex items-center justify-end gap-3 mt-4`}>

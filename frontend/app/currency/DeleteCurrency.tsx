@@ -55,7 +55,7 @@ export default function DeleteCurrency({
                 <Heading2 title={`Delete Currency`}
                           icon={<Trash size={40} strokeWidth={1}/>}/>
                 <p>Are you sure you want to delete currency <span
-                    className={`inline-flex items-center gap-2`}>
+                    className={`inline-flex items-center gap-2 font-bold`}>
                                     <CurrencyAbbreviation
                                         abbreviation={currency?.abbreviation}/><span>{currency?.name}</span></span>?
                 </p>
