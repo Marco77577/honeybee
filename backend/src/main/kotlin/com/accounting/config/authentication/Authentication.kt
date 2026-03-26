@@ -109,11 +109,12 @@ fun RoutingContext.requireUser(): AuthenticatedUser =
 
 /**
  * Asserts that the current user is allowed to read the given organization.
+ * @param organizationId The id of the organization whose access is to be asserted.
  * @throws NotAllowedToViewOrganization if the user is not allowed to read the organization.
  */
 context(route: Route)
-fun RoutingContext.assertMayReadOrganization(): String {
-    val organizationId = call.parameters.getOrFail("organizationId")
+fun RoutingContext.assertMayReadOrganization(organizationId: String? = null): String {
+    val organizationId = organizationId ?: call.parameters.getOrFail("organizationId")
     val userRepository by route.inject<UserRepository>()
     val user = requireUser()
     if (!userRepository.mayRead(user.id, organizationId)) throw NotAllowedToViewOrganization()
@@ -122,11 +123,12 @@ fun RoutingContext.assertMayReadOrganization(): String {
 
 /**
  * Asserts that the current user is allowed to write to the given organization.
+ * @param organizationId The id of the organization whose access is to be asserted.
  * @throws NotAllowedToViewOrganization if the user is not allowed to write to the organization.
  */
 context(route: Route)
-fun RoutingContext.assertMayWriteOrganization(): String {
-    val organizationId = call.parameters.getOrFail("organizationId")
+fun RoutingContext.assertMayWriteOrganization(organizationId: String? = null): String {
+    val organizationId = organizationId ?: call.parameters.getOrFail("organizationId")
     val userRepository by route.inject<UserRepository>()
     val user = requireUser()
     if (!userRepository.mayWrite(user.id, organizationId)) throw NotAllowedToViewOrganization()
@@ -135,11 +137,12 @@ fun RoutingContext.assertMayWriteOrganization(): String {
 
 /**
  * Asserts that the current user is the owner of an organization.
- * @throws NotAllowedToViewOrganization if the user is not the owner of the organization.
+ * @param organizationId The id of the organization whose access is to be asserted.
+ * @throws NotOwner if the user is not the owner of the organization.
  */
 context(route: Route)
-fun RoutingContext.assertIsOwner(): String {
-    val organizationId = call.parameters.getOrFail("organizationId")
+fun RoutingContext.assertIsOwner(organizationId: String? = null): String {
+    val organizationId = organizationId ?: call.parameters.getOrFail("organizationId")
     val userRepository by route.inject<UserRepository>()
     val user = requireUser()
     if (!userRepository.isOwner(user.id, organizationId)) throw NotOwner()
@@ -148,11 +151,12 @@ fun RoutingContext.assertIsOwner(): String {
 
 /**
  * Asserts that the current user is the owner of an organization.
- * @throws NotAllowedToViewOrganization if the user is not the owner of the organization.
+ * @param organizationId The id of the organization whose access is to be asserted.
+ * @throws NotAdmin if the user is not the owner of the organization.
  */
 context(route: Route)
-fun RoutingContext.assertIsAdmin(): String {
-    val organizationId = call.parameters.getOrFail("organizationId")
+fun RoutingContext.assertIsAdmin(organizationId: String? = null): String {
+    val organizationId = organizationId ?: call.parameters.getOrFail("organizationId")
     val userRepository by route.inject<UserRepository>()
     val user = requireUser()
     if (!userRepository.isAdmin(user.id, organizationId)) throw NotAdmin()

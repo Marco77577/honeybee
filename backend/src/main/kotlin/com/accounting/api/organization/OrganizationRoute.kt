@@ -101,8 +101,8 @@ fun Route.organization() {
                     }
                 }
             ) {
-                assertIsAdmin()
                 val updateOrganization = call.receive<UpdateOrganization>()
+                assertIsAdmin(updateOrganization.id)
 
                 val organization = organizationRepository.updateOrganization(
                     updateOrganization = updateOrganization,
