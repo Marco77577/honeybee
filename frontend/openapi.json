@@ -90,6 +90,89 @@
         "security" : [ {
           "oidc" : [ ]
         } ]
+      },
+      "patch" : {
+        "tags" : [ "organization", "v1" ],
+        "description" : "Update a organization",
+        "parameters" : [ ],
+        "requestBody" : {
+          "description" : "updated organization",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/com.accounting.api.organization.model.UpdateOrganization"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "organization",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.api.organization.model.PublicOrganization"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid request",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.config.Error"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
+      }
+    },
+    "/api/v1/organization/{organizationId}" : {
+      "delete" : {
+        "tags" : [ "organization", "v1" ],
+        "description" : "Delete an organization",
+        "parameters" : [ {
+          "name" : "organizationId",
+          "in" : "path",
+          "description" : "The id of the organization that is to be deleted",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "organization deleted",
+            "headers" : { }
+          },
+          "400" : {
+            "description" : "invalid request",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/com.accounting.config.Error"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false,
+        "security" : [ {
+          "oidc" : [ ]
+        } ]
       }
     },
     "/api/v1/currency/{organizationId}" : {
@@ -695,6 +778,14 @@
       "com.accounting.api.organization.model.PublicOrganization" : {
         "type" : "object",
         "properties" : {
+          "defaultPaymentAccount" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "defaultRevenueAccount" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
           "displayName" : {
             "type" : "string",
             "title" : "String"
@@ -706,9 +797,13 @@
           "mainCurrencyId" : {
             "type" : [ "null", "string" ],
             "title" : "String"
+          },
+          "officialName" : {
+            "type" : "string",
+            "title" : "String"
           }
         },
-        "required" : [ "displayName", "id" ],
+        "required" : [ "displayName", "id", "officialName" ],
         "title" : "PublicOrganization"
       },
       "com.accounting.database.organization.LegalForm" : {
@@ -755,6 +850,33 @@
         },
         "required" : [ "errorCode", "message", "statusCode" ],
         "title" : "Error"
+      },
+      "com.accounting.api.organization.model.UpdateOrganization" : {
+        "type" : "object",
+        "properties" : {
+          "defaultPaymentAccount" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "defaultRevenueAccount" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "displayName" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "id" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "officialName" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        },
+        "required" : [ "displayName", "id", "officialName" ],
+        "title" : "UpdateOrganization"
       },
       "com.accounting.api.currency.model.PublicCurrency" : {
         "type" : "object",

@@ -6,7 +6,10 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class PublicOrganization(
     val id: String,
+    val officialName: String,
     val displayName: String,
+    val defaultPaymentAccount: String?,
+    val defaultRevenueAccount: String?,
     val mainCurrencyId: String?,
 ) {
 
@@ -17,7 +20,10 @@ data class PublicOrganization(
          */
         fun from(organization: Organization) = PublicOrganization(
             id = organization.id,
+            officialName = organization.officialName,
             displayName = organization.displayName,
+            defaultPaymentAccount = organization.defaultPaymentAccount,
+            defaultRevenueAccount = organization.defaultRevenueAccount,
             mainCurrencyId = organization.mainCurrency
         )
     }

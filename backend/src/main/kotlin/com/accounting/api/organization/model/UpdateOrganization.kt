@@ -7,6 +7,6 @@ data class UpdateOrganization(
     val id: String,
     val displayName: String,
     val officialName: String,
-    val defaultPaymentAccount: String,
-    val defaultRevenueAccount: String,
+    val defaultPaymentAccount: String?,
+    val defaultRevenueAccount: String?,
 )

@@ -1,6 +1,8 @@
 import {
+    ApiV1OrganizationOrganizationIdDeleteRequest,
     ComAccountingApiOrganizationModelCreateOrganization,
     ComAccountingApiOrganizationModelPublicOrganization,
+    type ComAccountingApiOrganizationModelUpdateOrganization,
     OrganizationApi
 } from "@/app/generated/api";
 import {useOrganizationApi} from "@/app/context/api/ApiProvider";
@@ -25,6 +27,18 @@ export const organization = {
                 {comAccountingApiOrganizationModelCreateOrganization: organization}
             ),
         }),
+        update: (api: OrganizationApi) => mutationOptions({
+            mutationFn: (organization: ComAccountingApiOrganizationModelUpdateOrganization) => api.apiV1OrganizationPatch(
+                {
+                    comAccountingApiOrganizationModelUpdateOrganization: organization
+                }
+            ),
+        }),
+        delete: (api: OrganizationApi) => mutationOptions({
+            mutationFn: (organization: ApiV1OrganizationOrganizationIdDeleteRequest) => api.apiV1OrganizationOrganizationIdDelete(
+                organization
+            ),
+        }),
     },
 };
 
@@ -38,6 +52,28 @@ export function useCreateOrganizationMutation() {
     const api = useOrganizationApi();
     return useMutation({
         ...organization.mutations.create(api),
+        onSuccess: () => queryClient.invalidateQueries({
+            queryKey: organizationKeys.all,
+        }),
+    })
+}
+
+export function useUpdateOrganizationMutation() {
+    const queryClient = useQueryClient();
+    const api = useOrganizationApi();
+    return useMutation({
+        ...organization.mutations.update(api),
+        onSuccess: () => queryClient.invalidateQueries({
+            queryKey: organizationKeys.all,
+        }),
+    })
+}
+
+export function useDeleteOrganizationMutation() {
+    const queryClient = useQueryClient();
+    const api = useOrganizationApi();
+    return useMutation({
+        ...organization.mutations.delete(api),
         onSuccess: () => queryClient.invalidateQueries({
             queryKey: organizationKeys.all,
         }),
