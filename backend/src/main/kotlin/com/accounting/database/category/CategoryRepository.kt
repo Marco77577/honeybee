@@ -2,6 +2,7 @@ package com.accounting.database.category
 
 import com.accounting.api.category.model.CreateCategory
 import com.accounting.api.category.model.UpdateCategory
+import com.accounting.config.CategoryCycleException
 import com.accounting.database.Id
 import com.accounting.database.account.Accounts
 import org.jetbrains.exposed.sql.*
@@ -40,6 +41,11 @@ class CategoryRepository {
         updateCategory: UpdateCategory,
         organizationId: String,
     ) = transaction {
+        assertNoCycle(
+            categoryId = updateCategory.id,
+            newParentId = updateCategory.parent
+        )
+
         Categories.update(
             {
                 (Categories.id eq updateCategory.id) and
@@ -55,6 +61,32 @@ class CategoryRepository {
             .select { Categories.id eq updateCategory.id }
             .single()
             .toCategory()
+    }
+
+    /**
+     * Assert that the new parent category would not create a cycle.
+     * @param categoryId The id of the category that is to be updated.
+     * @param newParentId The id of the new parent category.
+     * @throws CategoryCycleException if the new parent category creates a cycle.
+     */
+    private fun assertNoCycle(
+        categoryId: String,
+        newParentId: String?
+    ) {
+        if (newParentId == null) return
+        if (newParentId == categoryId) throw CategoryCycleException()
+
+        var currentParentId: String? = newParentId
+
+        while (currentParentId != null) {
+            if (currentParentId == categoryId) throw CategoryCycleException()
+
+            currentParentId = Categories
+                .slice(Categories.parent)
+                .select { Categories.id eq currentParentId }
+                .singleOrNull()
+                ?.get(Categories.parent)
+        }
     }
 
     fun deleteCategory(organizationId: String, categoryId: String) = transaction {

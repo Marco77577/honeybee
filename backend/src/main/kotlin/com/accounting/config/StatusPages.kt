@@ -12,6 +12,7 @@ import org.jetbrains.exposed.exceptions.ExposedSQLException
 class NotAuthenticatedException : Exception("user is not authenticated")
 class NotAllowedToViewOrganization : Exception("user may not view organization")
 class NotAllowedToWriteOrganization : Exception("user may not write organization")
+class CategoryCycleException : Exception("category cycle detected")
 
 @Serializable
 data class Error(
@@ -68,6 +69,16 @@ fun Application.configureStatusPages() {
                 Error(
                     statusCode = HttpStatusCode.BadRequest.value,
                     errorCode = 5,
+                    message = cause.message ?: "Bad Request"
+                )
+            )
+        }
+        exception<CategoryCycleException> { call, cause ->
+            call.respond(
+                HttpStatusCode.BadRequest,
+                Error(
+                    statusCode = HttpStatusCode.BadRequest.value,
+                    errorCode = 6,
                     message = cause.message ?: "Bad Request"
                 )
             )
