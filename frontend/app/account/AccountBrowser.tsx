@@ -34,43 +34,45 @@ export default function AccountBrowser({
         ?.filter(account => displayByParents.some(category => account.category === category.id));
 
     return (
-        <div className={clsx(`relative h-full flex flex-col p-2 min-w-45`, className)} {...props}>
-            {empty && <div
-                className={`w-full h-full flex flex-col items-center justify-center gap-4 p-4 text-input-text-placeholder`}>
-                <Search size={30} strokeWidth={1}/>
-                <span className={`text-center`}>There is no account in this category.</span>
-            </div>}
-            <div
-                className={`absolute top-1 md:top-3.5 right-2 md:right-4 z-10 flex items-center rounded-lg`}>
-                <Dialog>
-                    <Dialog.Trigger tabIndex={0}>
-                        <ClickableIcon title={`Add Account`}>
-                            <ComboIcon main={Inbox} secondary={Plus}/>
-                        </ClickableIcon>
-                    </Dialog.Trigger>
-                    <Dialog.Content>
-                        <DialogContext.Consumer>
-                            {({close}) => (
-                                <UpsertAccount category={category.id}
-                                               onSuccess={close}/>
-                            )}
-                        </DialogContext.Consumer>
-                    </Dialog.Content>
-                </Dialog>
+        <div className={`max-h-[70vh] overflow-y-scroll`}>
+            <div className={clsx(`relative h-full flex flex-col p-2 min-w-45`, className)} {...props}>
+                {empty && <div
+                    className={`w-full h-full flex flex-col items-center justify-center gap-4 p-4 text-input-text-placeholder`}>
+                    <Search size={30} strokeWidth={1}/>
+                    <span className={`text-center`}>There is no account in this category.</span>
+                </div>}
+                <div
+                    className={`absolute top-1 md:top-3.5 right-2 md:right-4 z-10 flex items-center rounded-lg`}>
+                    <Dialog>
+                        <Dialog.Trigger tabIndex={0}>
+                            <ClickableIcon title={`Add Account`}>
+                                <ComboIcon main={Inbox} secondary={Plus}/>
+                            </ClickableIcon>
+                        </Dialog.Trigger>
+                        <Dialog.Content>
+                            <DialogContext.Consumer>
+                                {({close}) => (
+                                    <UpsertAccount category={category.id}
+                                                   onSuccess={close}/>
+                                )}
+                            </DialogContext.Consumer>
+                        </Dialog.Content>
+                    </Dialog>
+                </div>
+                {
+                    accounts
+                        ?.sort((a, b) => a.number - b.number)
+                        ?.map(account => (
+                            <DragAndDropAccount
+                                key={account.id}
+                                account={account}
+                                selected={account.id === selectedAccount?.id}
+                                open={displayByParents.some(category => category.id === account.category)}
+                                first={account.id === filtered?.[0]?.id}
+                                onSelectAccount={setSelectedAccount}/>
+                        ))
+                }
             </div>
-            {
-                accounts
-                    ?.sort((a, b) => a.number - b.number)
-                    ?.map(account => (
-                        <DragAndDropAccount
-                            key={account.id}
-                            account={account}
-                            selected={account.id === selectedAccount?.id}
-                            open={displayByParents.some(category => category.id === account.category)}
-                            first={account.id === filtered?.[0]?.id}
-                            onSelectAccount={setSelectedAccount}/>
-                    ))
-            }
         </div>
     );
 }
