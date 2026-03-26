@@ -4,6 +4,7 @@ import com.accounting.database.account.AccountRepository
 import com.accounting.database.category.CategoryRepository
 import com.accounting.database.currency.CurrencyRepository
 import com.accounting.database.organization.OrganizationRepository
+import com.accounting.database.transaction.TransactionRepository
 import com.accounting.database.user.UserRepository
 import io.ktor.server.application.*
 import org.koin.core.module.dsl.singleOf
@@ -21,6 +22,7 @@ fun Application.configureKoin() {
                 singleOf(::UserRepository)
                 singleOf(::AccountRepository)
                 singleOf(::CategoryRepository)
+                singleOf(::TransactionRepository)
             }
         )
     }

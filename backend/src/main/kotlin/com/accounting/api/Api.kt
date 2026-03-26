@@ -4,6 +4,7 @@ import com.accounting.api.account.account
 import com.accounting.api.category.category
 import com.accounting.api.currency.currency
 import com.accounting.api.organization.organization
+import com.accounting.api.transaction.transaction
 import com.accounting.util.isProduction
 import io.github.smiley4.ktoropenapi.get
 import io.github.smiley4.ktoropenapi.openApi
@@ -36,6 +37,7 @@ fun Application.configureApi() {
             currency()
             category()
             account()
+            transaction()
         }
 
         get("/health", {

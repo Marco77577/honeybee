@@ -8,8 +8,11 @@ import com.accounting.api.currency.model.CreateCurrency
 import com.accounting.api.currency.model.UpdateCurrency
 import com.accounting.api.organization.model.CreateOrganization
 import com.accounting.api.organization.model.UpdateOrganization
+import com.accounting.api.transaction.model.CreateTransaction
+import com.accounting.api.transaction.model.UpdateTransaction
 import io.ktor.server.application.*
 import io.ktor.server.plugins.requestvalidation.*
+import java.time.LocalDate
 
 fun Application.configureRequestValidation() {
     install(RequestValidation) {
@@ -56,11 +59,43 @@ fun Application.configureRequestValidation() {
             else ValidationResult.Valid
         }
         validate<UpdateOrganization> {
-            if (it.displayName.isEmpty()) ValidationResult.Invalid("display name must not be empty")
-            if (it.officialName.isEmpty()) ValidationResult.Invalid("official name must not be empty")
+            if (it.id.isEmpty()) ValidationResult.Invalid("id must not be empty")
+            else if (it.displayName.isEmpty()) ValidationResult.Invalid("display name must not be empty")
+            else if (it.officialName.isEmpty()) ValidationResult.Invalid("official name must not be empty")
             else if (it.defaultPaymentAccount == null) ValidationResult.Invalid("default payment account must be set")
             else if (it.defaultRevenueAccount == null) ValidationResult.Invalid("default revenue account must be set")
             else ValidationResult.Valid
+        }
+        validate<CreateTransaction> {
+            if (it.date.isEmpty()) ValidationResult.Invalid("date must not be empty")
+            else if (it.title.isEmpty()) ValidationResult.Invalid("title must not be empty")
+            else if (it.amount <= 0) ValidationResult.Invalid("amount must be positive")
+            else if (it.debitAccount.isEmpty()) ValidationResult.Invalid("debit account must not be empty")
+            else if (it.creditAccount.isEmpty()) ValidationResult.Invalid("credit account must not be empty")
+            else {
+                try {
+                    LocalDate.parse(it.date)
+                    ValidationResult.Valid
+                } catch (_: Exception) {
+                    ValidationResult.Invalid("date must be in format YYYY-MM-DD")
+                }
+            }
+        }
+        validate<UpdateTransaction> {
+            if (it.id.isEmpty()) ValidationResult.Invalid("id must not be empty")
+            else if (it.date.isEmpty()) ValidationResult.Invalid("date must not be empty")
+            else if (it.title.isEmpty()) ValidationResult.Invalid("title must not be empty")
+            else if (it.amount <= 0) ValidationResult.Invalid("amount must be positive")
+            else if (it.debitAccount.isEmpty()) ValidationResult.Invalid("debit account must not be empty")
+            else if (it.creditAccount.isEmpty()) ValidationResult.Invalid("credit account must not be empty")
+            else {
+                try {
+                    LocalDate.parse(it.date)
+                    ValidationResult.Valid
+                } catch (_: Exception) {
+                    ValidationResult.Invalid("date must be in format YYYY-MM-DD")
+                }
+            }
         }
     }
 }
