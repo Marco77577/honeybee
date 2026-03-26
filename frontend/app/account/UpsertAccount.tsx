@@ -172,7 +172,7 @@ export default function UpsertAccount({
                                  onClick={handleReset}/>
                 <PrimaryButton title={edit ? `Save` : `Add`}
                                loading={edit ? updateAccount.isPending : createAccount.isPending}
-                               disabled={isNameError}
+                               disabled={isNumberError || isNameError}
                                onClick={edit ? handleUpdateClick : handleCreateClick}/>
             </div>
         </div>
