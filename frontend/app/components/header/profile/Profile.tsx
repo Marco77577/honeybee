@@ -24,48 +24,53 @@ export default function Profile({alwaysOpen = false}: ProfileProps) {
     );
 
     return (
-        <Popover trigger={<ProfileTrigger/>} alwaysOpen={alwaysOpen}>
-            {isLoading && (
-                <div>
-                    <Skeleton className={`mx-2 rounded-lg`}>
-                        <Box>
-                            <div className={`m-2 h-14`}/>
-                        </Box>
-                    </Skeleton>
-                    <PopoverDivider/>
-                </div>
-            )}
-            {!isLoading && organizations && organizations.length > 0 && (
-                <div className={`contents`}>
-                    {
-                        organizations.map(
-                            organization => {
-                                return (
-                                    <PopoverListElement
-                                        key={organization.id}
-                                        title={organization.displayName}
-                                        subtitle="GmbH"
-                                        icon={Building2}
-                                        onClick={() => setOrganizationId(organization)}/>
-                                )
-                            }
-                        )
-                    }
-                    <PopoverDivider/>
-                </div>
-            )}
-            <PopoverListElement
-                title="Manage Organizations"
-                subtitle="Create and delete organizations."
-                icon={Pencil}/>
-            <PopoverDivider/>
-            <PopoverListElement
-                title="Logout"
-                color="error"
-                onClick={() => {
-                    auth.removeUser().then();
-                }}
-                icon={LogOut}/>
+        <Popover immediate={alwaysOpen}>
+            <Popover.Trigger>
+                <ProfileTrigger/>
+            </Popover.Trigger>
+            <Popover.Content align={`right`}>
+                {isLoading && (
+                    <div>
+                        <Skeleton className={`mx-2 rounded-lg`}>
+                            <Box>
+                                <div className={`m-2 h-14`}/>
+                            </Box>
+                        </Skeleton>
+                        <PopoverDivider/>
+                    </div>
+                )}
+                {!isLoading && organizations && organizations.length > 0 && (
+                    <div className={`contents`}>
+                        {
+                            organizations.map(
+                                organization => {
+                                    return (
+                                        <PopoverListElement
+                                            key={organization.id}
+                                            title={organization.displayName}
+                                            subtitle="GmbH"
+                                            icon={Building2}
+                                            onClick={() => setOrganizationId(organization)}/>
+                                    )
+                                }
+                            )
+                        }
+                        <PopoverDivider/>
+                    </div>
+                )}
+                <PopoverListElement
+                    title="Manage Organizations"
+                    subtitle="Create and delete organizations."
+                    icon={Pencil}/>
+                <PopoverDivider/>
+                <PopoverListElement
+                    title="Logout"
+                    color="error"
+                    onClick={() => {
+                        auth.removeUser().then();
+                    }}
+                    icon={LogOut}/>
+            </Popover.Content>
         </Popover>
     )
 }
