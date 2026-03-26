@@ -75,7 +75,7 @@ fun Route.transaction() {
                             description = "The id of the organization owning the transactions"
                             required = true
                         }
-                        pathParameter<Stringt>("accountId") {
+                        pathParameter<String>("accountId") {
                             description = "The id of the account whose transactions are to be returned"
                             required = true
                         }
