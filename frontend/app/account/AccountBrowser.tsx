@@ -2,7 +2,7 @@ import {Account} from "@/app/context/api/queries/accounts";
 import React, {useState} from "react";
 import ClickableIcon from "@/app/components/ClickableIcon";
 import {Dialog, DialogContext} from "@/app/components/Dialog";
-import {FolderPen, Inbox, Pen, Plus, Search, Trash} from "lucide-react";
+import {Inbox, Pen, Plus, Search, Trash} from "lucide-react";
 import UpsertAccount from "@/app/account/UpsertAccount";
 import clsx from "clsx";
 import CurrencyAbbreviation from "@/app/currency/CurrencyAbbreviation";
