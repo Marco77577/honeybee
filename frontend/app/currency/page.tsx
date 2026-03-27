@@ -2,7 +2,7 @@
 
 import Heading1 from "@/app/components/title/Heading1";
 import {Banknote, BookSearch, Pencil, Trash} from "lucide-react";
-import {useCurrenciesQuery, useMainCurrency} from "@/app/context/api/queries/currencies";
+import {useMainCurrency} from "@/app/context/api/queries/currencies";
 import {Skeleton} from "@radix-ui/themes";
 import CurrencyAbbreviation from "@/app/currency/CurrencyAbbreviation";
 import PrimaryButton from "@/app/components/button/PrimaryButton";
@@ -55,8 +55,7 @@ function LoadingCurrency() {
 
 export default function Currency() {
     // LOAD DATA FROM BACKEND
-    const mainCurrency = useMainCurrency();
-    const {data: currencies} = useCurrenciesQuery();
+    const {currencies, mainCurrency} = useMainCurrency();
     const {data: latestExchangeRates} = useFrankfurterLatest(mainCurrency?.abbreviation);
 
     return (

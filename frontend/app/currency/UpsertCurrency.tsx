@@ -33,7 +33,7 @@ export default function UpsertCurrency({
     // dependencies
     const queryClient = useQueryClient();
     const organization = useOrganization();
-    const mainCurrency = useMainCurrency();
+    const {mainCurrency} = useMainCurrency();
     const createCurrency = useCreateCurrencyMutation();
     const updateCurrency = useUpdateCurrencyMutation();
     const {data: latestExchangeRates} = useFrankfurterLatest(mainCurrency?.abbreviation);

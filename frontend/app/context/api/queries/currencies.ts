@@ -70,7 +70,10 @@ export function useMainCurrency() {
         if (mainCurrency != null) queryClient.invalidateQueries({queryKey: frankfurterKeys.latest}).then();
     }, [mainCurrency, queryClient]);
 
-    return mainCurrency;
+    return {
+        currencies,
+        mainCurrency
+    };
 }
 
 export function useCreateCurrencyMutation() {
