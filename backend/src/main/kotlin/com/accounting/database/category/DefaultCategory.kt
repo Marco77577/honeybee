@@ -2,10 +2,16 @@ package com.accounting.database.category
 
 import com.accounting.database.account.Account
 
+const val ASSETS_CATEGORY_NAME = "Assets"
+const val LIABILITIES_CATEGORY_NAME = "Liabilities & Equity"
+const val EXPENSE_CATEGORY_NAME = "Expense"
+const val REVENUE_CATEGORY_NAME = "Revenue"
+const val BALANCE_CATEGORY_NAME = "Balance Sheet"
+
 val defaultCategories =
     Category.Builder("All Accounts", editable = false) {
         subcategories(
-            Category.Builder("Assets", editable = false) {
+            Category.Builder(ASSETS_CATEGORY_NAME, editable = false) {
                 subcategories(
                     Category.Builder("Current Assets") {
                         subcategories(
@@ -98,7 +104,7 @@ val defaultCategories =
                     },
                 )
             },
-            Category.Builder("Liabilities & Equity", editable = false) {
+            Category.Builder(LIABILITIES_CATEGORY_NAME, editable = false) {
                 subcategories(
                     Category.Builder("Current Liabilities") {
                         subcategories(
@@ -187,7 +193,7 @@ val defaultCategories =
                     },
                 )
             },
-            Category.Builder("Expense", editable = false) {
+            Category.Builder(EXPENSE_CATEGORY_NAME, editable = false) {
                 subcategories(
                     Category.Builder("Expenses Materials, Goods, Services") {
                         accounts(
@@ -266,7 +272,7 @@ val defaultCategories =
                     },
                 )
             },
-            Category.Builder("Revenue", editable = false) {
+            Category.Builder(REVENUE_CATEGORY_NAME, editable = false) {
                 subcategories(
                     Category.Builder("Operating Revenue") {
                         accounts(
@@ -285,7 +291,7 @@ val defaultCategories =
                     },
                 )
             },
-            Category.Builder("Balance", editable = false) {
+            Category.Builder(BALANCE_CATEGORY_NAME, editable = false) {
                 subcategories(
                     Category.Builder("Opening / Closing") {
                         accounts(

@@ -11,6 +11,7 @@ object Categories : Table("categories") {
     val name = varchar("name", 255)
     val editable = bool("editable").default(true)
     val parent = varchar("parent_category_id", 255).references(id).nullable()
+    val main = varchar("main_category_id", 255).references(id)
     val organization = varchar("organization_id", 255).references(
         ref = Organizations.id,
         onDelete = ReferenceOption.CASCADE

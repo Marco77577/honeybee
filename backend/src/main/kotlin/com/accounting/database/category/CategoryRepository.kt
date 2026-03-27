@@ -24,10 +24,16 @@ class CategoryRepository {
         createCategory: CreateCategory,
         organizationId: String,
     ) = transaction {
+        val parentCategory = Categories
+            .select { Categories.id eq createCategory.parent }
+            .single()
+            .toCategory()
+
         val id = Categories.insert {
             it[id] = Id.category()
             it[name] = createCategory.name.trim()
-            it[parent] = createCategory.parent
+            it[parent] = parentCategory.id
+            it[main] = parentCategory.main
             it[organization] = organizationId
         } get Categories.id
 
@@ -46,6 +52,11 @@ class CategoryRepository {
             newParentId = updateCategory.parent
         )
 
+        val parentCategory = Categories
+            .select { Categories.id eq updateCategory.parent }
+            .single()
+            .toCategory()
+
         Categories.update(
             {
                 (Categories.id eq updateCategory.id) and
@@ -54,7 +65,8 @@ class CategoryRepository {
             }
         ) {
             it[name] = updateCategory.name.trim()
-            it[parent] = updateCategory.parent
+            it[parent] = parentCategory.id
+            it[main] = parentCategory.main
         }
 
         Categories
@@ -99,7 +111,7 @@ class CategoryRepository {
             .single()
             .toCategory()
 
-        // assign accounts of category to be deleted to parent of category
+        // assign accounts of a category to be deleted to parent of the category
         category.parent?.let { parent ->
             Accounts.update({ Accounts.category eq category.id }) {
                 it[Accounts.category] = parent
@@ -112,18 +124,19 @@ class CategoryRepository {
                     (Categories.editable eq true)
         }
     }
-
-    /**
-     * Converts a [ResultRow] to a [Category] object.
-     * @return The converted [Category] object.
-     */
-    private fun ResultRow.toCategory() = Category(
-        id = this[Categories.id],
-        name = this[Categories.name],
-        editable = this[Categories.editable],
-        parent = this[Categories.parent],
-        organization = this[Categories.organization],
-        updatedAt = this[Categories.updatedAt],
-        createdAt = this[Categories.createdAt],
-    )
 }
+
+/**
+ * Converts a [ResultRow] to a [Category] object.
+ * @return The converted [Category] object.
+ */
+fun ResultRow.toCategory(alias: Alias<Categories>? = null) = Category(
+    id = alias?.let { this[it[Categories.id]] } ?: this[Categories.id],
+    name = alias?.let { this[it[Categories.name]] } ?: this[Categories.name],
+    editable = alias?.let { this[it[Categories.editable]] } ?: this[Categories.editable],
+    parent = alias?.let { this[it[Categories.parent]] } ?: this[Categories.parent],
+    main = alias?.let { this[it[Categories.main]] } ?: this[Categories.main],
+    organization = alias?.let { this[it[Categories.organization]] } ?: this[Categories.organization],
+    updatedAt = alias?.let { this[it[Categories.updatedAt]] } ?: this[Categories.updatedAt],
+    createdAt = alias?.let { this[it[Categories.createdAt]] } ?: this[Categories.createdAt],
+)

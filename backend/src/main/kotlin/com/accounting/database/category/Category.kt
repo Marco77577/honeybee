@@ -12,6 +12,7 @@ data class Category(
     val name: String,
     val editable: Boolean,
     val parent: String? = null,
+    val main: String,
     val organization: String,
 
     @Serializable(with = LocalDateTimeSerializer::class)
@@ -63,10 +64,13 @@ data class Category(
             parentCategory: Category? = null,
         ): Recipe {
             configure()
+            val id = Id.category()
             val category = Category(
+                id = id,
                 name = name,
                 editable = editable,
                 parent = parentCategory?.id,
+                main = if (editable) parentCategory?.main ?: id else id,
                 organization = organizationId,
             )
             val accounts = accounts.map {

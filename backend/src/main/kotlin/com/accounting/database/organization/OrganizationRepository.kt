@@ -1,7 +1,7 @@
 package com.accounting.database.organization
 
-import com.accounting.api.organization.model.UpdateOrganization
 import com.accounting.api.organization.model.CreateOrganization
+import com.accounting.api.organization.model.UpdateOrganization
 import com.accounting.config.authentication.AuthenticatedUser
 import com.accounting.database.Id
 import com.accounting.database.account.Accounts
@@ -98,6 +98,7 @@ class OrganizationRepository {
                 it[name] = category.name
                 it[editable] = category.editable
                 it[parent] = category.parent
+                it[main] = category.main
                 it[organization] = category.organization
             }
         }
