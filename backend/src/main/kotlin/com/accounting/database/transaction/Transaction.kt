@@ -16,6 +16,7 @@ data class Transaction(
 
     val title: String,
     val amount: Double,
+    val currency: String,
     val exchangeRate: Double,
     val debitAccount: String,
     val creditAccount: String,

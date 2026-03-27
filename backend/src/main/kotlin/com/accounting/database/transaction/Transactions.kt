@@ -1,6 +1,7 @@
 package com.accounting.database.transaction
 
 import com.accounting.database.account.Accounts
+import com.accounting.database.currency.Currencies
 import com.accounting.database.organization.Organizations
 import org.jetbrains.exposed.sql.ReferenceOption
 import org.jetbrains.exposed.sql.Table
@@ -14,6 +15,7 @@ object Transactions : Table("transactions") {
     val date = date("date")
     val title = varchar("title", 255)
     val amount = decimal("amount", 19, 2)
+    val currency = varchar("currency_id", 255).references(Currencies.id)
     val exchangeRate = decimal("exchange_rate", 19, 16).default(BigDecimal(1))
     val debitAccount = varchar("debit_account_id", 255).references(Accounts.id)
     val creditAccount = varchar("credit_account_id", 255).references(Accounts.id)
