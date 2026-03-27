@@ -1394,6 +1394,10 @@
             "type" : "string",
             "title" : "String"
           },
+          "currency" : {
+            "type" : "string",
+            "title" : "String"
+          },
           "date" : {
             "type" : "string",
             "title" : "String"
@@ -1416,7 +1420,7 @@
             "title" : "String"
           }
         },
-        "required" : [ "amount", "creditAccount", "date", "debitAccount", "exchangeRate", "id", "title" ],
+        "required" : [ "amount", "creditAccount", "currency", "date", "debitAccount", "exchangeRate", "id", "title" ],
         "title" : "PublicTransaction"
       },
       "com.accounting.api.transaction.model.CreateTransaction" : {
@@ -1428,6 +1432,10 @@
             "title" : "Double"
           },
           "creditAccount" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "currency" : {
             "type" : "string",
             "title" : "String"
           },
@@ -1449,7 +1457,7 @@
             "title" : "String"
           }
         },
-        "required" : [ "amount", "creditAccount", "date", "debitAccount", "exchangeRate", "title" ],
+        "required" : [ "amount", "creditAccount", "currency", "date", "debitAccount", "exchangeRate", "title" ],
         "title" : "CreateTransaction"
       },
       "kotlin.Throwable" : {
@@ -1487,6 +1495,10 @@
             "type" : "string",
             "title" : "String"
           },
+          "currency" : {
+            "type" : "string",
+            "title" : "String"
+          },
           "date" : {
             "type" : "string",
             "title" : "String"
@@ -1509,7 +1521,7 @@
             "title" : "String"
           }
         },
-        "required" : [ "amount", "creditAccount", "date", "debitAccount", "exchangeRate", "id", "title" ],
+        "required" : [ "amount", "creditAccount", "currency", "date", "debitAccount", "exchangeRate", "id", "title" ],
         "title" : "UpdateTransaction"
       }
     },
