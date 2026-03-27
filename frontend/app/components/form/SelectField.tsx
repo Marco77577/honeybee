@@ -28,7 +28,7 @@ export default function SelectField<T>({
     const [, setSelected] = useState<T | null>(value ?? null);
     const [query, setQuery] = useState<string>(value ? toText(value) : '');
     const [highlightedIndex, setHighlightedIndex] = useState(-1);
-    const [isOpen, setIsOpen] = useState(false);
+    const [open, setOpen] = useState(false);
 
     if (!options) {
         return (
@@ -45,7 +45,7 @@ export default function SelectField<T>({
         setSelected(option);
         onValueChange(option);
         setQuery(toText(option));
-        setIsOpen(false);
+        setOpen(false);
     }
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -74,7 +74,7 @@ export default function SelectField<T>({
                 handleSelect(filteredOptions[highlightedIndex]);
                 setHighlightedIndex(-1);
             } else {
-                setIsOpen(true);
+                setOpen(true);
             }
         }
 
@@ -83,7 +83,7 @@ export default function SelectField<T>({
             e.stopPropagation();
             setHighlightedIndex(-1);
             setQuery(value ? toText(value) : '');
-            setIsOpen(false);
+            setOpen(false);
         }
     };
 
@@ -92,12 +92,12 @@ export default function SelectField<T>({
             {...props}
             className={clsx(
                 `flex flex-col rounded-lg py-3 bg-input-text-background border border-input-text-border focus-within:border-input-text-border-focused outline-3 outline-transparent focus-within:outline-input-text-border-outline text-base`,
-                isOpen && `pb-0`,
+                open && `pb-0`,
                 className
             )}>
             <div
                 className={`flex items-center`}
-                onClick={() => setIsOpen(!isOpen)}>
+                onClick={() => setOpen(!open)}>
                 <label className={`px-3 text-input-text-placeholder`} htmlFor={id}>
                     {icon}
                 </label>
@@ -110,7 +110,7 @@ export default function SelectField<T>({
                     onKeyDown={handleKeyDown}
                     placeholder={placeholder}/>
             </div>
-            <AutoHeight open={isOpen}>
+            <AutoHeight open={open}>
                 <div className={`pt-1`}>
                     <PopoverDivider/>
                     <div className={`p-2 max-h-60 overflow-y-scroll`}>
