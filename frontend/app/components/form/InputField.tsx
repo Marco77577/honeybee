@@ -42,7 +42,7 @@ export default function InputField({
                 onChange={e => onValueChange(e.target.value)}
                 id={id}
                 className={clsx(
-                    `grow outline-0 placeholder-input-text-placeholder`,
+                    `min-w-0 grow outline-0 placeholder-input-text-placeholder`,
                     ((!leading && trailing) || alignEnd) && `text-end`,
                 )}
                 type="text"
