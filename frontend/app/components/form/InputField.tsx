@@ -7,6 +7,7 @@ interface InputFieldProps {
     value: string | undefined,
     placeholder?: string,
     onValueChange: (value: string) => void,
+    alignEnd?: boolean,
     disabled?: boolean,
     error?: boolean,
 }
@@ -18,6 +19,7 @@ export default function InputField({
                                        placeholder,
                                        onValueChange,
                                        className,
+                                       alignEnd = false,
                                        disabled = false,
                                        error = false,
                                        ...props
@@ -41,7 +43,7 @@ export default function InputField({
                 id={id}
                 className={clsx(
                     `grow outline-0 placeholder-input-text-placeholder`,
-                    !leading && trailing && `text-end`,
+                    ((!leading && trailing) || alignEnd) && `text-end`,
                 )}
                 type="text"
                 disabled={disabled}
