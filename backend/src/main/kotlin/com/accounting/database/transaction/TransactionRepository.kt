@@ -50,6 +50,7 @@ class TransactionRepository {
             it[date] = LocalDate.parse(createTransaction.date)
             it[title] = createTransaction.title.trim()
             it[amount] = BigDecimal(createTransaction.amount.toString())
+            it[exchangeRate] = BigDecimal(createTransaction.exchangeRate.toString())
             it[debitAccount] = createTransaction.debitAccount
             it[creditAccount] = createTransaction.creditAccount
             it[organization] = organizationId
@@ -71,6 +72,7 @@ class TransactionRepository {
             it[date] = LocalDate.parse(updateTransaction.date)
             it[title] = updateTransaction.title.trim()
             it[amount] = BigDecimal(updateTransaction.amount.toString())
+            it[exchangeRate] = BigDecimal(updateTransaction.exchangeRate.toString())
             it[debitAccount] = updateTransaction.debitAccount
             it[creditAccount] = updateTransaction.creditAccount
         }
@@ -96,6 +98,7 @@ class TransactionRepository {
         date = this[Transactions.date],
         title = this[Transactions.title],
         amount = this[Transactions.amount].toDouble(),
+        exchangeRate = this[Transactions.exchangeRate].toDouble(),
         debitAccount = this[Transactions.debitAccount],
         creditAccount = this[Transactions.creditAccount],
         organization = this[Transactions.organization],

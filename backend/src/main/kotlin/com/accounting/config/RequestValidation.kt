@@ -70,6 +70,7 @@ fun Application.configureRequestValidation() {
             if (it.date.isEmpty()) ValidationResult.Invalid("date must not be empty")
             else if (it.title.isEmpty()) ValidationResult.Invalid("title must not be empty")
             else if (it.amount <= 0) ValidationResult.Invalid("amount must be positive")
+            else if (it.exchangeRate <= 0) ValidationResult.Invalid("exchange rate must be positive")
             else if (it.debitAccount.isEmpty()) ValidationResult.Invalid("debit account must not be empty")
             else if (it.creditAccount.isEmpty()) ValidationResult.Invalid("credit account must not be empty")
             else {
@@ -86,6 +87,7 @@ fun Application.configureRequestValidation() {
             else if (it.date.isEmpty()) ValidationResult.Invalid("date must not be empty")
             else if (it.title.isEmpty()) ValidationResult.Invalid("title must not be empty")
             else if (it.amount <= 0) ValidationResult.Invalid("amount must be positive")
+            else if (it.exchangeRate <= 0) ValidationResult.Invalid("exchange rate must be positive")
             else if (it.debitAccount.isEmpty()) ValidationResult.Invalid("debit account must not be empty")
             else if (it.creditAccount.isEmpty()) ValidationResult.Invalid("credit account must not be empty")
             else {

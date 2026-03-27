@@ -9,6 +9,7 @@ data class PublicTransaction(
     val date: String,
     val title: String,
     val amount: Double,
+    val exchangeRate: Double,
     val debitAccount: String,
     val creditAccount: String,
 ) {
@@ -23,6 +24,7 @@ data class PublicTransaction(
             date = currency.date.toString(),
             title = currency.title,
             amount = currency.amount,
+            exchangeRate = currency.exchangeRate,
             debitAccount = currency.debitAccount,
             creditAccount = currency.creditAccount,
         )
