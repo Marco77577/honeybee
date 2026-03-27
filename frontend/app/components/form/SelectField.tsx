@@ -6,7 +6,7 @@ import InputField from "@/app/components/form/InputField";
 import {Skeleton} from "@radix-ui/themes";
 
 interface SelectFieldProps<T> {
-    icon: ReactElement,
+    icon?: ReactElement,
     value?: T | null,
     options: T[],
     placeholder?: string,
@@ -96,11 +96,11 @@ export default function SelectField<T>({
                 className
             )}>
             <div
-                className={`flex items-center`}
+                className={`flex items-center px-3 gap-3`}
                 onClick={() => setOpen(!open)}>
-                <label className={`px-3 text-input-text-placeholder`} htmlFor={id}>
+                {icon && <label className={`text-input-text-placeholder`} htmlFor={id}>
                     {icon}
-                </label>
+                </label>}
                 <input
                     value={query}
                     onChange={e => setQuery(e.target.value)}
